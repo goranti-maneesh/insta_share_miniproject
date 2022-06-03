@@ -6,7 +6,7 @@ export const InstaImageContainer = styled.div``
 
 export const RenderInstaImage = styled.img``
 
-export const LoginFormContainer = styled.div``
+export const LoginFormContainer = styled.form``
 
 export const InstaLogoContainer = styled.div``
 
