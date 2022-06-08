@@ -1,7 +1,9 @@
 import Routes from './routes/index'
 
-function App() {
+type App = () => void;
+
+const App = () => (
   <Routes />
-}
+)
 
 export default App;
