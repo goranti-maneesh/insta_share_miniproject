@@ -7,7 +7,7 @@ LabelElement, InputElement, ErrorMsg} from './StyledComponents'
 // import useOnSuccess from "./OnSuccess";
 
 const userNameErrMsg = "User name must contain 5 letters"
-const passwordErrMsg = "Password must contain letters, special character and number"
+const passwordErrMsg = "Password must contain letters, special character and number with range of 6 to 16"
 
 export const LoginForm = () => {
     const history = useHistory()
@@ -34,7 +34,7 @@ export const LoginForm = () => {
     }
 
     const onBlurPassword = () => {
-        const regex = new RegExp('([!@#$%^&][A-Za-z][0-9]){7,14}')
+        const regex = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
         const result = regex.test(password)
         console.log(result, regex, password)
         if(result){
