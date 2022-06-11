@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, InputFieldContainer,
 LabelElement, InputElement, ErrorMsg} from './StyledComponents'
+import LoginServiceApi from '../../services/LoginService/index.api'
 // import useOnSuccess from "./OnSuccess";
 
 const userNameErrMsg = "User name must contain 5 letters"
@@ -81,7 +82,7 @@ export const LoginForm = () => {
             body: JSON.stringify(userDetails)
         }
 
-        const response = await fetch(url, options)
+        const response = LoginServiceApi.onLogin(userDetails)
         const data = await response.json()
 
         if(response.ok){
