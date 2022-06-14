@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, InputFieldContainer,
-LabelElement, InputElement, ErrorMsg} from './StyledComponents'
+LabelElement, InputElement, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 import LoginServiceApi from '../../services/LoginService/index.api'
 // import useOnSuccess from "./OnSuccess";
 
@@ -81,16 +81,18 @@ export const LoginForm = () => {
             method: "POST",
             body: JSON.stringify(userDetails)
         }
+        
+        // console.log(LoginServiceApi.onLogin())
 
-        const response = LoginServiceApi.onLogin(userDetails)
-        const data = await response.json()
+        // const response = LoginServiceApi.onLogin(userDetails)
+        // const data = await response.json()
 
-        if(response.ok){
-            onSuccess(data.jwt_token)
-        }
-        else{
-            onFailure(data.error_msg)
-        }
+        // if(response.ok){
+        //     onSuccess(data.jwt_token)
+        // }
+        // else{
+        //     onFailure(data.error_msg)
+        // }
     }
 
 
@@ -114,8 +116,10 @@ export const LoginForm = () => {
                 </InstaLogoContainer>
                 {useInputLabelContainer("text", "USERNAME", "username", userName, useOnChangeUsername, "Username", isUserNameErrorDisplayed, setUserNameErrorDisplayStatus, userNameErrMsg, onBlurUsername)}
                 {useInputLabelContainer("text", "PASSWORD", "password", password, useOnChangePassword, "Password", isPasswordErrorDisplayed, setPasswordErrorDisplayStatus, passwordErrMsg, onBlurPassword)}
-                <LoginButton type="submit">Login</LoginButton>
-                {isErrorDisplayed ? <ErrorMsg>{errorMsg}</ErrorMsg> : null}
+                <ButtonErrorMsgContainer>
+                    <LoginButton type="submit">Login</LoginButton>
+                    {isErrorDisplayed ? <ErrorMsg>{errorMsg}</ErrorMsg> : null}
+                </ButtonErrorMsgContainer>
             </LoginFormContainer>
         </LoginPageContainer>
     )
