@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, InputFieldContainer,
 LabelElement, InputElement, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
-import LoginServiceApi from '../../services/LoginService/index.api'
+import LoginServiceApi from '../../services/LoginService/index.fixtures'
 // import useOnSuccess from "./OnSuccess";
 
 const userNameErrMsg = "User name must contain 5 letters"
@@ -50,7 +50,8 @@ export const LoginForm = () => {
             <LabelElement htmlFor={id}>{labelText}</LabelElement>
             <br/>
             <InputElement type={type} value={value} id={id} onChange={onchangeMethod} placeholder={placeholder} onFocus={() => OnFocus(setFunction)} onBlur={onblurFunc}/>
-            {isErrorDisplayed ? <ErrorMsg>{errMsg}</ErrorMsg> : null}
+            {/* {isErrorDisplayed ? <ErrorMsg>{errMsg}</ErrorMsg> : null} */}
+            <ErrorMsg>{isErrorDisplayed ? errMsg: null}</ErrorMsg>
         </InputFieldContainer>
     )
     
@@ -84,7 +85,7 @@ export const LoginForm = () => {
         
         // console.log(LoginServiceApi.onLogin())
 
-        // const response = LoginServiceApi.onLogin(userDetails)
+        // const response = await fetch(url, options)
         // const data = await response.json()
 
         // if(response.ok){
@@ -118,7 +119,7 @@ export const LoginForm = () => {
                 {useInputLabelContainer("text", "PASSWORD", "password", password, useOnChangePassword, "Password", isPasswordErrorDisplayed, setPasswordErrorDisplayStatus, passwordErrMsg, onBlurPassword)}
                 <ButtonErrorMsgContainer>
                     <LoginButton type="submit">Login</LoginButton>
-                    {isErrorDisplayed ? <ErrorMsg>{errorMsg}</ErrorMsg> : null}
+                    <ErrorMsg>{isErrorDisplayed ? errorMsg: null}</ErrorMsg>
                 </ButtonErrorMsgContainer>
             </LoginFormContainer>
         </LoginPageContainer>

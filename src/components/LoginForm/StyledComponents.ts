@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import tw from "twin.macro"
 
 export const LoginPageContainer = styled.div`
-    ${tw`flex justify-evenly items-center h-screen`}
+    ${tw`flex justify-center items-center h-screen`}
 `
 
 export const InstaImageContainer = styled.div`
+    ${tw`mr-82px`}
     @media (max-width: 768px){
-        ${tw`hidden`}
+        ${tw`hidden mr-0`}
     }
 `
 
@@ -41,7 +42,7 @@ export const InstaShareTitle = styled.h1`
 `
 
 export const InputFieldContainer = styled.div`
-    ${tw`mt-6 w-360px`}
+    ${tw`mt-3 w-360px`}
 
     @media (max-width: 768px){
         ${tw`w-312px`}
@@ -70,11 +71,11 @@ export const ButtonErrorMsgContainer = styled.div`
 `
 
 export const ErrorMsg = styled.p`
-    ${tw`text-14px mt-2 mb-2 text-flamingo`}
+    ${tw`text-14px h-6 m-0 text-flamingo`}
 `
 
 export const LoginButton = styled.button`
-    ${tw`bg-picton-blue w-360px h-40px rounded-lg text-white border-none cursor-pointer outline-none mt-6`}
+    ${tw`bg-picton-blue w-360px h-40px rounded-lg text-white border-none cursor-pointer outline-none mt-3`}
 
     @media (max-width: 768px){
         ${tw`w-312px`}

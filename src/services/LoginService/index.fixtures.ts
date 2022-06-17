@@ -1,7 +1,14 @@
-import {Component} from 'react'
+import { LoginRequestObjTypes, LoginApiResponseTypes } from "../../stores/types";
+import { resolveWithTimeout } from "../../utils/TestUtils";
+import LoginServiceType from "./index";
+import getLoginResponse from '../../fixtures/getLoginResponse.json'
 
-class Fixtures extends Component{
+
+class LoginServiceApi implements LoginServiceType{
+    onLogin(){
+        return resolveWithTimeout(getLoginResponse)
+    }
 
 }
 
-export default Fixtures
+export default LoginServiceApi
