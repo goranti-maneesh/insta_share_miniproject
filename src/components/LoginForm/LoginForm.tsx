@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, InputFieldContainer,
 LabelElement, InputElement, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
-import LoginServiceApi from '../../services/LoginService/index.fixtures'
+import {LogniResObjTypes} from '../../stores/types'
+import {ObjContext} from '../../App'
+// import { observer, inject } from 'mobx-react'
 // import useOnSuccess from "./OnSuccess";
 
 const userNameErrMsg = "User name must contain 5 letters"
 const passwordErrMsg = "Password must contain letters, special character and number with range of 6 to 16"
 
+
 export const LoginForm = () => {
     const history = useHistory()
+    const objUseContext = useContext(ObjContext)
+    // console.log(objUseContext)
     
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
@@ -37,7 +42,6 @@ export const LoginForm = () => {
     const onBlurPassword = () => {
         const regex = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
         const result = regex.test(password)
-        console.log(result, regex, password)
         if(result){
             setPasswordErrorDisplayStatus(false)
         }else{
@@ -57,8 +61,6 @@ export const LoginForm = () => {
     
     const onSuccess = (jwtToken: string) => {
         setErrorDisplayStatus(false)
-        Cookies.set("jwt_token", jwtToken, {expires: 30})
-        console.log(1234567890)
         history.replace("/")
     }
 
@@ -75,13 +77,14 @@ export const LoginForm = () => {
             username: userName,
             password: password
         }
-        
-        const url = "https://apis.ccbp.in/login"
 
-        const options = {
-            method: "POST",
-            body: JSON.stringify(userDetails)
-        }
+        objUseContext.LoginStoreInstance.onLogIn(userDetails)
+        
+        // if(returnData.objKeys === 'jwt_token'){
+
+        // }
+        // console.log(Object.keys(returnData), 'returnData')
+        // console.log(returnData.objKeys)
         
         // console.log(LoginServiceApi.onLogin())
 
