@@ -5,6 +5,12 @@ import getLoginResponse from '../../fixtures/getLoginResponse.json'
 
 
 class LoginServiceApi implements LoginServiceType{
+
+    networkCallWithApisauce!: Function;
+  constructor(networkCallWithApisauce: any) {
+    this.networkCallWithApisauce = networkCallWithApisauce;
+  }
+
     onLogin(){
         return resolveWithTimeout(getLoginResponse)
     }

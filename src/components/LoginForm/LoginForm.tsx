@@ -1,13 +1,10 @@
 import React, { useState, useContext } from "react";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, InputFieldContainer,
 LabelElement, InputElement, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
-import {LogniResObjTypes} from '../../stores/types'
 import {ObjContext} from '../../App'
-// import { observer, inject } from 'mobx-react'
-// import useOnSuccess from "./OnSuccess";
+import { LoginApiFaliureResponseObjTypes } from "../../stores/types";
 
 const userNameErrMsg = "User name must contain 5 letters"
 const passwordErrMsg = "Password must contain letters, special character and number with range of 6 to 16"
@@ -59,14 +56,15 @@ export const LoginForm = () => {
         </InputFieldContainer>
     )
     
-    const onSuccess = (jwtToken: string) => {
+    const onSuccess = () => {
         setErrorDisplayStatus(false)
         history.replace("/")
     }
 
-    const onFailure = (errorMsg: string) => {
+    const onFailure = (failureResponse: LoginApiFaliureResponseObjTypes) => {
+        console.log(failureResponse, 'failureResponse')
         setErrorDisplayStatus(true)
-        setErrorMsg(errorMsg)
+        setErrorMsg(failureResponse.error_msg)
     }
     
 
@@ -78,11 +76,25 @@ export const LoginForm = () => {
             password: password
         }
 
-        objUseContext.LoginStoreInstance.onLogIn(userDetails)
-        
-        // if(returnData.objKeys === 'jwt_token'){
+        if(userName !== "" && password !== ""){
+            setErrorDisplayStatus(false)
+            setErrorMsg("")
 
-        // }
+            const returnData = await objUseContext.LoginStoreInstance.onLogIn(userDetails)
+            
+            if(Object.keys(returnData)[0] === 'jwt_token'){
+                onSuccess()
+            }
+            else{
+                onFailure(returnData as LoginApiFaliureResponseObjTypes)
+            }
+        }
+        else{
+            setErrorDisplayStatus(true)
+            setErrorMsg("Enter valid Username and Password")
+        }
+
+        
         // console.log(Object.keys(returnData), 'returnData')
         // console.log(returnData.objKeys)
         

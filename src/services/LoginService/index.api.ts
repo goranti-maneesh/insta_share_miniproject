@@ -16,26 +16,27 @@ class LoginServiceApi implements LoginServiceType{
     });
     this.networkCallWithApisauce = networkCallWithApisauce;
   }
-  onLogin(requestObject: LoginRequestObjTypes) {
-    return this.networkCallWithApisauce(
-      this.api,
-      'login/v1/',
-      requestObject,
-      apiMethods.post
-    );
-  }
+  // onLogin(requestObject: LoginRequestObjTypes) {
+  //   // console.log(requestObject, 'requestObject')
+  //   return this.networkCallWithApisauce(
+  //     this.api,
+  //     'login/v1/',
+  //     requestObject,
+  //     apiMethods.post
+  //   );
+  // }
     
-    // onLogin = async (requestObj: LoginRequestObjTypes) => {
+    onLogin = async (requestObj: LoginRequestObjTypes) => {
 
-    //     const options = {
-    //         method: 'POST',
-    //         body: JSON.stringify(requestObj)
-    //     }   
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(requestObj)
+        }   
 
-    //     const response = await fetch(loginApi, options)
-    //     const data = await response.json()
-    //     return data
-    // }
+        const response = await fetch(loginApi, options)
+        const data = await response.json()
+        return data
+    }
 }
 
 export default LoginServiceApi
