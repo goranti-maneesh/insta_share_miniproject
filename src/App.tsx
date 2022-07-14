@@ -1,20 +1,20 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { createContext } from 'react';
+
+import stores from '../src/stores/index'
+
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
-import stores from '../src/stores/index'
-import { Provider, observer } from 'mobx-react'
-import { createContext } from 'react';
-import {ServiceStoreTypes} from './stores/types'
+import ProtectedRoute from './utils/ProtectedRoute';
 
-// type App = () => void;
 export const ObjContext = createContext(stores)
 
 const App = (): JSX.Element => (
   <ObjContext.Provider value={stores}>
     <BrowserRouter>
         <Switch>
-            <Route path="/login" component={LoginForm}/>
-            <Route path="/" component={Home}/>
+            <Route key="login" path="/login" component={LoginForm}/>
+            <ProtectedRoute key="/" path="/" component={Home}/>
         </Switch>
     </BrowserRouter>
   </ObjContext.Provider>

@@ -1,7 +1,7 @@
-import {LoginApiResponseTypes, LoginApiFaliureResponseObjTypes, LoginRequestObjTypes} from '../../stores/types'
+import {LoginApiResponseObjTypes, LoginRequestObjTypes} from '../../stores/types'
 
 interface LoginServiceType{
-    onLogin: (requestObject: LoginRequestObjTypes) => Promise<LoginApiResponseTypes | LoginApiFaliureResponseObjTypes>
+    onLogin: (requestObject: LoginRequestObjTypes) => Promise<LoginApiResponseObjTypes>
 }
 
 export default LoginServiceType

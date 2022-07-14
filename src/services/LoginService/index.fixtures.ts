@@ -1,6 +1,7 @@
-import { LoginRequestObjTypes, LoginApiResponseTypes } from "../../stores/types";
-import { resolveWithTimeout } from "../../utils/TestUtils";
 import LoginServiceType from "./index";
+
+import { LoginRequestObjTypes, LoginApiResponseObjTypes } from "../../stores/types";
+import { resolveWithTimeout } from "../../utils/TestUtils";
 import getLoginResponse from '../../fixtures/getLoginResponse.json'
 
 

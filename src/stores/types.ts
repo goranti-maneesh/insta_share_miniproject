@@ -1,10 +1,11 @@
-export interface LoginApiResponseTypes{
+export interface LoginApiResponseObjTypes{
     jwt_token: string
+
 }
 
 export interface LoginApiFaliureResponseObjTypes{
     error_msg: string,
-    status_code: number
+    status_code: number    
 }
 
 export interface LoginRequestObjTypes{

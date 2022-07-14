@@ -1,10 +1,13 @@
+import Cookies from 'js-cookie'
+
 import { observable } from 'mobx';
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
-import LoginServiceApiInstance from '../index'
-import { LoginRequestObjTypes, LoginApiResponseTypes } from '../types'
-import Cookies from 'js-cookie'
-import LoginServiceType from '../../services/LoginService/index'
 import { APIStatus, API_INITIAL} from '@ib/api-constants/lib/index';
+
+import LoginServiceType from '../../services/LoginService/index.api'
+
+import LoginServiceApiInstance from '../index'
+import { LoginRequestObjTypes, LoginApiResponseObjTypes, LoginApiFaliureResponseObjTypes } from '../types'
 
 // const LoginApi = new LoginServiceApi()
 export class LoginStore{
@@ -16,8 +19,8 @@ export class LoginStore{
         this.loginApiService = LoginServiceApiInstance
     }
 
-    setCookies = (response: LoginApiResponseTypes) =>{
-        if(Object.keys(response)[0] === 'jwt_token'){
+    setCookies = (response: LoginApiResponseObjTypes) =>{
+        if(Object.keys(response).includes('jwt_token')){
             Cookies.set('jwtToken', response.jwt_token, {expires:30})
         }
     }
@@ -33,10 +36,8 @@ export class LoginStore{
         .to(
             this.setApiStatus, (response) => {
                 console.log(response, 'response')
-                // if(Object.keys(response)[0] === 'jwt_token'){
-                    this.setCookies(response as LoginApiResponseTypes);
-                    onSuccess()
-                // }
+                this.setCookies(response);
+                onSuccess()
             }
         )
     }

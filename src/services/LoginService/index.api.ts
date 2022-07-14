@@ -1,8 +1,10 @@
 import {create, ApisauceInstance} from 'apisauce'
-import LoginServiceType from './index'
+
 import {LoginRequestObjTypes} from '../../stores/types'
 import { apiMethods } from '../../constants/APIConstants';
 import config from '../../constants/EnvironmentConstants';
+
+import LoginServiceType from './index'
 
 const loginApi = 'https://apis.ccbp.in/login'
 
