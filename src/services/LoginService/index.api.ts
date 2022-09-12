@@ -1,34 +1,34 @@
 import {create, ApisauceInstance} from 'apisauce'
 
-import {LoginRequestObjTypes} from '../../stores/types'
+import {AuthRequestObjTypes} from '../../stores/types'
 import { apiMethods } from '../../constants/APIConstants';
 import config from '../../constants/EnvironmentConstants';
+import {loginApi} from '../../constants/LocalConstants'
 
-import LoginServiceType from './index'
+import AuthServiceType from './index'
 
-const loginApi = 'https://apis.ccbp.in/login'
-
-class LoginServiceApi implements LoginServiceType{
+class AuthServiceApi implements AuthServiceType{
 
     api: ApisauceInstance;
   networkCallWithApisauce!: Function;
   constructor(networkCallWithApisauce: any) {
     this.api = create({
-      baseURL: `${config.PAYMENT_AUTHENTICATION_URL}`,
+      baseURL: `${config.LOGIN_BASE_URL}`,
     });
     this.networkCallWithApisauce = networkCallWithApisauce;
   }
-  // onLogin(requestObject: LoginRequestObjTypes) {
-  //   // console.log(requestObject, 'requestObject')
-  //   return this.networkCallWithApisauce(
-  //     this.api,
-  //     'login/v1/',
-  //     requestObject,
-  //     apiMethods.post
-  //   );
-  // }
+
+  // onAuthLogin(requestObject: AuthRequestObjTypes) {
+  //     console.log(this.networkCallWithApisauce, "api")
+  //     return this.networkCallWithApisauce(
+  //       this.api,
+  //       '/login',
+  //       requestObject,
+  //       apiMethods.post
+  //     );
+  //   }
     
-    onLogin = async (requestObj: LoginRequestObjTypes) => {
+    onAuthLogin = async (requestObj: AuthRequestObjTypes) => {
 
         const options = {
             method: 'POST',
@@ -41,4 +41,4 @@ class LoginServiceApi implements LoginServiceType{
     }
 }
 
-export default LoginServiceApi
+export default AuthServiceApi

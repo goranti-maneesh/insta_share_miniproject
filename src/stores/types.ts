@@ -1,14 +1,14 @@
-export interface LoginApiResponseObjTypes{
+export interface AuthApiResponseObjTypes{
     jwt_token: string
 
 }
 
-export interface LoginApiFaliureResponseObjTypes{
+export interface AuthApiFaliureResponseObjTypes{
     error_msg: string,
     status_code: number    
 }
 
-export interface LoginRequestObjTypes{
+export interface AuthRequestObjTypes{
     username: string,
     password: string
 }
@@ -19,10 +19,24 @@ interface ApiNetworkCallType{
 }
 
 export interface ServiceStoreTypes{
-    LoginServiceApiInstance: ApiNetworkCallType,
-    LoginStoreInstance: {
+    AuthServiceApiInstance: ApiNetworkCallType,
+    AuthStoreInstance: {
         loginApiService: ApiNetworkCallType
-        onLogIn: Function,
+        onAuthLogIn: Function,
         setCookies: Function
     }
+}
+
+export interface loginUserNameAndPasswordPropTypes {
+    type: string;
+    labelText: string;
+    id: string;
+    value: string;
+    onchangeMethod: (event: React.FormEvent<HTMLInputElement>) => void;
+    placeholder: string;
+    isErrorDisplayed: boolean;
+    setFunction: React.Dispatch<React.SetStateAction<boolean>>;
+    errMsg: string;
+    onblurFunc: () => void;
+    OnFocusEvent: (setFunction: (value: React.SetStateAction<boolean>) => void) => void;
 }

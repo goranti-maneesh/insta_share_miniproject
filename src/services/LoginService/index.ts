@@ -1,7 +1,7 @@
-import {LoginApiResponseObjTypes, LoginRequestObjTypes} from '../../stores/types'
+import {AuthApiResponseObjTypes, AuthRequestObjTypes} from '../../stores/types'
 
-interface LoginServiceType{
-    onLogin: (requestObject: LoginRequestObjTypes) => Promise<LoginApiResponseObjTypes>
+interface AuthServiceType{
+    onAuthLogin: (requestObject: AuthRequestObjTypes) => Promise<AuthApiResponseObjTypes>
 }
 
-export default LoginServiceType
+export default AuthServiceType

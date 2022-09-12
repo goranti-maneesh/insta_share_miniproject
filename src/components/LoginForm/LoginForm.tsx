@@ -1,19 +1,20 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useContext, FC, useEffect } from "react";
+import { RouteComponentProps, Redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
+RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './styledComponents'
 
 import {ObjContext} from '../../App'
 import useInputLabelContainer from "../../common/LoginInputLabelContainer";
-import { LoginApiFaliureResponseObjTypes } from "../../stores/types";            
+import { AuthApiFaliureResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
+import { isLoggedIn } from "../../utils/AuthUtils/AuthUtils";
 
-import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
-RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
+const LoginForm: FC<RouteComponentProps> = ({history}) => {
 
-const userNameErrMsg = "User name must contain 5 letters"
-const passwordErrMsg = "Password must contain letters, special character and number with range of 6 to 16"
+    const {t} = useTranslation()
 
-
-export const LoginForm = () => {
-    const history = useHistory()
+    const buttonTextError = t('loginErrors.loginButtonError')
 
     const objUseContext = useContext(ObjContext)
     
@@ -23,8 +24,9 @@ export const LoginForm = () => {
     const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
     const [isErrorDisplayed, setErrorDisplayStatus] = useState(false)
+    const [isLoading, setLoadingStatus] = useState(false)
 
-    const OnFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
+    const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
         setFunction(false)
     }
 
@@ -47,81 +49,108 @@ export const LoginForm = () => {
             setPasswordErrorDisplayStatus(true)
         }
     }
-
-    // const useInputLabelContainer = (type:string, labelText: string, id: string, value:string, onchangeMethod: (event: React.FormEvent<HTMLInputElement>) => void, placeholder: string, isErrorDisplayed: boolean, setFunction: { (value: React.SetStateAction<boolean>): void}, errMsg: string, onblurFunc: React.FocusEventHandler<HTMLInputElement>) => (
-    //     <InputFieldContainer>
-    //         <LabelElement htmlFor={id}>{labelText}</LabelElement>
-    //         <br/>
-    //         <InputElement type={type} value={value} id={id} onChange={onchangeMethod} placeholder={placeholder} onFocus={() => OnFocusEvent(setFunction)} onBlur={onblurFunc}/>
-    //         {/* {isErrorDisplayed ? <ErrorMsg>{errMsg}</ErrorMsg> : null} */}
-    //         <ErrorMsg>{isErrorDisplayed ? errMsg: null}</ErrorMsg>
-    //     </InputFieldContainer>
-    // )
     
     const onSuccess = () => {
         setErrorDisplayStatus(false)
+        setLoadingStatus(false)
+        console.log(history)
         history.replace("/")
     }
 
-    const onFailure = (failureResponse: LoginApiFaliureResponseObjTypes) => {
+    const onFailure = (failureResponse: AuthApiFaliureResponseObjTypes) => {
         setErrorDisplayStatus(true)
+        setLoadingStatus(false)
         setErrorMsg(failureResponse.error_msg)
     }
-    
 
+    useEffect(() => {
+        setErrorMsg(buttonTextError)
+    })
     
-    const useLoginApi = async (event: React.FormEvent<HTMLFormElement>) => {
+    const loginAPI = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const userDetails = {
             username: userName,
             password: password
         }
-
+        
         if(userName !== "" && password !== ""){
+            setLoadingStatus(true)
             setErrorDisplayStatus(false)
             setErrorMsg("")
 
-            const returnData = await objUseContext.LoginStoreInstance.onLogIn(userDetails)
+            const returnData: any = await objUseContext.authStoreInstance.onAuthLogIn(userDetails)
             
             if(Object.keys(returnData).includes('jwt_token')){
                 onSuccess()
             }
             else{
-                onFailure(returnData as LoginApiFaliureResponseObjTypes)
+                onFailure(returnData as AuthApiFaliureResponseObjTypes)
             }
         }
         else{
             setErrorDisplayStatus(true)
-            setErrorMsg("Enter valid Username and Password")
         }
     }
 
 
-    const useOnChangeUsername = (event: React.FormEvent<HTMLInputElement>) => {
+    const onChangeUsername = (event: React.FormEvent<HTMLInputElement>) => {
         setUserName(event.currentTarget.value)
     }
 
-    const useOnChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
+    const onChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
         setPassword(event.currentTarget.value)
+    }
+
+    const loginUserNameProps: loginUserNameAndPasswordPropTypes = {
+        type: "text",
+        labelText: "USERNAME",
+        id: "username",
+        value: userName,
+        onchangeMethod: onChangeUsername,
+        placeholder: "Username",
+        isErrorDisplayed: isUserNameErrorDisplayed,
+        setFunction: setUserNameErrorDisplayStatus,
+        errMsg: t('loginErrors.loginUsernameError'),
+        onblurFunc: onBlurUsername,
+        OnFocusEvent: onFocusEvent
+    }
+    
+    const loginPasswordProps:loginUserNameAndPasswordPropTypes = {
+        type: "password",
+        labelText: "PASSWORD",
+        id: "password",
+        value: password,
+        onchangeMethod: onChangePassword,
+        placeholder: "Password",
+        isErrorDisplayed: isPasswordErrorDisplayed,
+        setFunction: setPasswordErrorDisplayStatus,
+        errMsg: t('loginErrors.loginPasswordError'),
+        onblurFunc: onBlurPassword,
+        OnFocusEvent: onFocusEvent
     }
 
     return(
         <LoginPageContainer>
+            {isLoggedIn()? <Redirect to="/"/> : null}
             <InstaImageContainer>
                 <RenderInstaImage src="https://res.cloudinary.com/degjdup40/image/upload/v1654572231/Layer_2_sz97wf.png"/>
             </InstaImageContainer>
-            <LoginFormContainer onSubmit={useLoginApi}>
+            
+            <LoginFormContainer onSubmit={loginAPI}>
                 <InstaLogoContainer>
                     <RenderInstaLogo src="https://res.cloudinary.com/degjdup40/image/upload/v1654572262/Standard_Collection_8_m8rwqb.png"/>
                     <InstaShareTitle>Insta Share</InstaShareTitle>
                 </InstaLogoContainer>
-                {useInputLabelContainer("text", "USERNAME", "username", userName, useOnChangeUsername, "Username", isUserNameErrorDisplayed, setUserNameErrorDisplayStatus, userNameErrMsg, onBlurUsername, OnFocusEvent)}
-                {useInputLabelContainer("text", "PASSWORD", "password", password, useOnChangePassword, "Password", isPasswordErrorDisplayed, setPasswordErrorDisplayStatus, passwordErrMsg, onBlurPassword, OnFocusEvent)}
+                {useInputLabelContainer(loginUserNameProps)}
+                {useInputLabelContainer(loginPasswordProps)}
                 <ButtonErrorMsgContainer>
-                    <LoginButton type="submit">Login</LoginButton>
+                    <LoginButton type="submit">{isLoading ? "Loading" : "Login"}</LoginButton>
                     <ErrorMsg>{isErrorDisplayed ? errorMsg: null}</ErrorMsg>
                 </ButtonErrorMsgContainer>
             </LoginFormContainer>
         </LoginPageContainer>
     )
 }
+
+export  {LoginForm}

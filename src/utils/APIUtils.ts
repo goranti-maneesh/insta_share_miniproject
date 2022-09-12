@@ -190,11 +190,13 @@ export const networkCallWithApisauce = (store: any) => async (
   url: string,
   requestObject: Record<string, any>,
   type: any = apiMethods.post,
+  
   options = {
     getAccessToken: store.getAccessToken,
     getRefreshToken: store.getRefreshToken,
   }
 ) => {
+  console.log(1)
   api.setHeaders({
     Authorization: `Bearer ${options.getAccessToken()}`,
   });
@@ -203,8 +205,10 @@ export const networkCallWithApisauce = (store: any) => async (
     // NOTE: same api is invocation method is used in AuthApiUtils also. for any modifications update the same there
     //@ts-ignore
     response = await getData(api, url, requestObject, type);
+    console.log(response, "response")
   } catch (error) {
     const { message } = error as Error;
+    console.log(2)
     const { isAccessTokenExpired } = isAccessTokenExpiredMessage(message);
     if (isAccessTokenExpired) {
       // NOTE: To avoid circular dependencies we are passing store as an argument

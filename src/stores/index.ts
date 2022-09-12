@@ -1,10 +1,11 @@
-// import LoginServiceApi from '../services/LoginService/index.fixtures'
-import LoginServiceApi from '../services/LoginService/index.api'
+// import AuthServiceApi from '../services/LoginService/index.fixtures'
+import AuthServiceApi from '../services/LoginService/index.api'
 import { networkCallWithApisauce } from '../utils/APIUtils'
 
-import LoginStore from './LoginStore/index'
+import AuthStore from './AuthStore/index'
 
-const LoginServiceApiInstance = new LoginServiceApi(networkCallWithApisauce)
-const LoginStoreInstance = new LoginStore(LoginServiceApiInstance)
+console.log(networkCallWithApisauce)
+const authServiceApiInstance = new AuthServiceApi(networkCallWithApisauce)
+const authStoreInstance = new AuthStore(authServiceApiInstance)
 
-export default {LoginServiceApiInstance, LoginStoreInstance}
+export default {authServiceApiInstance, authStoreInstance}
