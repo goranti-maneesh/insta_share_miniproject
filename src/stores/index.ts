@@ -4,7 +4,6 @@ import { networkCallWithApisauce } from '../utils/APIUtils'
 
 import AuthStore from './AuthStore/index'
 
-console.log(networkCallWithApisauce)
 const authServiceApiInstance = new AuthServiceApi(networkCallWithApisauce)
 const authStoreInstance = new AuthStore(authServiceApiInstance)
 

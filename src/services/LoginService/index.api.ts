@@ -34,10 +34,14 @@ class AuthServiceApi implements AuthServiceType{
             method: 'POST',
             body: JSON.stringify(requestObj)
         }   
-
-        const response = await fetch(loginApi, options)
+        
+        const url = `${this.api.axiosInstance.defaults.baseURL}/login`
+        
+        const response = await fetch(url, options)
         const data = await response.json()
-        return data
+        return {
+          ...data,reponseStatus: response.ok
+        }
     }
 }
 

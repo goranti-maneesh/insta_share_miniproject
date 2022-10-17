@@ -1,16 +1,17 @@
 export interface AuthApiResponseObjTypes{
-    jwt_token: string
-
+    jwt_token: string,
+    responseStatus: boolean
 }
 
-export interface AuthApiFaliureResponseObjTypes{
+export interface AuthApiFailureResponseObjTypes{
     error_msg: string,
-    status_code: number    
+    status_code: number,
+    responseStatus: boolean  
 }
 
 export interface AuthRequestObjTypes{
     username: string,
-    password: string
+    password: string,
 }
 
 interface ApiNetworkCallType{

@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie'
-
 import { observable } from 'mobx';
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
 import { APIStatus, API_INITIAL} from '@ib/api-constants/lib/index';
@@ -7,7 +5,8 @@ import { APIStatus, API_INITIAL} from '@ib/api-constants/lib/index';
 import AuthServiceType from '../../services/LoginService/index'
 
 import AuthServiceApiInstance from '../index'
-import { AuthRequestObjTypes, AuthApiResponseObjTypes, AuthApiFaliureResponseObjTypes } from '../types'
+import { AuthRequestObjTypes, AuthApiResponseObjTypes, AuthApiFailureResponseObjTypes } from '../types'
+import { setJwtToken } from '../../utils/StorageUtils';
 
 export class AuthStore{
     @observable authApiService!: AuthServiceType
@@ -17,32 +16,24 @@ export class AuthStore{
         this.authApiService = AuthServiceApiInstance
     }
 
-    setAuthCookies = (response: any) =>{
-        console.log(response, 'response')
-        if(Object.keys(response).includes('jwt_token')){
-            Cookies.set('jwtToken', response.jwt_token, {expires:30})
+    setAuthCookies = (response: AuthApiResponseObjTypes| AuthApiFailureResponseObjTypes) =>{
+        console.log(response)
+        if(response.responseStatus){
+        // if(Object.keys(response).includes('jwt_token')){
+            // setJwtToken(response.jwt_token)
         }
     }
-
+    
     setAuthApiStatus = (apiResponse: APIStatus) => {
         this.authApiStatus = apiResponse
+        // console.log(this.authApiStatus, "authApiStatus")
     }
 
-    onAuthLogIn = (userDetais: AuthRequestObjTypes, onSuccess = () => {}, onFailure = (error: any) => {}) => {
-        // console.log(123)
+    onAuthLogIn = (userDetais: AuthRequestObjTypes) => {
         const authLoginApi = this.authApiService.onAuthLogin(userDetais)
-        console.log(authLoginApi)
-        // authLoginApi.then(data=>{
-        //     console.log(data, "data")
-        // })
-        // .then((data)=>{
-        //     conso
-        // })
-        return bindPromiseWithOnSuccess(authLoginApi)
-        .to(
+        return bindPromiseWithOnSuccess(authLoginApi).to(
             this.setAuthApiStatus, (response) => {
                 this.setAuthCookies(response);
-                onSuccess()
             }
         )
     }

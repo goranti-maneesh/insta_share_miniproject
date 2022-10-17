@@ -1,4 +1,4 @@
-import React, { useState, useContext, FC, useEffect } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { RouteComponentProps, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -7,24 +7,25 @@ RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg
 
 import {ObjContext} from '../../App'
 import useInputLabelContainer from "../../common/LoginInputLabelContainer";
-import { AuthApiFaliureResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
+import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
 import { isLoggedIn } from "../../utils/AuthUtils/AuthUtils";
 
-const LoginForm: FC<RouteComponentProps> = ({history}) => {
+const LoginForm = (props: RouteComponentProps) => {
 
     const {t} = useTranslation()
 
     const buttonTextError = t('loginErrors.loginButtonError')
 
+    const useEffectInitialRender = useRef(true);
+
     const objUseContext = useContext(ObjContext)
+
+    const {onAuthLogIn, authApiStatus} = objUseContext.authStoreInstance
     
-    const [userName, setUserName] = useState("")
-    const [password, setPassword] = useState("")
+    const [userDetails, setUserDetails] = useState({username: "", password: ""})
     const [isUserNameErrorDisplayed, setUserNameErrorDisplayStatus] = useState(false)
     const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
-    const [isErrorDisplayed, setErrorDisplayStatus] = useState(false)
-    const [isLoading, setLoadingStatus] = useState(false)
 
     const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
         setFunction(false)
@@ -32,7 +33,7 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
 
     const onBlurUsername = () => {
         const regex = new RegExp('[a-zA-Z0-9]{5,}')
-        const result = regex.test(userName)
+        const result = regex.test(userDetails.username)
         if(result){
             setUserNameErrorDisplayStatus(false)
         }else{
@@ -42,7 +43,7 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
 
     const onBlurPassword = () => {
         const regex = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
-        const result = regex.test(password)
+        const result = regex.test(userDetails.password)
         if(result){
             setPasswordErrorDisplayStatus(false)
         }else{
@@ -51,62 +52,58 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
     }
     
     const onSuccess = () => {
-        setErrorDisplayStatus(false)
-        setLoadingStatus(false)
-        console.log(history)
+        const {history} = props
         history.replace("/")
     }
 
-    const onFailure = (failureResponse: AuthApiFaliureResponseObjTypes) => {
-        setErrorDisplayStatus(true)
-        setLoadingStatus(false)
+    const onFailure = (failureResponse: AuthApiFailureResponseObjTypes) => {
         setErrorMsg(failureResponse.error_msg)
     }
 
     useEffect(() => {
-        setErrorMsg(buttonTextError)
-    })
+        if(useEffectInitialRender.current){
+            useEffectInitialRender.current = false
+        }
+        else{
+            setErrorMsg(buttonTextError)
+        }
+    }, [buttonTextError])
     
     const loginAPI = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const userDetails = {
-            username: userName,
-            password: password
-        }
         
-        if(userName !== "" && password !== ""){
-            setLoadingStatus(true)
-            setErrorDisplayStatus(false)
+        if(userDetails.username !== "" && userDetails.password !== ""){
             setErrorMsg("")
 
-            const returnData: any = await objUseContext.authStoreInstance.onAuthLogIn(userDetails)
+            const returnData: AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes = await onAuthLogIn(userDetails)
             
-            if(Object.keys(returnData).includes('jwt_token')){
+            if(returnData.responseStatus){
                 onSuccess()
             }
             else{
-                onFailure(returnData as AuthApiFaliureResponseObjTypes)
+                onFailure(returnData as unknown as AuthApiFailureResponseObjTypes)
             }
         }
         else{
-            setErrorDisplayStatus(true)
+            setErrorMsg(buttonTextError)
         }
     }
 
-
     const onChangeUsername = (event: React.FormEvent<HTMLInputElement>) => {
-        setUserName(event.currentTarget.value)
+        setUserDetails({username: event.currentTarget.value, password: userDetails.password})
+        // setUserName(event.currentTarget.value)
     }
 
     const onChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
-        setPassword(event.currentTarget.value)
+        setUserDetails({username: userDetails.username, password: event.currentTarget.value})
+        // setPassword(event.currentTarget.value)
     }
 
     const loginUserNameProps: loginUserNameAndPasswordPropTypes = {
         type: "text",
         labelText: "USERNAME",
         id: "username",
-        value: userName,
+        value: userDetails.username,
         onchangeMethod: onChangeUsername,
         placeholder: "Username",
         isErrorDisplayed: isUserNameErrorDisplayed,
@@ -120,7 +117,7 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
         type: "password",
         labelText: "PASSWORD",
         id: "password",
-        value: password,
+        value: userDetails.password,
         onchangeMethod: onChangePassword,
         placeholder: "Password",
         isErrorDisplayed: isPasswordErrorDisplayed,
@@ -130,13 +127,15 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
         OnFocusEvent: onFocusEvent
     }
 
+    console.log(errorMsg, "errorMsg")
+
     return(
         <LoginPageContainer>
             {isLoggedIn()? <Redirect to="/"/> : null}
             <InstaImageContainer>
                 <RenderInstaImage src="https://res.cloudinary.com/degjdup40/image/upload/v1654572231/Layer_2_sz97wf.png"/>
             </InstaImageContainer>
-            
+
             <LoginFormContainer onSubmit={loginAPI}>
                 <InstaLogoContainer>
                     <RenderInstaLogo src="https://res.cloudinary.com/degjdup40/image/upload/v1654572262/Standard_Collection_8_m8rwqb.png"/>
@@ -145,8 +144,8 @@ const LoginForm: FC<RouteComponentProps> = ({history}) => {
                 {useInputLabelContainer(loginUserNameProps)}
                 {useInputLabelContainer(loginPasswordProps)}
                 <ButtonErrorMsgContainer>
-                    <LoginButton type="submit">{isLoading ? "Loading" : "Login"}</LoginButton>
-                    <ErrorMsg>{isErrorDisplayed ? errorMsg: null}</ErrorMsg>
+                    <LoginButton type="submit">{authApiStatus === 100 ? "Loading" : "Login"}</LoginButton>
+                    <ErrorMsg>{errorMsg === "" ? null : errorMsg}</ErrorMsg>
                 </ButtonErrorMsgContainer>
             </LoginFormContainer>
         </LoginPageContainer>

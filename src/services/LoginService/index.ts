@@ -1,7 +1,7 @@
-import {AuthApiResponseObjTypes, AuthRequestObjTypes} from '../../stores/types'
+import {AuthApiResponseObjTypes, AuthApiFailureResponseObjTypes, AuthRequestObjTypes} from '../../stores/types'
 
 interface AuthServiceType{
-    onAuthLogin: (requestObject: AuthRequestObjTypes) => Promise<AuthApiResponseObjTypes>
+    onAuthLogin: (requestObject: AuthRequestObjTypes) => Promise<AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes>
 }
 
 export default AuthServiceType

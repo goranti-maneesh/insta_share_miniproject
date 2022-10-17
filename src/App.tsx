@@ -1,7 +1,7 @@
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { createContext } from 'react';
 
-import stores from '../src/stores/index'
+import stores from './stores/index'
 
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';

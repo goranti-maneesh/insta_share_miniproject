@@ -17,7 +17,6 @@ export const useInputLabelContainer = (props: loginUserNameAndPasswordPropTypes)
     errMsg,
     onblurFunc,
     OnFocusEvent} = props
-    // console.log(isLoggedIn())
     
 
     return(

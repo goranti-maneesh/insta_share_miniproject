@@ -1,3 +1,4 @@
 {
-    "jwt_token": "abcd"
+    "jwt_token": "abcd",
+    "responseStatus": true
 }
