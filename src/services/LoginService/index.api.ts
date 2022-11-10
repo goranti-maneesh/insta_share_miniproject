@@ -29,18 +29,19 @@ class AuthServiceApi implements AuthServiceType{
   //   }
     
     onAuthLogin = async (requestObj: AuthRequestObjTypes) => {
+      console.log(config.LOGIN_BASE_URL)
 
         const options = {
             method: 'POST',
             body: JSON.stringify(requestObj)
         }   
         
-        const url = `${this.api.axiosInstance.defaults.baseURL}/login`
+        const url = `${config.LOGIN_BASE_URL}/login`
         
         const response = await fetch(url, options)
         const data = await response.json()
         return {
-          ...data,reponseStatus: response.ok
+          ...data,responseStatus: response.ok
         }
     }
 }

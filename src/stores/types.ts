@@ -1,3 +1,7 @@
+import { Dispatch, SetStateAction } from "react"
+import AuthServiceApi from "../services/LoginService/index.api"
+import AuthStore from "./AuthStore"
+
 export interface AuthApiResponseObjTypes{
     jwt_token: string,
     responseStatus: boolean
@@ -6,7 +10,8 @@ export interface AuthApiResponseObjTypes{
 export interface AuthApiFailureResponseObjTypes{
     error_msg: string,
     status_code: number,
-    responseStatus: boolean  
+    responseStatus: boolean,
+    jwt_token?: string
 }
 
 export interface AuthRequestObjTypes{
@@ -40,4 +45,11 @@ export interface loginUserNameAndPasswordPropTypes {
     errMsg: string;
     onblurFunc: () => void;
     OnFocusEvent: (setFunction: (value: React.SetStateAction<boolean>) => void) => void;
+}
+
+export interface contextValueTypes {
+    searchValues: (string | Dispatch<SetStateAction<string>>)[];
+    screenSizeView: MediaQueryList;
+    authServiceApiInstance: AuthServiceApi;
+    authStoreInstance: AuthStore;
 }

@@ -17,10 +17,12 @@ export class AuthStore{
     }
 
     setAuthCookies = (response: AuthApiResponseObjTypes| AuthApiFailureResponseObjTypes) =>{
-        console.log(response)
-        if(response.responseStatus){
+        // console.log(response)
+        const {jwt_token, responseStatus} = response
+        console.log(responseStatus, jwt_token)
+        if(responseStatus){
         // if(Object.keys(response).includes('jwt_token')){
-            // setJwtToken(response.jwt_token)
+            setJwtToken(jwt_token)
         }
     }
     

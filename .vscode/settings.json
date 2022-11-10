@@ -1,0 +1,9 @@
+{
+    "liveServer.settings.port": 5501,
+    "prettier.withNodeModules": true,
+    "prettier.useTabs": true,
+    "prettier.trailingComma": "all",
+    "prettier.tabWidth": 4,
+    "prettier.singleAttributePerLine": false,
+    "prettier.resolveGlobalModules": true
+}

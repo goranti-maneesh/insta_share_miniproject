@@ -3,9 +3,9 @@ import { RouteComponentProps, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
-RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './styledComponents'
+RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 
-import {ObjContext} from '../../App'
+import {ObjContext} from '../../context/context'
 import useInputLabelContainer from "../../common/LoginInputLabelContainer";
 import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
 import { isLoggedIn } from "../../utils/AuthUtils/AuthUtils";
@@ -53,7 +53,7 @@ const LoginForm = (props: RouteComponentProps) => {
     
     const onSuccess = () => {
         const {history} = props
-        history.replace("/")
+        history.push("/")
     }
 
     const onFailure = (failureResponse: AuthApiFailureResponseObjTypes) => {
@@ -126,8 +126,6 @@ const LoginForm = (props: RouteComponentProps) => {
         onblurFunc: onBlurPassword,
         OnFocusEvent: onFocusEvent
     }
-
-    console.log(errorMsg, "errorMsg")
 
     return(
         <LoginPageContainer>
