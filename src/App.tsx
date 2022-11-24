@@ -1,14 +1,14 @@
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import stores from './stores/index'
+import stores from './Auth/stores/index'
 
-import Home from './components/Home';
-import LoginForm from './components/LoginForm';
-import Translate from './common/Translate/index'
-import ProtectedRoute from './utils/ProtectedRoute';
+import Home from './OwnProfile/Home';
+import LoginForm from './Auth/components/LoginForm';
+import Translate from './Common/Translate/index'
+import ProtectedRoute from './Auth/utils/ProtectedRoute';
 import { ObjContext } from './context/context';
-import { contextValueTypes } from './stores/types';
+import { contextValueTypes } from './Auth/stores/types';
 
 const isLargeView = window.matchMedia("(min-width: 768px)")
 

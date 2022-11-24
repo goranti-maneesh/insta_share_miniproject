@@ -3,5 +3,12 @@
         "loginUsernameError": "User name must contain 5 letters",
         "loginPasswordError": "Password must contain letters, special character and number with range of 6 to 16",
         "loginButtonError": "Enter valid Username and Password"
+    },
+    "loginPageText": {
+        "loginText": "Login"
+    },
+    "translateText": {
+        "telugu": "Telugu",
+        "english": "English"
     }
 }

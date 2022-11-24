@@ -9,7 +9,7 @@ import { AuthRequestObjTypes, AuthApiResponseObjTypes, AuthApiFailureResponseObj
 import { setJwtToken } from '../../utils/StorageUtils';
 
 export class AuthStore{
-    @observable authApiService!: AuthServiceType
+    @observable authApiService: AuthServiceType
     @observable authApiStatus = API_INITIAL;
 
     constructor(AuthServiceApiInstance: AuthServiceType){

@@ -1,9 +1,9 @@
 import {create, ApisauceInstance} from 'apisauce'
 
 import {AuthRequestObjTypes} from '../../stores/types'
-import { apiMethods } from '../../constants/APIConstants';
-import config from '../../constants/EnvironmentConstants';
-import {loginApi} from '../../constants/LocalConstants'
+import { apiMethods } from '../../../constants/APIConstants';
+import config from '../../../constants/EnvironmentConstants';
+import {loginApi} from '../../../constants/LocalConstants'
 
 import AuthServiceType from './index'
 
@@ -29,17 +29,17 @@ class AuthServiceApi implements AuthServiceType{
   //   }
     
     onAuthLogin = async (requestObj: AuthRequestObjTypes) => {
-      console.log(config.LOGIN_BASE_URL)
-
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(requestObj)
-        }   
-        
-        const url = `${config.LOGIN_BASE_URL}/login`
-        
-        const response = await fetch(url, options)
-        const data = await response.json()
+      
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(requestObj)
+      }   
+      
+      const url = `${config.LOGIN_BASE_URL}/login`
+      
+      const response = await fetch(url, options)
+      const data = await response.json()
+      // console.log(data, "data")
         return {
           ...data,responseStatus: response.ok
         }

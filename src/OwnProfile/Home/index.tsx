@@ -1,4 +1,4 @@
-import Header from '../../common/Header';
+import Header from '../../Common/Header';
 import {FlexHeading, NoneHeading} from './styledComponents'
 
 const Home = () => {

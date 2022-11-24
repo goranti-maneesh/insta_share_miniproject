@@ -1,6 +1,6 @@
 import Cookies from "js-cookie"
 
-import {TOKEN} from '../constants/LocalConstants'
+import {TOKEN} from '../../constants/LocalConstants'
 
 export const setCookie = (TOKEN: string, TOKENVALUE: string) => {
     return Cookies.set(TOKEN, TOKENVALUE, {expires:30})
