@@ -10,12 +10,11 @@ import AuthServiceType from './index'
 class AuthServiceApi implements AuthServiceType{
 
     api: ApisauceInstance;
-  networkCallWithApisauce!: Function;
-  constructor(networkCallWithApisauce: any) {
+  constructor() {
     this.api = create({
       baseURL: `${config.LOGIN_BASE_URL}`,
     });
-    this.networkCallWithApisauce = networkCallWithApisauce;
+    // this.networkCallWithApisauce = networkCallWithApisauce;
   }
 
   // onAuthLogin(requestObject: AuthRequestObjTypes) {

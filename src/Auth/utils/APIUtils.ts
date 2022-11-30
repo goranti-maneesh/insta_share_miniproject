@@ -5,7 +5,7 @@ import {
   API_FAILED,
 } from '@ib/api-constants'
 import getData from '@ib/api';
-import I18n from '../../i18n/index';
+import I18n from '../../Common/i18n/index';
 
 import { apiMethods } from '../../constants/APIConstants';
 import { resStatuses, statusCodes } from '../../constants/APIErrorConstants';

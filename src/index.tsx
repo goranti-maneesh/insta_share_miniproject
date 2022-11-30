@@ -1,4 +1,4 @@
-import './i18n'
+import './Common/i18n'
 // import ReactDOM from 'react-dom/client';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';

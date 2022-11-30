@@ -10,7 +10,7 @@ import useInputLabelContainer from "../LoginInputLabelContainer";
 import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
 import { isLoggedIn } from "../../utils/AuthUtils/AuthUtils";
 
-import useExample from '../../Example'
+import useAuthStore from '../../Hooks/useAuthStore'
 
 const LoginForm = (props: RouteComponentProps) => {
 
@@ -22,14 +22,15 @@ const LoginForm = (props: RouteComponentProps) => {
 
     const objUseContext = useContext(ObjContext)
 
-    const {authApiStatus} = objUseContext.authStoreInstance
+    const {authApiStatus, onAuthLogIn} = objUseContext.authStoreInstance
     
     const [userDetails, setUserDetails] = useState({username: "", password: ""})
     const [isUserNameErrorDisplayed, setUserNameErrorDisplayStatus] = useState(false)
     const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
 
-    const onAuthLogIn = useExample()
+    // const onAuthLogIn = useExample()
+    console.log(useAuthStore(), "hello", onAuthLogIn)
 
     const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
         setFunction(false)

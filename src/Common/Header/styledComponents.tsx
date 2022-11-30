@@ -14,7 +14,7 @@ export const HeaderContainer = styled.div`
 `
 
 export const LogoContainer = styled.div`
-    ${tw`flex`}
+    ${tw`flex justify-center items-center`}
 `
 
 export const InstaLogo = styled.img`
@@ -26,27 +26,27 @@ export const InstaShareTitle = styled.h1`
 `
 
 export const RoutesContainer = styled.div`
-    ${tw`flex`}
+    ${tw`w-1/2 flex justify-between items-center`}
 `
 
 export const SearchInputContainer = styled.div`
-    ${`w-214px mr-8 h-7 border-navbar-search-border-search-icon-bg border-solid rounded-3px`}
+    ${tw`w-214px mr-8 h-7 border-navbar-search-border-search-icon-bg border border-solid rounded-3px flex`}
 `
 
 export const SearchInput = styled.input`
-    ${tw`outline-none border-0 bg-navbar-search-input-bg py-1.5 pl-3 text-navbar-search-input-text text-14px`}
+    ${tw`w-180px outline-none border-0 bg-navbar-search-input-bg py-1.5 pl-3 text-navbar-search-input-text text-14px`}
 `
 
 export const SearchIconContainer = styled.div`
-    ${tw`bg-navbar-search-border-search-icon-bg pt-3 pr-2 pb-3 pl-3 `}
+    ${tw`bg-navbar-search-border-search-icon-bg w-34px flex justify-center items-center`}
 `
 
 export const SearchIcon = styled(FiSearch)`
-    ${tw`w-2.5 h-2.5`}
+    ${tw`w-2.5 h-2.5 `}
 `
 
 export const HeaderLink = styled(Link)`
-    ${tw`text-14px leading-18px text-navbar-link-color font-medium`}
+    ${tw`no-underline text-14px leading-18px text-navbar-link-color font-medium`}
 `
 
 export const LogoutButton = styled.button`

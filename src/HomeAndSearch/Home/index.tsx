@@ -6,9 +6,7 @@ const Home = () => {
     return(
         <div>
             <Header/>
-            {window.innerWidth >= 800 ? <h1>Hello Home</h1> : null}
-            <FlexHeading>Display Flex</FlexHeading>
-            <NoneHeading>Display None</NoneHeading>
+            
         </div>
         
     )

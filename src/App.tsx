@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 
 import stores from './Auth/stores/index'
 
-import Home from './OwnProfile/Home';
+import './App.css'
+
+import Home from './HomeAndSearch/Home';
 import LoginForm from './Auth/components/LoginForm';
 import Translate from './Common/Translate/index'
 import ProtectedRoute from './Auth/utils/ProtectedRoute';
