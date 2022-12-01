@@ -7,7 +7,7 @@ import Home from './OwnProfile/Home';
 import LoginForm from './Auth/components/LoginForm';
 import Translate from './Common/Translate/index'
 import ProtectedRoute from './Auth/utils/ProtectedRoute';
-import { ObjContext } from './context/context';
+import { ObjContext } from './Common/context/context';
 import { contextValueTypes } from './Auth/stores/types';
 
 const isLargeView = window.matchMedia("(min-width: 768px)")

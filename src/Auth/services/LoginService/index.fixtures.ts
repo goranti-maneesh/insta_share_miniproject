@@ -8,10 +8,10 @@ import getLoginResponse from '../../fixtures/getLoginResponse.json'
 
 class AuthServiceApi implements AuthServiceType{
   // api: ApisauceInstance;
-    networkCallWithApisauce!: Function;
-  constructor(networkCallWithApisauce: any) {
-    this.networkCallWithApisauce = networkCallWithApisauce;
-  }
+  //   networkCallWithApisauce!: Function;
+  // constructor(networkCallWithApisauce: any) {
+  //   this.networkCallWithApisauce = networkCallWithApisauce;
+  // }
 
     onAuthLogin(){
         return resolveWithTimeout(getLoginResponse)

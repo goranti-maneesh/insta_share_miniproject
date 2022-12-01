@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import { useContext } from "react";
 
 import {
@@ -17,13 +18,19 @@ import {
 } from "./styledComponents";
 
 import { instaHeaderLogo } from "../../constants/LocalConstants";
-import {ObjContext} from '../../context/context'
+import {ObjContext} from '../context/context'
+import { accessRemoveCookie } from "../../Auth/utils/StorageUtils";
+import { isLoggedIn } from "../../Auth/utils/AuthUtils/AuthUtils";
 
-export const Header = () => {
+const Header = (props) => {
 
 	const objUseContext = useContext(ObjContext)
 
 	const onChangeSearchInput = (event) => {};
+
+	const onClickLogout = () => {
+		accessRemoveCookie(props)
+	}
 
 	const renderHeaderLargeView = () => (
 		<HeaderMainContainer>
@@ -45,7 +52,7 @@ export const Header = () => {
 				</SearchInputContainer>
 				<HeaderLink to="/">Home</HeaderLink>
 				<HeaderLink to="/profile">Profile</HeaderLink>
-				<LogoutButton>Logout</LogoutButton>
+				<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
 			</RoutesContainer>
 			</HeaderContainer>
 		</HeaderMainContainer>
@@ -57,3 +64,5 @@ export const Header = () => {
 
 	return <MainHeaderContainer>{objUseContext.screenSizeView.matches ? renderHeaderLargeView() : renderHeaderMobileView()}</MainHeaderContainer>;
 };
+
+export const HeaderWithRouter = withRouter(Header)

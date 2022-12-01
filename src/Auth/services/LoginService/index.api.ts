@@ -10,12 +10,10 @@ import AuthServiceType from './index'
 class AuthServiceApi implements AuthServiceType{
 
     api: ApisauceInstance;
-  networkCallWithApisauce!: Function;
-  constructor(networkCallWithApisauce: any) {
+  constructor() {
     this.api = create({
       baseURL: `${config.LOGIN_BASE_URL}`,
     });
-    this.networkCallWithApisauce = networkCallWithApisauce;
   }
 
   // onAuthLogin(requestObject: AuthRequestObjTypes) {
@@ -39,7 +37,6 @@ class AuthServiceApi implements AuthServiceType{
       
       const response = await fetch(url, options)
       const data = await response.json()
-      // console.log(data, "data")
         return {
           ...data,responseStatus: response.ok
         }
