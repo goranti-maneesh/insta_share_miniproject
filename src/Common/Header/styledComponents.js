@@ -41,6 +41,10 @@ export const SearchIconContainer = styled.div`
     ${tw`bg-navbar-search-border-search-icon-bg w-34px flex justify-center items-center`}
 `
 
+export const SearchButton = styled.button`
+    ${tw`bg-transparent outline-none cursor-pointer border-0`}
+`
+
 export const SearchIcon = styled(FiSearch)`
     ${tw`w-2.5 h-2.5 `}
 `

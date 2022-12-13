@@ -6,7 +6,7 @@ import AuthServiceType from '../../services/LoginService/index'
 
 import AuthServiceApiInstance from '../index'
 import { AuthRequestObjTypes, AuthApiResponseObjTypes, AuthApiFailureResponseObjTypes } from '../types'
-import { setJwtToken } from '../../utils/StorageUtils';
+import { setJwtToken } from '../../../Common/utils/StorageUtils';
 
 export class AuthStore{
     @observable authApiService: AuthServiceType

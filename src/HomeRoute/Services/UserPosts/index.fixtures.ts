@@ -1,0 +1,5 @@
+class UserPostsService {
+
+}
+
+export {UserPostsService}

@@ -3,7 +3,7 @@ import { SetStateAction } from 'react'
 import {InputFieldContainer, LabelElement, InputElement, ErrorMsg} from './styledComponents'
 
 import {loginUserNameAndPasswordPropTypes} from '../../stores/types'
-import { isLoggedIn } from '../../utils/AuthUtils/AuthUtils'
+import { isLoggedIn } from '../../../Common/utils/AuthUtils/AuthUtils'
 
 export const useInputLabelContainer = (props: loginUserNameAndPasswordPropTypes) => {
     const {type,

@@ -5,16 +5,19 @@ import { useTranslation } from "react-i18next";
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 
-import {ObjContext} from '../../../context/context'
+import {ObjContext} from '../../../Common/context/context'
 import useInputLabelContainer from "../LoginInputLabelContainer";
 import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
-import { isLoggedIn } from "../../utils/AuthUtils/AuthUtils";
+import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
 
-import useAuthStore from '../../Hooks/useAuthStore'
+import {useAuthStore} from '../../Hooks/useAuthStore'
+
 
 const LoginForm = (props: RouteComponentProps) => {
-
+    
     const {t} = useTranslation()
+    
+    const authStoreInstance = useAuthStore()
 
     const buttonTextError = t('loginErrors.loginButtonError')
 
@@ -29,8 +32,6 @@ const LoginForm = (props: RouteComponentProps) => {
     const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
 
-    // const onAuthLogIn = useExample()
-    console.log(useAuthStore(), "hello", onAuthLogIn)
 
     const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
         setFunction(false)
@@ -58,7 +59,7 @@ const LoginForm = (props: RouteComponentProps) => {
     
     const onSuccess = () => {
         const {history} = props
-        history.push("/")
+        history.replace("/")
     }
 
     const onFailure = (failureResponse: AuthApiFailureResponseObjTypes) => {
@@ -81,8 +82,8 @@ const LoginForm = (props: RouteComponentProps) => {
             setErrorMsg("")
 
             
-            const returnData: AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes = await onAuthLogIn(userDetails)
-            
+            const returnData: AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes = await authStoreInstance.onAuthLogIn(userDetails)
+            // console.log(authStoreInstance)
             if(returnData.responseStatus){
                 onSuccess()
             }
@@ -148,7 +149,7 @@ const LoginForm = (props: RouteComponentProps) => {
                 {useInputLabelContainer(loginUserNameProps)}
                 {useInputLabelContainer(loginPasswordProps)}
                 <ButtonErrorMsgContainer>
-                    <LoginButton type="submit">{authApiStatus === 100 ? "Loading" : t<string>('loginPageText.loginText')}</LoginButton>
+                    <LoginButton type="submit">{authStoreInstance.authApiStatus === 100 ? "Loading" : t<string>('loginPageText.loginText')}</LoginButton>
                     <ErrorMsg>{errorMsg === "" ? null : errorMsg}</ErrorMsg>
                 </ButtonErrorMsgContainer>
             </LoginFormContainer>

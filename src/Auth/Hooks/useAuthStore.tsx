@@ -1,11 +1,10 @@
-import AuthStore from '../stores/AuthStore/index'
+import AuthServiceApi from "../services/LoginService/index.api"
+import { AuthStore } from "../stores/AuthStore/LoginStore"
 
-// const authStoreHook = new AuthStore()
+const authServiceApiInstance = new AuthServiceApi()
 
-const useAuthStore = () => {
-    const authStoreHook = AuthStore
+const authStoreInstance = new AuthStore(authServiceApiInstance)
 
-    return authStoreHook
+export const useAuthStore = () => {
+    return authStoreInstance
 }
-
-export default useAuthStore
