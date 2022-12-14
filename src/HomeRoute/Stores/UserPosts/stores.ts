@@ -1,35 +1,43 @@
-import { observable, action } from 'mobx';
-import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
-import { APIStatus, API_INITIAL} from '@ib/api-constants/lib/index';
-import UserPostModal from '../userPostsModal'
+import { observable } from "mobx";
+import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
+import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
+import UserPostModal from "../userPostsModal";
+import { userPostsResponseTypes } from "../Types/UserPostsTypes";
 
-class UserPostsStores{
-    @observable userPostApiService
-    @observable responseStatus = API_INITIAL
-    @observable userPostsResponse = null
+class UserPostsStores {
+	@observable userPostApiService;
+	@observable responseStatus = API_INITIAL;
+	@observable userPostsResponse;
 
-    constructor(userPostServiceApiInstance ){
-        this.userPostApiService = userPostServiceApiInstance
-    }
+	constructor(userPostServiceApiInstance) {
+		this.userPostApiService = userPostServiceApiInstance;
+	}
 
-    getUserPostsResponse = (response) => {
-        console.log(response)
-        const modalData = response.posts.map((eachPost) => new UserPostModal(eachPost))
-        this.userPostsResponse = modalData
-    }
+	getUserPostsResponse = (response: userPostsResponseTypes) => {
+		const modalData = response.posts.map((eachPost) => {
+			return new UserPostModal(eachPost);
+		});
+		console.log(modalData, 'modalData');
+		this.userPostsResponse = {
+			modalData,
+			responseStatus: response.responseStatus,
+		};
+	};
 
-    getUserPostsStatus = (responseStatus: APIStatus) => {
-        this.responseStatus = responseStatus
-    }
+	getUserPostsStatus = (responseStatus: APIStatus) => {
+		this.responseStatus = responseStatus;
+	};
 
-    fetchUserPosts = () => {
-        const postsResponse = this.userPostApiService.getUserStories()
-        return bindPromiseWithOnSuccess(postsResponse).to(
-            this.getUserPostsStatus, (response) => {
-                this.getUserPostsResponse(response)
-            }
-        )
-    }
+	fetchUserPosts = () => {
+		const postsResponse = this.userPostApiService.getUserPosts();
+		return bindPromiseWithOnSuccess(postsResponse).to(
+			this.getUserPostsStatus,
+			(response: userPostsResponseTypes) => {
+				// console.log(response)
+				return this.getUserPostsResponse(response);
+			},
+		);
+	};
 }
 
-export {UserPostsStores}
+export { UserPostsStores };

@@ -15,13 +15,13 @@ export const HomeAndSearch = () => {
 		setSearchClickStatus(true);
 	};
 
-    const onChangeSearchText = (text) => {
+    const onChangeSearchText = (text: string) => {
         setSearchText(text)
     }
 
 	return (
 		<HomeAndSearchMainContainer>
-			<Header onClickState={onClickState} onChangeSearchText={onChangeSearchText} />
+			<Header onClickState={onClickState} onChangeSearchText={onChangeSearchText} searchText={searchText}/>
             <WrapperComponent>
                 {searchClickStatus ? <SearchResults /> : <Home/>}
             </WrapperComponent>

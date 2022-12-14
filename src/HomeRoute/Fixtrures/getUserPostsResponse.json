@@ -1,50 +1,53 @@
-[
-    {
-        "comments": [
-            {
-                "comment": "Lightning is incredible.",
-                "userId": "Prabuddha_Dasgupta",
-                "userName": "Prabuddha Dasgupta"
+{
+    "posts":[
+        {
+            "comments": [
+                {
+                    "comment": "Lightning is incredible.",
+                    "userId": "Prabuddha_Dasgupta",
+                    "userName": "Prabuddha Dasgupta"
+                },
+                {
+                    "comment": "The Earth laughs in flowers.",
+                    "userId": "Gautam_Rajadhyaksha",
+                    "userName": "Gautam Rajadhyaksha"
+                }
+            ],
+            "createdAt": "4 Hours Ago",
+            "likesCount": 7,
+            "postDetails": {
+                "caption": "Another day, another sunrise", 
+                "imageUrl": "https://assets.ccbp.in/frontend/react-js/instagram…oject/posts/instagram-mini-project-post-1-img.png"
             },
-            {
-                "comment": "The Earth laughs in flowers.",
-                "userId": "Gautam_Rajadhyaksha",
-                "userName": "Gautam Rajadhyaksha"
-            }
-        ],
-        "createdAt": "4 Hours Ago",
-        "likesCount": 7,
-        "postDetails": {
-            "caption": "Another day, another sunrise", 
-            "imageUrl": "https://assets.ccbp.in/frontend/react-js/instagram…oject/posts/instagram-mini-project-post-1-img.png"
+            "postId": "f25d77f0-602e-41d1-971e-4b8cf54709eb",
+            "profilePic": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/users/instagram-mini-project-user-1-img.png",
+            "userId": "Varun_Aadithya",
+            "userName": "Varun Aadithya"
         },
-        "postId": "f25d77f0-602e-41d1-971e-4b8cf54709eb",
-        "profilePic": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/users/instagram-mini-project-user-1-img.png",
-        "userId": "Varun_Aadithya",
-        "userName": "Varun Aadithya"
-    },
-    {
-        "comments": [
-            {
-                "comment": "Beauty is power; a smile is its sword.",
-                "userId": "Varun_Aadithya",
-                "userName": "Varun Aadithya"
+        {
+            "comments": [
+                {
+                    "comment": "Beauty is power; a smile is its sword.",
+                    "userId": "Varun_Aadithya",
+                    "userName": "Varun Aadithya"
+                },
+                {
+                    "comment": "Someone looked pretty today.",
+                    "userId": "Atul_Kasbekar",
+                    "userName": "Atul Kasbekar"
+                }
+            ],
+            "createdAt": "August 21",
+            "likesCount": 8,
+            "postDetails": {
+                "caption": "#Nofilter needed,", 
+                "imageUrl": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-2-img.png"
             },
-            {
-                "comment": "Someone looked pretty today.",
-                "userId": "Atul_Kasbekar",
-                "userName": "Atul Kasbekar"
-            }
-        ],
-        "createdAt": "August 21",
-        "likesCount": 8,
-        "postDetails": {
-            "caption": "#Nofilter needed,", 
-            "imageUrl": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-2-img.png"
-        },
-        "postId": "2844b49e-28ad-413f-9846-8b9005ed9f6f",
-        "profilePic": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/users/instagram-mini-project-user-11-img.png",
-        "userId": "Dabboo_Ratnani",
-        "userName": "Dabboo Ratnani"
-    }
-]
+            "postId": "2844b49e-28ad-413f-9846-8b9005ed9f6f",
+            "profilePic": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/users/instagram-mini-project-user-11-img.png",
+            "userId": "Dabboo_Ratnani",
+            "userName": "Dabboo Ratnani"
+        }
+    ],
+    "responseStatus": true
+}

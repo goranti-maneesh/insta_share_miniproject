@@ -1,13 +1,18 @@
+import { eachPostCommentTypes, eachUserPostTypes } from "./Types/UserPostsTypes"
 
-class UserPostModal{
-    comments: Array<Object>
+class UserPostModal implements eachUserPostTypes{
+    comments: Array<eachPostCommentTypes>
     createdAt: string
     likesCount: number
-    postDetails: Object
+    postDetails: {
+		caption: string;
+		imageUrl: string;
+	}
     postId: string
     profilePic: string
     userId: string
     userName: string
+    
     constructor(data){
         this.comments = data.comments.map((eachComment) => ({
             comment: eachComment.comment,

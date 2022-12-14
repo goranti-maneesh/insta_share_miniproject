@@ -83,7 +83,7 @@ const LoginForm = (props: RouteComponentProps) => {
 
             
             const returnData: AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes = await authStoreInstance.onAuthLogIn(userDetails)
-            // console.log(authStoreInstance)
+            
             if(returnData.responseStatus){
                 onSuccess()
             }

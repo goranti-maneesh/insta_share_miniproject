@@ -1,5 +1,5 @@
-import { withRouter } from "react-router-dom";
 import { useContext } from "react";
+import { withRouter } from "react-router-dom";
 
 import {
 	HeaderMainContainer,
@@ -18,17 +18,19 @@ import {
 	MainHeaderContainer,
 } from "./styledComponents";
 
+import {HeaderProps} from '../../HomeRoute/Stores/Types/UserPostsTypes'
+
 import { instaHeaderLogo } from "../../constants/LocalConstants";
 import {ObjContext} from '../context/context'
 import { accessRemoveCookie } from "../../Common/utils/StorageUtils";
 
-const Header = (props) => {
+const Header = (props: HeaderProps): JSX.Element => {
 
 	const objUseContext = useContext(ObjContext)
 
-	const {onClickState, onChangeSearchText} = props
+	const {onClickState, onChangeSearchText, searchText} = props
 
-	const onChangeSearchInput = (event) => {
+	const onChangeSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onChangeSearchText(event.target.value)
 	};
 
@@ -53,6 +55,7 @@ const Header = (props) => {
 						type="text"
 						placeholder="Search Caption"
 						onChange={onChangeSearchInput}
+						value={searchText}
 					/>
 					<SearchIconContainer>
 						<SearchButton onClick={onClickSearchButton}>
