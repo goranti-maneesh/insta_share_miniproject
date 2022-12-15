@@ -6,7 +6,7 @@ import {useUserPostsHook} from '../../Hooks/UserPosts/useUserPostsHook'
 
 
 export const Home = (): JSX.Element => {
-    const [userPostsData, setUserPostsData] = useState()
+    const [userPostsData, setUserPostsData] = useState({})
     const [constraint, setConstraint] = useState(constraints.initial)
 
     const UserPosts = useUserPostsHook()

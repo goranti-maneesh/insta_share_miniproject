@@ -1,10 +1,9 @@
 import { UserPostsService } from "../../Services/UserPosts/index.api"
-import { UserPostsStores } from "../../Stores/UserPosts/stores"
+import  UserPostsStores  from "../../Stores/UserPostsStore/index"
 
 const UserPostsServiceInstance = new UserPostsService()
 
 const UserPostsStoresInstance = new UserPostsStores(UserPostsServiceInstance)
-// console.log(UserPostsServiceInstance)
 
 const useUserPostsHook = () => {
     return UserPostsStoresInstance
