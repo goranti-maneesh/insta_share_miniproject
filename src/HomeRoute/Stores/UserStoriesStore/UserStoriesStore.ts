@@ -1,26 +1,28 @@
-import { APIStatus } from "@ib/api-constants";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
-import { observable } from "mobx";
+import { observable, action } from "mobx";
+import { userStoriesResponseTypes } from "../Types/UserStoriesTypes";
 import { UserStoryModal } from "../UserStoriesModal";
+import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
 
 export class UserStoriesStore{
     @observable userStoriesResponse
-    @observable userStoriesStatus
+    @observable userStoriesStatus = API_INITIAL
     @observable userStoriesApiService
 
     constructor(userStoriesApiService){
         this.userStoriesApiService = userStoriesApiService
     }
 
-    getUserStoriesResponse = (response) => {
-        const userStoriesModals = response.userStories.map((eachStory) => new UserStoryModal(eachStory))
+    @action.bound getUserStoriesResponse = (response: userStoriesResponseTypes) => {
+        console.log(response, "response")
+        const userStoriesModals = response.usersStories.map((eachStory) => new UserStoryModal(eachStory))
         this.userStoriesResponse = {
             userStoriesModals,
             status: response.responseStatus
         }
     }
 
-    getUserStoriesStatus = (responseStatus: APIStatus) => {
+    @action.bound getUserStoriesStatus = (responseStatus: APIStatus) => {
         this.userStoriesStatus = responseStatus
     }
 
@@ -28,7 +30,7 @@ export class UserStoriesStore{
         const storiesResponse = this.userStoriesApiService.getUserStories()
         return bindPromiseWithOnSuccess(storiesResponse).to(
             this.getUserStoriesStatus,
-            (resonse) => {
+            (resonse: userStoriesResponseTypes) => {
                 this.getUserStoriesResponse(resonse)
             }
         )

@@ -30,6 +30,7 @@ class UserPostModal implements eachUserPostTypes{
         this.userId = data.user_id
         this.userName = data.user_name
     }
+    
 
 }
 

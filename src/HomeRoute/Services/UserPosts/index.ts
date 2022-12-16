@@ -1,5 +1,5 @@
-import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes"
+import { userFixturePostsResponseTypes } from "../../Stores/Types/UserPostsTypes"
 
 export interface UserPostsServiceTypes{
-    getUserPosts: () => Promise<userPostsResponseTypes>
+    getUserPosts: () => Promise<userFixturePostsResponseTypes>
 }

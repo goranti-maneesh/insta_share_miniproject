@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
 
-import { constraints } from '../../../Common/utils/Constraints'
+import UserStories from '../UserStories/index'
 
-import {useUserPostsHook} from '../../Hooks/UserPosts/useUserPostsHook'
+import {usePostsHook} from '../../Hooks/UserPosts/useUserPostsHook'
+import {StoriesHook} from '../../Hooks/UserStories/useUserStoriesHook'
+
+import { constraints } from '../../../Common/utils/Constraints'
 
 
 export const Home = (): JSX.Element => {
     const [userPostsData, setUserPostsData] = useState({})
     const [constraint, setConstraint] = useState(constraints.initial)
 
-    const UserPosts = useUserPostsHook()
+    const UserPosts = usePostsHook()
 
     useEffect(() => {
         getPostsData()
@@ -18,8 +21,8 @@ export const Home = (): JSX.Element => {
     const getPostsData = async () => {
         setConstraint(constraints.loading)
         await UserPosts.fetchUserPosts()
-        console.log(UserPosts.userPostsResponse)
         setUserPostsData(UserPosts.userPostsResponse)
+        // console.log(UserPosts.userPostsResponse)
     }
 
     const renderPosts = () => {
@@ -45,6 +48,7 @@ export const Home = (): JSX.Element => {
     return(
         <div>
             <h1>Home</h1>
+            <StoriesHook><UserStories/></StoriesHook>
         </div>
         
     )

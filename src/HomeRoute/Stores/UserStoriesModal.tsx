@@ -1,4 +1,6 @@
-export class UserStoryModal {
+import { eachStoryType } from "./Types/UserStoriesTypes"
+
+export class UserStoryModal implements eachStoryType{
     userId: string
     userName: string
     storyUrl: string
