@@ -21,6 +21,7 @@ class UserPostModal implements eachUserPostTypes{
         }))
         this.createdAt = data.created_at
         this.likesCount = data.likes_count
+        console.log(data,">>data.post_details<<")
         this.postDetails = {
             caption: data.post_details.caption,
             imageUrl: data.post_details.image_url
@@ -30,7 +31,13 @@ class UserPostModal implements eachUserPostTypes{
         this.userId = data.user_id
         this.userName = data.user_name
     }
-
+    created_at: string
+    likes_count: number
+    post_details: { caption: string; image_url: string }
+    post_id: string
+    profile_pic: string
+    user_id: string
+    user_name: string
 }
 
 export default UserPostModal

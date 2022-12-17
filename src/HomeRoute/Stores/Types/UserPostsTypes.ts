@@ -2,22 +2,22 @@ import { RouteComponentProps } from "react-router-dom";
 
 export interface eachPostCommentTypes {
 	comment: string;
-	userId: string;
-	userName: string;
+	user_id: string;
+	user_name: string;
 }
 
 export interface eachUserPostTypes {
 	comments: Array<eachPostCommentTypes>;
-	createdAt: string;
-	likesCount: number;
-	postDetails: {
+	created_at: string;
+	likes_count: number;
+	post_details: {
 		caption: string;
-		imageUrl: string;
+		image_url: string;
 	};
-	postId: string;
-	profilePic: string;
-	userId: string;
-	userName: string;
+	post_id: string;
+	profile_pic: string;
+	user_id: string;
+	user_name: string;
 }
 
 export interface userPostsResponseTypes {
