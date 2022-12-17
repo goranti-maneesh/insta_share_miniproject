@@ -5,7 +5,7 @@ import { UserStoryModal } from "../UserStoriesModal";
 import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
 
 export class UserStoriesStore{
-    @observable userStoriesResponse
+    @observable userStoriesResponse: userStoriesResponseTypes
     @observable userStoriesStatus = API_INITIAL
     @observable userStoriesApiService
 
@@ -14,11 +14,10 @@ export class UserStoriesStore{
     }
 
     @action.bound getUserStoriesResponse = (response: userStoriesResponseTypes) => {
-        console.log(response, "response")
-        const userStoriesModals = response.usersStories.map((eachStory) => new UserStoryModal(eachStory))
+        const userStoriesModals = response.users_stories.map((eachStory) => new UserStoryModal(eachStory))
         this.userStoriesResponse = {
-            userStoriesModals,
-            status: response.responseStatus
+            users_stories: userStoriesModals,
+            responseStatus: response.responseStatus
         }
     }
 

@@ -16,7 +16,7 @@ export class UserStoriesService implements UserStoriesServiceTypes{
           const data = await response.json()
           console.log(data, "data")
             return {
-              usersStories:data.users_stories,responseStatus: response.ok
+              ...data,responseStatus: response.ok
             }
     }
 }

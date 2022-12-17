@@ -27,6 +27,7 @@
     "react-icons": "4.6.0",
     "react-scripts": "5.0.1",
     "reactjs-tailwind": "0.1.9",
+    "slick-carousel": "1.8.1",
     "styled-components": "5.3.6",
     "tailwind-styled-components": "2.1.7",
     "twin.macro": "2.8.2",

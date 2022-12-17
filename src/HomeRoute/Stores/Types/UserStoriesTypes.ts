@@ -5,7 +5,7 @@ export interface eachStoryFixturesType {
 }
 
 export interface userStoriesFixturesResponseTypes {
-	usersStories: Array<eachStoryFixturesType>;
+	users_stories: Array<eachStoryFixturesType>;
     responseStatus: boolean
 }
 
@@ -16,6 +16,6 @@ export interface eachStoryType {
 }
 
 export interface userStoriesResponseTypes {
-	usersStories: Array<eachStoryType>;
+	users_stories: Array<eachStoryType>;
     responseStatus: boolean
 }
