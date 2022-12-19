@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+import {EachPostUl, PostsLoader} from './styledComponents'
+
 import UserStories from '../UserStories/index'
 import EachPost from '../EachPost'
 
@@ -8,6 +10,8 @@ import {StoriesHook} from '../../Hooks/UserStories/useUserStoriesHook'
 import { userPostsResponseTypes } from '../../Stores/Types/UserPostsTypes'
 
 import { constraints } from '../../../Common/utils/Constraints'
+import Loader from '../../../Common/Loader/index'
+import Failure from '../../../Common/Failure/index'
 
 export const Home = (): JSX.Element => {
     const [userPostsData, setUserPostsData] = useState({} as userPostsResponseTypes)
@@ -36,26 +40,22 @@ export const Home = (): JSX.Element => {
         return(
             <div>
                 <StoriesHook><UserStories/></StoriesHook>
-                <ul>
+                <EachPostUl>
                     {userPostsData.posts.map((eachPost) => (
-                        <EachPost key={eachPost.userId} post={eachPost}/>
+                        <EachPost key={eachPost.postId} post={eachPost}/>
                     ))}
-                </ul>
+                </EachPostUl>
             </div>
         )
     }
 
-    const renderFailureView = () => {
-        return(
-            <h1>Failure</h1>
-        )
-    }
+    const renderFailureView = () => <Failure getPostsData={getPostsData}/>
 
-    const renderLoadingView = () => {
-        return(
-            <h1>Loading</h1>
-        )
-    }
+    const renderLoadingView = () => (
+        <PostsLoader>
+            <Loader width={53} height={53}/>
+        </PostsLoader>
+    )
 
     const renderOverAllViews = () => {
         switch(constraint){
@@ -71,8 +71,6 @@ export const Home = (): JSX.Element => {
     return(
         <div>
             {renderOverAllViews()}
-            <h1>Home</h1>
-            
         </div>
         
     )

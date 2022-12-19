@@ -1,15 +1,27 @@
-import {EachPostContainer, UserDetails, ProfilePic, UserName, 
+import { useState } from 'react'
+import {EachPostli, UserDetails, ProfilePicBGContainer, ProfilePicContainer, ProfilePic, UserName, 
     PostImageConstainer, PostImage, PostDetailsSection, LoveCommentShareContainer,
-    IconBtton, LoveIcon, CommentIcon, ShareIcon, LikesAndCommentsSection, LikesCount, Caption, CommentsUl, CommentLi,
+    IconBtton, LoveIconFill, LoveIconOutline, CommentIcon, ShareIcon, LikesAndCommentsSection, LikesCount, Caption, CommentsUl, CommentLi,
     CommentedUser, Comment, CreatedAt} from './styledComponents'
 
 export const EachPost = (props) => {
     const {post} = props
     const {comments, createdAt, likesCount, postDetails, postId, profilePic, userId, userName} = post
+
+    const [isLiked, setLikeStatus] = useState(false as boolean)
+
+    const changeLikedStatus = () => {
+        setLikeStatus(!isLiked)
+    }
+
     return(
-        <EachPostContainer>
+        <EachPostli>
             <UserDetails>
-                <ProfilePic src={profilePic} alt="profile pic"/>
+                <ProfilePicBGContainer>
+                    <ProfilePicContainer>
+                        <ProfilePic src={profilePic} alt="profile pic"/>
+                    </ProfilePicContainer>
+                </ProfilePicBGContainer>
                 <UserName>{userName}</UserName>
             </UserDetails>
             <PostImageConstainer>
@@ -17,24 +29,30 @@ export const EachPost = (props) => {
             </PostImageConstainer>
             <PostDetailsSection>
                 <LoveCommentShareContainer>
+                    <IconBtton onClick={changeLikedStatus}>
+                        {isLiked ? <LoveIconFill fill='#F05161'/> : <LoveIconOutline/>}
+                    </IconBtton>
                     <IconBtton>
-                        <LoveIcon />
+                        <CommentIcon/>
+                    </IconBtton>
+                    <IconBtton>
+                        <ShareIcon/>
                     </IconBtton>
                 </LoveCommentShareContainer>
                 <LikesAndCommentsSection>
-                    <LikesCount>{likesCount}</LikesCount>
+                    <LikesCount>{isLiked ? likesCount + 1 : likesCount} likes</LikesCount>
                     <Caption>{postDetails.caption}</Caption>
                     <CommentsUl>
                         {comments.map((eachComment) => (
                             <CommentLi key={eachComment.userId}>
-                                <CommentedUser>{eachComment.userName}</CommentedUser>
-                                <Comment>{eachComment.comment}</Comment>
+                                <CommentedUser>{`${eachComment.userName} `}</CommentedUser>
+                                <Comment>{` ${eachComment.comment}`}</Comment>
                             </CommentLi>
                         ))}
                     </CommentsUl>
                     <CreatedAt>{createdAt}</CreatedAt>
                 </LikesAndCommentsSection>
             </PostDetailsSection>
-        </EachPostContainer>
+        </EachPostli>
     )
 }

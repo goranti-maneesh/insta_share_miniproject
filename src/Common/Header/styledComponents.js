@@ -6,7 +6,7 @@ import {FiSearch} from 'react-icons/fi'
 
 
 export const HeaderMainContainer = styled.div`
-   ${tw`h-16 flex flex-col justify-center`}
+   ${tw`h-16 flex flex-col justify-center border-Alto border-solid border-0 border-b`}
 `
 
 export const HeaderContainer = styled.div`

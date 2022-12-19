@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css"; 
+// import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
-import {UserStoriesUl} from './styledComponents'
-import './index.css'
+import {
+	USerStoriesContainer,
+	UserStoriesUl,
+	StoryLoader,
+} from "./styledComponents";
+import "./index.css";
 
 import EachStory from "../EachStory";
 
 import { useStoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
-import {userStoriesResponseTypes} from '../../Stores/Types/UserStoriesTypes'
+import { userStoriesResponseTypes } from "../../Stores/Types/UserStoriesTypes";
 
 import { constraints } from "../../../Common/utils/Constraints";
+import Loader from "../../../Common/Loader/index";
+import Failure from "../../../Common/Failure/index";
 
 export const UserStories = (): JSX.Element => {
-	const [userStoriesData, setUserStoriesData] = useState({} as userStoriesResponseTypes);
+	const [userStoriesData, setUserStoriesData] = useState(
+		{} as userStoriesResponseTypes,
+	);
 	const [constraint, setConstraint] = useState(constraints.initial);
 
 	const UsersStories = useStoriesHook();
 
 	const settings = {
-		// centerMode: true,		
+		// centerMode: true,
 		arrows: true,
 		infinite: false,
 		speed: 500,
@@ -40,30 +48,34 @@ export const UserStories = (): JSX.Element => {
 	};
 
 	const renderSuccessView = () => {
-		return(
-            <div>
+		return (
+			<USerStoriesContainer>
 				<UserStoriesUl>
-                	<Slider {...settings}>
+					<Slider {...settings}>
 						{userStoriesData.users_stories.map((eachStory) => (
-							<EachStory key={eachStory.userId} story={eachStory}/>
+							<EachStory
+								key={eachStory.userId}
+								story={eachStory}
+							/>
 						))}
-                	</Slider>
+					</Slider>
 				</UserStoriesUl>
-            </div>
-        );
+			</USerStoriesContainer>
+		);
 	};
 
-	const renderLoadingView = () => {
-		return <h1>Loading View</h1>;
-	};
+	const renderLoadingView = () => (
+		<StoryLoader>
+			<Loader width={32} height={32} />
+		</StoryLoader>
+	);
 
-	const renderFailureView = () => {
-		return <h1>Story Failure</h1>;
-	};
+	const renderFailureView = () => <Failure getPostsData={getStoriesData}/>
 
 	const renderOverAllViews = () => {
 		switch (constraint) {
 			case "SUCCESS":
+				return renderFailureView();
 				return renderSuccessView();
 			case "LOADING":
 				return renderLoadingView();
@@ -72,9 +84,5 @@ export const UserStories = (): JSX.Element => {
 		}
 	};
 
-	return (
-		<div>
-			{renderOverAllViews()}
-		</div>
-	);
+	return <div>{renderOverAllViews()}</div>;
 };

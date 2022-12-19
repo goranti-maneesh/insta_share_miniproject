@@ -15,5 +15,5 @@ export const StoryImage = styled.img`
 `;
 
 export const StoryUserName = styled.p`
-	${tw`text-14px text-mineShaft`}
+	${tw`text-14px m-0 mt-1 text-mineShaft`}
 `;
