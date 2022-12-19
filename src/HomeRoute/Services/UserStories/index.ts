@@ -1,5 +1,5 @@
-import { userStoriesResponseTypes } from "../../Stores/Types/UserStoriesTypes"
+import { userStoriesFixturesResponseTypes } from "../../Stores/Types/UserStoriesTypes"
 
 export interface UserStoriesServiceTypes{
-    getUserStories: () => Promise<userStoriesResponseTypes>
+    getUserStories: () => Promise<userStoriesFixturesResponseTypes>
 }

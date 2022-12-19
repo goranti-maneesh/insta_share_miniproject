@@ -1,9 +1,7 @@
 import {create, ApisauceInstance} from 'apisauce'
 
 import {AuthRequestObjTypes} from '../../stores/types'
-import { apiMethods } from '../../../constants/APIConstants';
 import config from '../../../constants/EnvironmentConstants';
-import {loginApi} from '../../../constants/LocalConstants'
 
 import AuthServiceType from './index'
 
@@ -14,18 +12,8 @@ class AuthServiceApi implements AuthServiceType{
     this.api = create({
       baseURL: `${config.LOGIN_BASE_URL}`,
     });
-    // this.networkCallWithApisauce = networkCallWithApisauce;
   }
 
-  // onAuthLogin(requestObject: AuthRequestObjTypes) {
-  //     console.log(this.networkCallWithApisauce, "api")
-  //     return this.networkCallWithApisauce(
-  //       this.api,
-  //       '/login',
-  //       requestObject,
-  //       apiMethods.post
-  //     );
-  //   }
     
     onAuthLogin = async (requestObj: AuthRequestObjTypes) => {
       
