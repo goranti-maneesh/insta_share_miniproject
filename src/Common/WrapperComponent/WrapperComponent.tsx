@@ -1,6 +1,6 @@
 import {WrapperComponentContainer, WrapperMainComponent} from './styledComponents'
 
-export const WrapperComponent = (props: { children: JSX.Element }) => {
+export const WrapperComponent = (props: { children: JSX.Element }): JSX.Element => {
 
     const {children} = props
 

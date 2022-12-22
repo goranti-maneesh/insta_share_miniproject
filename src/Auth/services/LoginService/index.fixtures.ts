@@ -1,19 +1,13 @@
-import {ApisauceInstance} from 'apisauce'
 import AuthServiceType from "./index";
 
-import { AuthRequestObjTypes, AuthApiResponseObjTypes } from "../../stores/types";
 import { resolveWithTimeout } from '../../../Common/utils/TestUtils';
 import getLoginResponse from '../../fixtures/getLoginResponse.json'
+import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes } from "../../stores/types";
 
 
 class AuthServiceApi implements AuthServiceType{
-  // api: ApisauceInstance;
-  //   networkCallWithApisauce!: Function;
-  // constructor(networkCallWithApisauce: any) {
-  //   this.networkCallWithApisauce = networkCallWithApisauce;
-  // }
 
-    onAuthLogin(){
+    onAuthLogin(): Promise<AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes>{
         return resolveWithTimeout(getLoginResponse)
     }
 

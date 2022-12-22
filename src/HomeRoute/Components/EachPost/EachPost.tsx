@@ -4,14 +4,31 @@ import {EachPostli, UserDetails, ProfilePicBGContainer, ProfilePicContainer, Pro
     IconBtton, LoveIconFill, LoveIconOutline, CommentIcon, ShareIcon, LikesAndCommentsSection, LikesCount, Caption, CommentsUl, CommentLi,
     CommentedUser, Comment, CreatedAt} from './styledComponents'
 
-export const EachPost = (props) => {
+import {eachUserPostPropTypes} from '../../Stores/Types/UserPostsTypes'
+import {PostLikeRequestObjTypes} from '../../Stores/Types/PostLikeStatusTypes'
+import {usePostLikeStatus} from '../../Hooks/PostLikeStatus/usePostLikeStatusHook'
+
+export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
     const {post} = props
     const {comments, createdAt, likesCount, postDetails, postId, profilePic, userId, userName} = post
 
     const [isLiked, setLikeStatus] = useState(false as boolean)
 
-    const changeLikedStatus = () => {
-        setLikeStatus(!isLiked)
+    const postLikeStatus = usePostLikeStatus()
+    // console.log(postLikeStatus, 'postLikeStatus')
+
+    const changeLikedStatus = async (): Promise<void> => {
+        const likeStatus = !isLiked
+        setLikeStatus(likeStatus)
+
+        const postLikeStatusRequestObj: PostLikeRequestObjTypes = {
+            likeStatusObj:{
+                like_status: likeStatus
+            },
+            postId
+        }
+
+        await postLikeStatus.fetchPostLikeStatus(postLikeStatusRequestObj)
     }
 
     return(

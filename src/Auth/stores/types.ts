@@ -48,8 +48,5 @@ export interface loginUserNameAndPasswordPropTypes {
 }
 
 export interface contextValueTypes {
-    searchValues: (string | Dispatch<SetStateAction<string>>)[];
     screenSizeView: MediaQueryList;
-    authServiceApiInstance: AuthServiceApi;
-    authStoreInstance: AuthStore;
 }

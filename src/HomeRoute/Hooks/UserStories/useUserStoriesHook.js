@@ -1,6 +1,6 @@
 import { useContext, createContext } from 'react'
 
-import UserStoriesStore from '../../Stores/UserStoriesStore/index'
+import UserStoriesStore from '../../Stores/HomeRouteStores/UserStoriesStore'
 
 import {UserStoriesService} from '../../Services/UserStories/index.api'
 

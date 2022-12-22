@@ -1,21 +1,12 @@
-import {create, ApisauceInstance} from 'apisauce'
-
-import {AuthRequestObjTypes} from '../../stores/types'
+import {AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, AuthRequestObjTypes} from '../../stores/types'
 import config from '../../../constants/EnvironmentConstants';
 
 import AuthServiceType from './index'
 
 class AuthServiceApi implements AuthServiceType{
 
-    api: ApisauceInstance;
-  constructor() {
-    this.api = create({
-      baseURL: `${config.LOGIN_BASE_URL}`,
-    });
-  }
-
     
-    onAuthLogin = async (requestObj: AuthRequestObjTypes) => {
+    onAuthLogin = async (requestObj: AuthRequestObjTypes): Promise<AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes> => {
       
       const options = {
         method: 'POST',

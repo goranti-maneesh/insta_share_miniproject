@@ -1,6 +1,4 @@
 .slick-prev,.slick-prev:before, .slick-prev:hover {
-    /* left: 0% !important; */
-    /* margin-right: 39px; */
     z-index: 1;
     background: black;
     border-radius: 50%;
@@ -13,8 +11,6 @@
 }
 
 .slick-next,.slick-next::before, .slick-next:hover {
-    /* margin-left: 39px; */
-    /* right: 0% !important; */
     z-index: 1;
     background: black;
     border-radius: 50%;
@@ -28,10 +24,8 @@
 
 .slick-prev:before{
     font-size: 25px;
-    /* margin-left: 39px; */
 }
 
 .slick-next:before{
     font-size: 25px;
-    /* margin-left: 39px; */
 }

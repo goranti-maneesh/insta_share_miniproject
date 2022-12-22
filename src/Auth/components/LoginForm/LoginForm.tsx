@@ -1,43 +1,39 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { RouteComponentProps, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 
-import {ObjContext} from '../../../Common/context/context'
 import useInputLabelContainer from "../LoginInputLabelContainer";
-import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
+import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, AuthRequestObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
 import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
 
-import {useAuthStore} from '../../Hooks/useAuthStore'
+import {useAuthStoreHook} from '../../Hooks/useAuthStore'
 
 
-const LoginForm = (props: RouteComponentProps) => {
+export const LoginForm = (props: RouteComponentProps) => {
     
     const {t} = useTranslation()
     
-    const authStoreInstance = useAuthStore()
+    const authStoreInstance = useAuthStoreHook()
 
     const buttonTextError = t('loginErrors.loginButtonError')
 
     const useEffectInitialRender = useRef(true);
-
-    const objUseContext = useContext(ObjContext)
-
-    const {authApiStatus, onAuthLogIn} = objUseContext.authStoreInstance
     
-    const [userDetails, setUserDetails] = useState({username: "", password: ""})
-    const [isUserNameErrorDisplayed, setUserNameErrorDisplayStatus] = useState(false)
-    const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false)
-    const [errorMsg, setErrorMsg] = useState("")
+    const [userDetails, setUserDetails] = useState({username: "", password: ""} as AuthRequestObjTypes)
+    const [isUserNameErrorDisplayed, setUserNameErrorDisplayStatus] = useState(false as boolean)
+    const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false as boolean)
+    const [errorMsg, setErrorMsg] = useState("" as string)
+    const [response, setResponse] = useState({} as AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes)
 
 
-    const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>): void}) => {
+    const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>)}): void => {
         setFunction(false)
     }
 
-    const onBlurUsername = () => {
+    const onBlurUsername = (): void => {
         const regex = new RegExp('[a-zA-Z0-9]{5,}')
         const result = regex.test(userDetails.username)
         if(result){
@@ -47,7 +43,7 @@ const LoginForm = (props: RouteComponentProps) => {
         }
     }
 
-    const onBlurPassword = () => {
+    const onBlurPassword = (): void => {
         const regex = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
         const result = regex.test(userDetails.password)
         if(result){
@@ -57,12 +53,12 @@ const LoginForm = (props: RouteComponentProps) => {
         }
     }
     
-    const onSuccess = () => {
+    const onSuccess = (): void => {
         const {history} = props
         history.replace("/")
     }
 
-    const onFailure = (failureResponse: AuthApiFailureResponseObjTypes) => {
+    const onFailure = (failureResponse: AuthApiFailureResponseObjTypes): void => {
         setErrorMsg(failureResponse.error_msg)
     }
 
@@ -75,20 +71,20 @@ const LoginForm = (props: RouteComponentProps) => {
         }
     }, [buttonTextError])
     
-    const loginAPI = async (event: React.FormEvent<HTMLFormElement>) => {
+    const loginAPI = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
         
         if(userDetails.username !== "" && userDetails.password !== ""){
             setErrorMsg("")
 
+            await authStoreInstance.onAuthLogIn(userDetails)
+            setResponse(authStoreInstance.authApiResponse)
             
-            const returnData: AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes = await authStoreInstance.onAuthLogIn(userDetails)
-            
-            if(returnData.responseStatus){
+            if(response.responseStatus){
                 onSuccess()
             }
             else{
-                onFailure(returnData as unknown as AuthApiFailureResponseObjTypes)
+                onFailure(response as unknown as AuthApiFailureResponseObjTypes)
             }
         }
         else{
@@ -96,14 +92,12 @@ const LoginForm = (props: RouteComponentProps) => {
         }
     }
 
-    const onChangeUsername = (event: React.FormEvent<HTMLInputElement>) => {
+    const onChangeUsername = (event: React.FormEvent<HTMLInputElement>): void => {
         setUserDetails({username: event.currentTarget.value, password: userDetails.password})
-        // setUserName(event.currentTarget.value)
     }
 
-    const onChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
+    const onChangePassword = (event: React.FormEvent<HTMLInputElement>): void => {
         setUserDetails({username: userDetails.username, password: event.currentTarget.value})
-        // setPassword(event.currentTarget.value)
     }
 
     const loginUserNameProps: loginUserNameAndPasswordPropTypes = {
@@ -157,4 +151,3 @@ const LoginForm = (props: RouteComponentProps) => {
     )
 }
 
-export  {LoginForm}

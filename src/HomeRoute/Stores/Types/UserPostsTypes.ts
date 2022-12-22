@@ -55,3 +55,7 @@ export interface HeaderProps extends RouteComponentProps{
     onChangeSearchText: (string) => void
     searchText: string
 }
+
+export interface eachUserPostPropTypes{
+	post: eachUserPostTypes
+}

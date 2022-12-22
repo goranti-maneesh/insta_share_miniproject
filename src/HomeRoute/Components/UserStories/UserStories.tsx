@@ -23,12 +23,11 @@ export const UserStories = (): JSX.Element => {
 	const [userStoriesData, setUserStoriesData] = useState(
 		{} as userStoriesResponseTypes,
 	);
-	const [constraint, setConstraint] = useState(constraints.initial);
+	const [constraint, setConstraint] = useState(constraints.initial as string);
 
 	const UsersStories = useStoriesHook();
 
 	const settings = {
-		// centerMode: true,
 		arrows: true,
 		infinite: false,
 		speed: 500,
@@ -40,14 +39,18 @@ export const UserStories = (): JSX.Element => {
 		getStoriesData();
 	}, []);
 
-	const getStoriesData = async () => {
+	const getStoriesData = async (): Promise<void> => {
 		setConstraint(constraints.loading);
 		await UsersStories.fetchUserStories();
-		setUserStoriesData(UsersStories.userStoriesResponse);
-		setConstraint(constraints.success);
+		if (UsersStories.userStoriesResponse.responseStatus) {
+			setUserStoriesData(UsersStories.userStoriesResponse);
+			setConstraint(constraints.success);
+		} else {
+			setConstraint(constraints.failure);
+		}
 	};
 
-	const renderSuccessView = () => {
+	const renderSuccessView = (): JSX.Element => {
 		return (
 			<USerStoriesContainer>
 				<UserStoriesUl>
@@ -64,18 +67,17 @@ export const UserStories = (): JSX.Element => {
 		);
 	};
 
-	const renderLoadingView = () => (
+	const renderLoadingView = (): JSX.Element => (
 		<StoryLoader>
 			<Loader width={32} height={32} />
 		</StoryLoader>
 	);
 
-	const renderFailureView = () => <Failure getPostsData={getStoriesData}/>
+	const renderFailureView = (): JSX.Element => <Failure getPostsData={getStoriesData} />;
 
-	const renderOverAllViews = () => {
+	const renderOverAllViews = (): JSX.Element => {
 		switch (constraint) {
 			case "SUCCESS":
-				return renderFailureView();
 				return renderSuccessView();
 			case "LOADING":
 				return renderLoadingView();

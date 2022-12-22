@@ -1,6 +1,6 @@
 import { resolveWithTimeout } from "../../../Common/utils/TestUtils"
 
-import usersStoriesFixtures from '../../Fixtrures/getUserStoriesResponse.json'
+import usersStoriesFixtures from '../../Fixtures/getUserStoriesResponse.json'
 
 import {UserStoriesServiceTypes} from './index'
 

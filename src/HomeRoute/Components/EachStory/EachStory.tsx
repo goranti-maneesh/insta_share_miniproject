@@ -2,7 +2,7 @@ import {EachStoryLi, StoryLink, StoryImage, StoryUserName} from './styledCompone
 
 import { eachStoryPropType } from "../../Stores/Types/UserStoriesTypes"
 
-export const EachStory = (props: eachStoryPropType) => {
+export const EachStory = (props: eachStoryPropType): JSX.Element => {
     const {story} = props
     const {userId, userName, storyUrl} = story
     return(

@@ -5,7 +5,7 @@ import { BsFillHeartFill, BsFillShareFill } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 
 export const EachPostli = styled.li`
-	${tw`bg-white list-none w-1040px p-0 mb-8`}
+	${tw`bg-white list-none w-full p-0 mb-8`}
 `;
 
 export const UserDetails = styled.div`
@@ -33,7 +33,7 @@ export const PostImageConstainer = styled.div`
 `;
 
 export const PostImage = styled.img`
-	${tw`w-1040px h-614px`}
+	${tw`w-full h-614px`}
 `;
 
 export const PostDetailsSection = styled.div`

@@ -1,6 +1,6 @@
 import Loader from "react-loader-spinner";
 
-export const LoaderComponent = (props: {width: number, height: number}) => {
+export const LoaderComponent = (props: {width?: number, height?: number}): JSX.Element => {
 	return (
 		<div>
 			<Loader type="TailSpin" color="#4094EF" height={props.height} width={props.width} />
