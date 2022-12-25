@@ -6,7 +6,7 @@ export const USerStoriesContainer = styled.div`
 `
 
 export const UserStoriesUl = styled.ul`
-	${tw`w-full p-0 w-980px min-h-98px mt-0 mb-0 ml-auto mr-auto`}
+	${tw`w-full p-0 max-w-980px min-h-98px mt-0 mb-0 ml-auto mr-auto`}
 `;
 
 export const StoryLoader = styled.div`

@@ -29,12 +29,18 @@ export const HomeAndSearch = (): JSX.Element => {
 		console.log("onClickSearch")
 
 		await useSearchedPostsHook.fetchUserSearchedPosts(searchText);
+		console.log(useSearchedPostsHook.userSearchedPostsResponse)
 		
 		if (useSearchedPostsHook.userSearchedPostsResponse.responseStatus) {
-			setUserSearchedPostsData(
-				useSearchedPostsHook.userSearchedPostsResponse,
-			);
-			setConstraint(constraints.success);
+			if(useSearchedPostsHook.userSearchedPostsResponse.posts.length > 0 && searchText !== ''){
+				setUserSearchedPostsData(
+					useSearchedPostsHook.userSearchedPostsResponse,
+				);
+				setConstraint(constraints.success);
+			}
+			else{
+				setConstraint(constraints.noResults)
+			}
 		} else {
 			setConstraint(constraints.failure);
 		}

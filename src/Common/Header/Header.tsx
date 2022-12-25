@@ -18,7 +18,7 @@ import {
 	MainHeaderContainer,
 } from "./styledComponents";
 
-import {HeaderProps} from '../../HomeRoute/Stores/Types/UserPostsTypes'
+import {HeaderProps} from '../Stores/Types/HeaderTypes'
 
 import { instaHeaderLogo } from "../../constants/LocalConstants";
 import {ObjContext} from '../context/context'

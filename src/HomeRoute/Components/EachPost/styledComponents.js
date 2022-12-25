@@ -6,10 +6,16 @@ import { FaRegComment } from "react-icons/fa";
 
 export const EachPostli = styled.li`
 	${tw`bg-white list-none w-full p-0 mb-8`}
+	@media (max-width: 768px){
+		${tw`mb-0`}
+	}
 `;
 
 export const UserDetails = styled.div`
 	${tw`h-60px px-6 flex items-center border-Alto border-solid border-DEFAULT`}
+	@media (max-width: 768px){
+		${tw`border-none`}
+	}
 `;
 
 export const ProfilePicBGContainer = styled.div`
@@ -30,14 +36,23 @@ export const UserName = styled.p`
 
 export const PostImageConstainer = styled.div`
 	${tw`h-614px`}
+	@media (max-width: 768px){
+		${tw`h-375px`}
+	}
 `;
 
 export const PostImage = styled.img`
 	${tw`w-full h-614px`}
+	@media (max-width: 768px){
+		${tw`h-375px`}
+	}
 `;
 
 export const PostDetailsSection = styled.div`
 	${tw`border-Alto border-solid border-DEFAULT pl-6 pt-18px pb-4`}
+	@media (max-width: 768px){
+		${tw`border-none`}
+	}
 `;
 
 export const LoveCommentShareContainer = styled.div`
@@ -88,7 +103,7 @@ export const CommentedUser = styled.p`
 	${tw`font-medium text-mineShaft text-14px m-0`}
 `;
 
-export const Comment = styled.p`
+export const Comment = styled.span`
 	${tw`font-normal text-mineShaft text-14px m-0`}
 `;
 

@@ -1,5 +1,3 @@
-import { RouteComponentProps } from "react-router-dom";
-
 export interface eachPostCommentTypes {
 	comment: string;
 	userId: string;
@@ -48,12 +46,6 @@ export interface eachFixtureUserPostTypes {
 export interface userFixturePostsResponseTypes {
 	posts: Array<eachFixtureUserPostTypes>;
 	responseStatus: boolean
-}
-
-export interface HeaderProps extends RouteComponentProps{
-    onClickState: () => void, 
-    onChangeSearchText: (string) => void
-    searchText: string
 }
 
 export interface eachUserPostPropTypes{

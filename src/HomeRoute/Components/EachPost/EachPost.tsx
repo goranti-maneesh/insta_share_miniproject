@@ -62,8 +62,7 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
                     <CommentsUl>
                         {comments.map((eachComment) => (
                             <CommentLi key={eachComment.userId}>
-                                <CommentedUser>{`${eachComment.userName} `}</CommentedUser>
-                                <Comment>{` ${eachComment.comment}`}</Comment>
+                                <CommentedUser>{`${eachComment.userName} `} <Comment>{` ${eachComment.comment}`}</Comment></CommentedUser>
                             </CommentLi>
                         ))}
                     </CommentsUl>

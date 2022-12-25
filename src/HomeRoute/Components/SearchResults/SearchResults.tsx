@@ -5,6 +5,10 @@ import {
 	SearchResultsTitle,
 	EachPostUl,
 	PostsLoader,
+	NoSearchViewContainer,
+	NoSearchViewImage,
+	NoSearchViewHeading,
+	NoSearchViewText
 } from "./styledComponents";
 
 import EachPost from "../EachPost";
@@ -19,7 +23,6 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 
 	const renderSuccessView = (): JSX.Element => {
 		const { userSearchedPostsData } = props;
-		console.log(userSearchedPostsData, "userSearchedPostsData");
 		return (
 			<EachPostUl>
 				{userSearchedPostsData.posts.map((eachPost) => (
@@ -42,6 +45,14 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 		</PostsLoader>
 	);
 
+	const renderNoResultsView = (): JSX.Element => (
+		<NoSearchViewContainer>
+			<NoSearchViewImage src="https://res.cloudinary.com/degjdup40/image/upload/v1671980655/Group_s5njey.png" alt="no search view"/>
+			<NoSearchViewHeading>Search Not Found</NoSearchViewHeading>
+			<NoSearchViewText>Try different keyword or search again</NoSearchViewText>
+		</NoSearchViewContainer>
+	)
+
 	const renderOverAllViews = () => {
 		const { constraint } = props;
 		switch (constraint) {
@@ -51,6 +62,8 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 				return renderLoadingView();
 			case "FAILURE":
 				return renderFailureView();
+			case "NORESULTS":
+				return renderNoResultsView();
 		}
 	};
 

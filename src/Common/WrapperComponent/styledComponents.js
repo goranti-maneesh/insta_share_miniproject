@@ -3,8 +3,11 @@ import tw from "twin.macro";
 
 export const WrapperMainComponent = styled.div`
 	${tw`bg-Alabastersolid p-1px`}
+	@media (max-width: 768px){
+		${tw`bg-white`}
+	}
 `;
 
 export const WrapperComponentContainer = styled.div`
-	${tw`w-1040px mx-auto`}
+	${tw`max-w-1040px mx-auto`}
 `;

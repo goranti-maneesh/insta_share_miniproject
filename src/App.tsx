@@ -9,6 +9,7 @@ import { ObjContext } from './Common/context/context';
 import { contextValueTypes } from './Auth/stores/types';
 import  HomeSearchRoute  from './HomeRoute/Components/HomeSearchRoute/index'
 import { AuthStoreHook } from './Auth/Hooks/useAuthStore';
+import UserProfile from './Profile/UserProfile';
 
 const isLargeView = window.matchMedia("(min-width: 768px)")
 
@@ -24,7 +25,7 @@ const App = (): JSX.Element => {
 
   useEffect(() =>{
     setScreenSize(isLargeView)
-  },[])
+  })
 
   const contextValues: contextValueTypes = {
     screenSizeView: screenSize 
@@ -44,6 +45,7 @@ const App = (): JSX.Element => {
         <Switch>
             <Route exact path="/login" component={AuthStoreHookLoginForm} />
             <ProtectedRoute exact path="/" component={HomeSearchRoute}/>
+            <ProtectedRoute exact path='/profile' component={UserProfile}/>
         </Switch>
     </BrowserRouter>
   </ObjContext.Provider>)

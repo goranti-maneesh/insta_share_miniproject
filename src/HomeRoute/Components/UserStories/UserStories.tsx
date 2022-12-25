@@ -33,6 +33,31 @@ export const UserStories = (): JSX.Element => {
 		speed: 500,
 		slidesToShow: 7,
 		slidesToScroll: 1,
+		responsive: [
+			{
+				breakpoint: 992,
+				settings: {
+				  slidesToShow: 6,
+				  slidesToScroll: 1,
+				  infinite: false
+				}
+			  },
+			{
+			  breakpoint: 768,
+			  settings: {
+				slidesToShow: 5,
+				slidesToScroll: 1,
+				infinite: false
+			  }
+			},
+			{
+			  breakpoint: 567,
+			  settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1,
+			  }
+			},
+		  ]
 	};
 
 	useEffect(() => {

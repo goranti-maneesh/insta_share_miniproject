@@ -5,6 +5,10 @@ module.exports = {
 			'194px': '194px',
 			'98px': '98px'
 		},
+		maxWidth: {
+			'1040px': '1040px',
+			'980px': '980px'
+		},
 		borderRadius: {
 			none: '0',
 			sm: '0.125rem',
@@ -89,7 +93,10 @@ module.exports = {
 				'312px': '312px',
 				'360px': '360px',
 				'373px': '373px',
+				'375px': '375px',
+				'409px': '409px',
 				'456px': '456px',
+				'500px': '500px',
 				'560px': '560px',
 				'582px': '582px',
 				'614px': '614px',
@@ -98,6 +105,7 @@ module.exports = {
 				'980px': '980px',
 				'1000px': '1000px',
 				'1040px': '1040px',
+				'80vh': '80vh',
 			},
 			colors: {
 				Alto: '#DBDBDB',
