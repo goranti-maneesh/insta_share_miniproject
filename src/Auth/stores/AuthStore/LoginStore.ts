@@ -19,8 +19,9 @@ export class AuthStore{
     @action.bound setAuthCookies = (response: AuthApiResponseObjTypes| AuthApiFailureResponseObjTypes): void =>{
         const {jwt_token, responseStatus} = response
         if(responseStatus){
-            setJwtToken(jwt_token)
             this.authApiResponse = response
+            console.log(2)
+            setJwtToken(jwt_token)
         }
     }
     

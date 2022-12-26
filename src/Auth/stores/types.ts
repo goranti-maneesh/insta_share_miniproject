@@ -48,5 +48,5 @@ export interface loginUserNameAndPasswordPropTypes {
 }
 
 export interface contextValueTypes {
-    screenSizeView: MediaQueryList;
+    isDesktopView: boolean;
 }

@@ -5,30 +5,28 @@ import './App.css'
 import LoginForm from './Auth/components/LoginForm';
 import Translate from './Common/Translate/index'
 import ProtectedRoute from './Common/utils/ProtectedRoute';
-import { ObjContext } from './Common/context/context';
+import { ObjContext } from './Common/context';
 import { contextValueTypes } from './Auth/stores/types';
 import  HomeSearchRoute  from './HomeRoute/Components/HomeSearchRoute/index'
 import { AuthStoreHook } from './Auth/Hooks/useAuthStore';
 import UserProfile from './Profile/UserProfile';
 
-const isLargeView = window.matchMedia("(min-width: 768px)")
+const mediaQuery = window.matchMedia("(min-width: 768px)")
 
 const App = (): JSX.Element => {
 
-  const [screenSize, setScreenSize] = useState(isLargeView)
+  const [screenSize, setScreenSize] = useState(mediaQuery.matches as boolean)
 
-  const changeScreenSize = (mediaQueryObject) => {
-    setScreenSize(mediaQueryObject.matches)
+  const changeScreenSize = (event) => {
+    setScreenSize(event.matches)
   }
 
-  isLargeView.addEventListener("change", changeScreenSize)
-
   useEffect(() =>{
-    setScreenSize(isLargeView)
+    mediaQuery.onchange = (event) => changeScreenSize(event)
   })
 
   const contextValues: contextValueTypes = {
-    screenSizeView: screenSize 
+    isDesktopView: screenSize 
   }
 
   const AuthStoreHookLoginForm = (): JSX.Element => {

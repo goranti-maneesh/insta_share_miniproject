@@ -21,7 +21,7 @@ import {
 import {HeaderProps} from '../Stores/Types/HeaderTypes'
 
 import { instaHeaderLogo } from "../../constants/LocalConstants";
-import {ObjContext} from '../context/context'
+import {ObjContext} from '../context'
 import { accessRemoveCookie } from "../../Common/utils/StorageUtils";
 
 const Header = (props: HeaderProps): JSX.Element => {
@@ -75,7 +75,7 @@ const Header = (props: HeaderProps): JSX.Element => {
 		<h1>Hello</h1>
 	)
 
-	return <MainHeaderContainer>{objUseContext.screenSizeView.matches ? renderHeaderLargeView() : renderHeaderMobileView()}</MainHeaderContainer>;
+	return <MainHeaderContainer>{objUseContext.isDesktopView ? renderHeaderLargeView() : renderHeaderMobileView()}</MainHeaderContainer>;
 };
 
 export const HeaderWithRouter = withRouter(Header)

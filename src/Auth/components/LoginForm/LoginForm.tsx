@@ -12,7 +12,7 @@ import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
 import {useAuthStoreHook} from '../../Hooks/useAuthStore'
 
 
-export const LoginForm = (props: RouteComponentProps) => {
+export const LoginForm = (props?: RouteComponentProps) => {
     
     const {t} = useTranslation()
     
@@ -55,6 +55,7 @@ export const LoginForm = (props: RouteComponentProps) => {
     
     const onSuccess = (): void => {
         const {history} = props
+        console.log(props, history, 'props')
         history.replace("/")
     }
 
@@ -79,8 +80,10 @@ export const LoginForm = (props: RouteComponentProps) => {
 
             await authStoreInstance.onAuthLogIn(userDetails)
             setResponse(authStoreInstance.authApiResponse)
-            
-            if(response.responseStatus){
+            console.log(authStoreInstance.authApiResponse)
+
+            if(authStoreInstance.authApiResponse.responseStatus){
+                console.log(1)
                 onSuccess()
             }
             else{
