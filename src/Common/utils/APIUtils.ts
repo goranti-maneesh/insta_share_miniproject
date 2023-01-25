@@ -7,8 +7,8 @@ import {
 import getData from '@ib/api';
 import I18n from '../../Common/i18n/index';
 
-import { apiMethods } from '../../constants/APIConstants';
-import { resStatuses, statusCodes } from '../../constants/APIErrorConstants';
+import { apiMethods } from '../constants/APIConstants';
+import { resStatuses, statusCodes } from '../constants/APIErrorConstants';
 
 import { ApisauceInstance } from 'apisauce';
 

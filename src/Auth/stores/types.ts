@@ -40,11 +40,8 @@ export interface loginUserNameAndPasswordPropTypes {
     value: string;
     onchangeMethod: (event: React.FormEvent<HTMLInputElement>) => void;
     placeholder: string;
-    isErrorDisplayed: boolean;
-    setFunction: React.Dispatch<React.SetStateAction<boolean>>;
     errMsg: string;
-    onblurFunc: () => void;
-    OnFocusEvent: (setFunction: (value: React.SetStateAction<boolean>) => void) => void;
+    regexValue: RegExp
 }
 
 export interface contextValueTypes {

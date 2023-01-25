@@ -8,7 +8,6 @@ import EachPost from "../EachPost";
 import { usePostsHook } from "../../Hooks/UserPosts/useUserPostsHook";
 import { StoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
 import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes";
-import { PostLikeStatusHook } from "../../Hooks/PostLikeStatus/usePostLikeStatusHook";
 
 import { constraints } from "../../../Common/utils/Constraints";
 import Loader from "../../../Common/Loader/index";
@@ -38,18 +37,11 @@ export const Home = (): JSX.Element => {
 	};
 
 	const renderSuccessView = (): JSX.Element => {
-		// console.log(
-		// 	PostLikeStatusHook,
-		// 	"--------------------------",
-		// 	StoriesHook,
-		// );
 		return (
 			<div>
 				<EachPostUl>
 					{userPostsData.posts.map((eachPost) => (
-						<PostLikeStatusHook key={eachPost.postId}>
-							<EachPost key={eachPost.postId} post={eachPost} />
-						</PostLikeStatusHook>
+						<EachPost key={eachPost.postId} post={eachPost} />
 					))}
 				</EachPostUl>
 			</div>

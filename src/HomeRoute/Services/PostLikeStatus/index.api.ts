@@ -2,7 +2,7 @@ import { PostLikeStatusServiceTypes } from "./index";
 
 import { PostLikeRequestObjTypes } from "../../Stores/Types/PostLikeStatusTypes";
 
-import config from '../../../constants/EnvironmentConstants'
+import config from '../../../Common/constants/EnvironmentConstants'
 import { accessLoginCookie } from "../../../Common/utils/StorageUtils";
 
 export class PostLikeStatusService implements PostLikeStatusServiceTypes{

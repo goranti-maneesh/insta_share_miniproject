@@ -1,5 +1,5 @@
 import {AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, AuthRequestObjTypes} from '../../stores/types'
-import config from '../../../constants/EnvironmentConstants';
+import config from '../../../Common/constants/EnvironmentConstants';
 
 import AuthServiceType from './index'
 

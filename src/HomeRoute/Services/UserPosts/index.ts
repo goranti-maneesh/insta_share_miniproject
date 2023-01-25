@@ -5,6 +5,3 @@ export interface UserPostsServiceTypes{
     
     getSearchedPosts: (searchedText: string) => Promise<userFixturePostsResponseTypes>
 }
-
-export interface UserSearchedPostsServiceTypes{
-}

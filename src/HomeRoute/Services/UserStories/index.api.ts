@@ -1,6 +1,6 @@
 import { UserStoriesServiceTypes } from './index'
 
-import config from '../../../constants/EnvironmentConstants'
+import config from '../../../Common/constants/EnvironmentConstants'
 import {accessLoginCookie} from '../../../Common/utils/StorageUtils'
 
 export class UserStoriesService implements UserStoriesServiceTypes{

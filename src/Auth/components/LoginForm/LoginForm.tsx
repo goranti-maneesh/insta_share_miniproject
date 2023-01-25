@@ -6,8 +6,11 @@ import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormCont
 RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 
 import useInputLabelContainer from "../LoginInputLabelContainer";
+
 import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, AuthRequestObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
-import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
+import {userNameRegexValidation, passWordRegexValidation} from '../../Utils/CredsValidation'
+
+import { isLoggedIn } from '../../../Common/utils/AuthUtils/AuthUtils';
 
 import {useAuthStoreHook} from '../../Hooks/useAuthStore'
 
@@ -19,39 +22,10 @@ export const LoginForm = (props?: RouteComponentProps) => {
     const authStoreInstance = useAuthStoreHook()
 
     const buttonTextError = t('loginErrors.loginButtonError')
-
-    const useEffectInitialRender = useRef(true);
     
     const [userDetails, setUserDetails] = useState({username: "", password: ""} as AuthRequestObjTypes)
-    const [isUserNameErrorDisplayed, setUserNameErrorDisplayStatus] = useState(false as boolean)
-    const [isPasswordErrorDisplayed, setPasswordErrorDisplayStatus] = useState(false as boolean)
     const [errorMsg, setErrorMsg] = useState("" as string)
     const [response, setResponse] = useState({} as AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes)
-
-
-    const onFocusEvent = (setFunction: { (value: React.SetStateAction<boolean>)}): void => {
-        setFunction(false)
-    }
-
-    const onBlurUsername = (): void => {
-        const regex = new RegExp('[a-zA-Z0-9]{5,}')
-        const result = regex.test(userDetails.username)
-        if(result){
-            setUserNameErrorDisplayStatus(false)
-        }else{
-            setUserNameErrorDisplayStatus(true)
-        }
-    }
-
-    const onBlurPassword = (): void => {
-        const regex = new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
-        const result = regex.test(userDetails.password)
-        if(result){
-            setPasswordErrorDisplayStatus(false)
-        }else{
-            setPasswordErrorDisplayStatus(true)
-        }
-    }
     
     const onSuccess = (): void => {
         const {history} = props
@@ -63,14 +37,13 @@ export const LoginForm = (props?: RouteComponentProps) => {
         setErrorMsg(failureResponse.error_msg)
     }
 
+    console.log(errorMsg, 'errorMsg')
+
     useEffect(() => {
-        if(useEffectInitialRender.current){
-            useEffectInitialRender.current = false
-        }
-        else{
+        if(errorMsg !== ""){
             setErrorMsg(buttonTextError)
         }
-    }, [buttonTextError])
+    }, [buttonTextError, errorMsg])
     
     const loginAPI = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
@@ -80,10 +53,8 @@ export const LoginForm = (props?: RouteComponentProps) => {
 
             await authStoreInstance.onAuthLogIn(userDetails)
             setResponse(authStoreInstance.authApiResponse)
-            console.log(authStoreInstance.authApiResponse)
 
             if(authStoreInstance.authApiResponse.responseStatus){
-                console.log(1)
                 onSuccess()
             }
             else{
@@ -110,11 +81,8 @@ export const LoginForm = (props?: RouteComponentProps) => {
         value: userDetails.username,
         onchangeMethod: onChangeUsername,
         placeholder: "Username",
-        isErrorDisplayed: isUserNameErrorDisplayed,
-        setFunction: setUserNameErrorDisplayStatus,
         errMsg: t('loginErrors.loginUsernameError'),
-        onblurFunc: onBlurUsername,
-        OnFocusEvent: onFocusEvent
+        regexValue: userNameRegexValidation
     }
     
     const loginPasswordProps:loginUserNameAndPasswordPropTypes = {
@@ -124,11 +92,8 @@ export const LoginForm = (props?: RouteComponentProps) => {
         value: userDetails.password,
         onchangeMethod: onChangePassword,
         placeholder: "Password",
-        isErrorDisplayed: isPasswordErrorDisplayed,
-        setFunction: setPasswordErrorDisplayStatus,
         errMsg: t('loginErrors.loginPasswordError'),
-        onblurFunc: onBlurPassword,
-        OnFocusEvent: onFocusEvent
+        regexValue: passWordRegexValidation
     }
 
     return(

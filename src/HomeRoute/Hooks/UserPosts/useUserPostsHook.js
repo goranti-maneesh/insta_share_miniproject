@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 
 import { UserPostsService } from "../../Services/UserPosts/index.api";
-import UserPostsStores from "../../Stores/HomeRouteStores/UserPostsStore/index";
+import UserPostsStores from "../../Stores/HomeRouteStores/UserPostsStore.ts";
 
 const UserPostsServiceInstance = new UserPostsService();
 

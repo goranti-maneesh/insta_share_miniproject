@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 
 import {
 	SearchedResultsContainer,
@@ -14,7 +13,6 @@ import {
 import EachPost from "../EachPost";
 
 import { searchResultsTypes } from "../../Stores/Types/UserSearchedPostsTypes";
-import {PostLikeStatusHook} from '../../Hooks/PostLikeStatus/usePostLikeStatusHook'
 
 import Failure from "../../../Common/Failure";
 import Loader from "../../../Common/Loader";
@@ -26,9 +24,7 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 		return (
 			<EachPostUl>
 				{userSearchedPostsData.posts.map((eachPost) => (
-					<PostLikeStatusHook>
-						<EachPost key={eachPost.postId} post={eachPost} />
-					</PostLikeStatusHook>
+					<EachPost key={eachPost.postId} post={eachPost} />
 				))}
 			</EachPostUl>
 		);

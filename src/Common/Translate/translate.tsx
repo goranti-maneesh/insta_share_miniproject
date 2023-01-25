@@ -14,8 +14,8 @@ export const Translate = () => {
     return(
         <TranslateContainer>
             <select onChange={changeLanguage}>
-                <option value="en">{t<string>('translateText.english')}</option>
-                <option value="te">{t<string>('translateText.telugu')}</option>
+                <option value="en">English</option>
+                <option value="te">ఆంగ్లం</option>
             </select>
         </TranslateContainer>
     )

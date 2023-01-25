@@ -1,0 +1,30 @@
+{
+    "id": "df3234jkjn2-324sdf1132nnknn-234324234",
+    "user_id": "rahul",
+    "user_name": "Rahul",
+    "profile_pic": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/profile/instagram-mini-project-profile-1.png",
+    "followers_count": 289,
+    "following_count": 12,
+    "user_bio": "It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.",
+    "posts": [
+        {
+            "id": "1a698dc4-sdf6e83-4ede-998e-638305f7aee6",
+            "image": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
+        },
+        {
+            "id": "1a698dc4-sdf6e83-4ede-998e-638305f7aee6",
+            "image": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
+        }
+    ],
+    "posts_count": 3,
+    "stories": [
+        {
+            "id": "5HJ25nUNJ",
+            "image": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/previous-stories/instagram-mini-project-previous-story-34-img.png"
+        },
+        {
+            "id": "5HJ25nUNJ",
+            "image": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/previous-stories/instagram-mini-project-previous-story-34-img.png"
+        }
+    ]
+}

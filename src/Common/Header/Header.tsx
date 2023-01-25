@@ -20,7 +20,7 @@ import {
 
 import {HeaderProps} from '../Stores/Types/HeaderTypes'
 
-import { instaHeaderLogo } from "../../constants/LocalConstants";
+import { instaHeaderLogo } from "../constants/LocalConstants";
 import {ObjContext} from '../context'
 import { accessRemoveCookie } from "../../Common/utils/StorageUtils";
 

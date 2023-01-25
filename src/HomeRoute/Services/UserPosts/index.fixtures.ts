@@ -2,7 +2,7 @@ import { resolveWithTimeout } from "../../../Common/utils/TestUtils"
 
 import usersPostsFixtures from '../../Fixtures/getUserPostsResponse.json'
 
-import {UserPostsServiceTypes, UserSearchedPostsServiceTypes} from './index'
+import {UserPostsServiceTypes} from './index'
 
 class UserPostsService implements UserPostsServiceTypes{
     getUserPosts = () => {

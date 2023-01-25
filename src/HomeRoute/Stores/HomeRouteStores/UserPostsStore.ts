@@ -1,24 +1,26 @@
 import { observable, action } from "mobx";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
 import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
-import UserPostModal from "../../HomeRouteModals/userPostsModal";
-import { userPostsResponseTypes } from "../../Types/UserPostsTypes";
+import UserPostModel from "../HomeRouteModels/UserPostsModel/UserPostsModel";
+import { userPostsResponseTypes } from "../Types/UserPostsTypes";
 
 class UserPostsStores {
 	@observable userPostApiService;
-	@observable userPostsStatus = API_INITIAL;
+	@observable userPostsStatus;
 	@observable userPostsResponse;
 
 	constructor(userPostServiceApiInstance) {
 		this.userPostApiService = userPostServiceApiInstance;
+		this.userPostsStatus = API_INITIAL;
+		this.userPostsResponse = {} as userPostsResponseTypes
 	}
 
 	@action.bound getUserPostsResponse = (response: userPostsResponseTypes): void => {
-		const modalData = response.posts.map((eachPost) => {
-			return new UserPostModal(eachPost);
+		const modelData = response.posts.map((eachPost) => {
+			return new UserPostModel(eachPost);
 		});
 		this.userPostsResponse = {
-			posts: modalData,
+			posts: modelData,
 			responseStatus: response.responseStatus,
 		};
 	};
@@ -38,4 +40,4 @@ class UserPostsStores {
 	};
 }
 
-export { UserPostsStores };
+export default UserPostsStores;

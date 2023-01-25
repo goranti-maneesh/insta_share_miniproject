@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import {UserPostsService} from '../../Services/UserPosts/index.api'
 
-import UserSearchedPostsStore from '../../Stores/HomeRouteStores/UserSearchedPostsStore/index'
+import UserSearchedPostsStore from '../../Stores/HomeRouteStores/UserSearchedPostsStore.ts'
 
 const UserPostsServiceInstance = new UserPostsService()
 

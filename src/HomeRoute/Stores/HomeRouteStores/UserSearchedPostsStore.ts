@@ -2,24 +2,26 @@ import { observable, action } from "mobx";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
 import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
 
-import UserPostModal from "../../HomeRouteModals/userPostsModal";
-import { userPostsResponseTypes } from "../../Types/UserPostsTypes";
+import UserPostModel from "../HomeRouteModels/UserPostsModel/UserPostsModel";
+import { userPostsResponseTypes } from "../Types/UserPostsTypes";
 
-export class UserSearchedPostsStore{
+export default class UserSearchedPostsStore{
     @observable userSearchedPostApiService;
-	@observable userSearchedPostsStatus = API_INITIAL;
+	@observable userSearchedPostsStatus;
 	@observable userSearchedPostsResponse;
 
     constructor(userSearchedPostServiceApiInstance) {
 		this.userSearchedPostApiService = userSearchedPostServiceApiInstance;
+		this.userSearchedPostsStatus = API_INITIAL
+		this.userSearchedPostsResponse = {} as userPostsResponseTypes
 	}
 
 	@action.bound getUserSearchedPostsResponse = (response: userPostsResponseTypes): void => {
-		const modalData = response.posts.map((eachPost) => {
-			return new UserPostModal(eachPost);
+		const modelData = response.posts.map((eachPost) => {
+			return new UserPostModel(eachPost);
 		});
 		this.userSearchedPostsResponse = {
-			posts: modalData,
+			posts: modelData,
 			responseStatus: response.responseStatus,
 		};
 	};

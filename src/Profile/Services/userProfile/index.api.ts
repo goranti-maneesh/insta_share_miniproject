@@ -1,9 +1,9 @@
 import config from '../../../Common/constants/EnvironmentConstants'
 import {accessLoginCookie} from '../../../Common/utils/StorageUtils'
-import { UserPostsServiceTypes } from './index'
+import { UserProfileDetailsServiceTypes } from './index'
 
-class UserPostsService implements UserPostsServiceTypes{
-    getUserPosts = async () => {
+class ProfileDetailsService implements UserProfileDetailsServiceTypes{
+    getProfileDetails = async () => {
         const options = {
             method: 'GET',
             headers: {
@@ -11,7 +11,7 @@ class UserPostsService implements UserPostsServiceTypes{
             } 
           }   
           
-          const url = `${config.INSTA_SHARE_BASE_URL}/posts`
+          const url = `${config.INSTA_SHARE_BASE_URL}/my-profile`
           const response = await fetch(url, options)
           const data = await response.json()
             return {
@@ -19,7 +19,7 @@ class UserPostsService implements UserPostsServiceTypes{
             }
     }
 
-    getSearchedPosts = async (searchedText: string) => {
+    getUserProfileDetails = async (userId: string) => {
       const options = {
         method: 'GET',
         headers: {
@@ -27,7 +27,7 @@ class UserPostsService implements UserPostsServiceTypes{
         } 
       }   
       
-      const url = `${config.INSTA_SHARE_BASE_URL}/posts?search=${searchedText}`
+      const url = `${config.INSTA_SHARE_BASE_URL}/users/{userId}`
       const response = await fetch(url, options)
       const data = await response.json()
         return {
@@ -36,4 +36,4 @@ class UserPostsService implements UserPostsServiceTypes{
     }
 }
 
-export {UserPostsService}
+export {ProfileDetailsService}

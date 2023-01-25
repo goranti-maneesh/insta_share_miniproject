@@ -4,7 +4,15 @@ export interface eachPostCommentTypes {
 	userName: string;
 }
 
+export interface PostLikeRequestObjTypes{
+    likeStatusObj:{
+        like_status: boolean
+    },
+    postId: string
+}
+
 export interface eachUserPostTypes {
+    fetchPostLikeStatus(PostLikeRequestObjTypes: PostLikeRequestObjTypes): void;
 	comments: Array<eachPostCommentTypes>;
 	createdAt: string;
 	likesCount: number;
@@ -16,6 +24,7 @@ export interface eachUserPostTypes {
 	profilePic: string;
 	userId: string;
 	userName: string;
+	// fetchPostLikeStatus: 
 }
 
 export interface userPostsResponseTypes {
