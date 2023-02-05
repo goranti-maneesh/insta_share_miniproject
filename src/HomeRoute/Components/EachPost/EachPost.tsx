@@ -21,6 +21,7 @@ import {
 	CommentsUl,
 	CommentLi,
 	CommentedUser,
+	CommentedUserName,
 	Comment,
 	CreatedAt,
 } from "./styledComponents";
@@ -39,6 +40,7 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 		postId,
 		profilePic,
 		userName,
+		userId
 	} = post;
 
 	const [isLiked, setLikeStatus] = useState(false as boolean);
@@ -85,7 +87,9 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 				{comments.map((eachComment) => (
 					<CommentLi key={eachComment.userId}>
 						<CommentedUser>
-							{`${eachComment.userName} `}{" "}
+							<CommentedUserName to={`/users/${eachComment.userId}`}>
+								{`${eachComment.userName}`}
+							</CommentedUserName>
 							<Comment>{` ${eachComment.comment}`}</Comment>
 						</CommentedUser>
 					</CommentLi>
@@ -103,7 +107,7 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 						<ProfilePic src={profilePic} alt="profile pic" />
 					</ProfilePicContainer>
 				</ProfilePicBGContainer>
-				<UserName>{userName}</UserName>
+				<UserName to={`users/${userId}`}>{userName}</UserName>
 			</UserDetails>
 			<PostImageConstainer>
 				<PostImage src={postDetails.imageUrl} alt="post image" />

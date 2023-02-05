@@ -47,7 +47,6 @@ class UserPostModel implements eachUserPostTypes{
     }
 
     @action.bound getPostLikeResponse = (response: PostLikeStatusResponseTypes): void => {
-        console.log(response)
         this.postLikeResponse = response
     }
 

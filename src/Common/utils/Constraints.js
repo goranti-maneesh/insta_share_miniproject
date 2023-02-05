@@ -5,3 +5,9 @@ export const constraints = {
     failure: "FAILURE",
     noResults: "NORESULTS"
 }
+
+export const headerConstraints = {
+    initial: 'INITIAL',
+	menu: 'MENU',
+	search: 'SEARCH'
+}

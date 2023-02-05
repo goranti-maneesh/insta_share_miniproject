@@ -7,7 +7,3 @@ export const EachPostUl = styled.ul`
 		${tw`border-Alto border-solid border-DEFAULT`}
 	}
 `
-
-export const PostsLoader = styled.div`
-    ${tw`h-960px flex items-center justify-center`}
-`

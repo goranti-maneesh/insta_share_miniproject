@@ -20,7 +20,6 @@ export class AuthStore{
         const {jwt_token, responseStatus} = response
         if(responseStatus){
             this.authApiResponse = response
-            console.log(2)
             setJwtToken(jwt_token)
         }
     }

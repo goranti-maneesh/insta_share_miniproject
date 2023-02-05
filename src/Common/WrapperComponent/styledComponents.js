@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const WrapperMainComponent = styled.div`
-	${tw`bg-Alabastersolid p-1px`}
+	${tw`bg-Alabastersolid pt-1px`}
 	@media (max-width: 768px){
 		${tw`bg-white`}
 	}

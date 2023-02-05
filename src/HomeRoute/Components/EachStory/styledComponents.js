@@ -11,9 +11,12 @@ export const StoryLink = styled(Link)`
 `;
 
 export const StoryImage = styled.img`
-	${tw`w-70px h-70px rounded-35px`}
+	${tw`w-70px h-70px rounded-35px m-auto`}
+	@media (max-width: 768px){
+		${tw`w-50px h-50px`}
+	}
 `;
 
 export const StoryUserName = styled.p`
-	${tw`text-14px m-0 mt-1 text-mineShaft`}
+	${tw`text-14px m-0 mt-1 text-mineShaft font-normal`}
 `;

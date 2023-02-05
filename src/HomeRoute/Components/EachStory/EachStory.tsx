@@ -7,7 +7,7 @@ export const EachStory = (props: eachStoryPropType): JSX.Element => {
     const {userId, userName, storyUrl} = story
     return(
         <EachStoryLi>
-            <StoryLink to=''>
+            <StoryLink to={`/users/${userId}`}>
                 <StoryImage src={storyUrl} alt="story-image"/>
                 <StoryUserName>{userName}</StoryUserName>
             </StoryLink>

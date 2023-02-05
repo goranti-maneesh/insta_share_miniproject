@@ -5,3 +5,8 @@ export interface HeaderProps extends RouteComponentProps{
     onChangeSearchText?: (string) => void
     searchText?: string
 }
+
+export interface HeaderLinkStylePropsType{
+    appliedtext: string,
+    appliedpath: boolean
+}

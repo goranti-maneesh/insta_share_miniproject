@@ -1,21 +1,26 @@
 import { useState } from "react";
 
-import { HomeAndSearchMainContainer, HomeAndSearchContainer } from "./styledComponents";
+import {
+	HomeAndSearchMainContainer,
+	HomeAndSearchContainer,
+} from "./styledComponents";
 
 import { Home } from "../Home/Home";
-import {SearchResults} from "../SearchResults/SearchResults";
+import { SearchResults } from "../SearchResults/SearchResults";
 
-import {PostsHook} from '../../Hooks/UserPosts/useUserPostsHook'
+import { PostsHook } from "../../Hooks/UserPosts/useUserPostsHook";
 import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes";
 import { useSearchedPostsContext } from "../../Hooks/UserSearchedPosts/useUserSearchedPostsHook";
 
-import Header from '../../../Common/Header'
+import Header from "../../../Common/Header";
 import WrapperComponent from "../../../Common/WrapperComponent";
 import { constraints } from "../../../Common/utils/Constraints";
 
 export const HomeAndSearch = (): JSX.Element => {
 	const [searchText, setSearchText] = useState("" as string);
-	const [searchClickStatus, setSearchClickStatus] = useState(false as boolean);
+	const [searchClickStatus, setSearchClickStatus] = useState(
+		false as boolean,
+	);
 	const [userSearchedPostsData, setUserSearchedPostsData] = useState(
 		{} as userPostsResponseTypes,
 	);
@@ -26,38 +31,52 @@ export const HomeAndSearch = (): JSX.Element => {
 	const onClickState = async (): Promise<void> => {
 		setSearchClickStatus(true);
 		setConstraint(constraints.loading);
-		console.log("onClickSearch")
 
 		await useSearchedPostsHook.fetchUserSearchedPosts(searchText);
-		console.log(useSearchedPostsHook.userSearchedPostsResponse)
-		
+
 		if (useSearchedPostsHook.userSearchedPostsResponse.responseStatus) {
-			if(useSearchedPostsHook.userSearchedPostsResponse.posts.length > 0 && searchText !== ''){
+			if (
+				useSearchedPostsHook.userSearchedPostsResponse.posts.length >
+					0 &&
+				searchText !== ""
+			) {
 				setUserSearchedPostsData(
 					useSearchedPostsHook.userSearchedPostsResponse,
 				);
 				setConstraint(constraints.success);
-			}
-			else{
-				setConstraint(constraints.noResults)
+			} else {
+				setConstraint(constraints.noResults);
 			}
 		} else {
 			setConstraint(constraints.failure);
 		}
 	};
 
-    const onChangeSearchText = (text: string): void => {
-        setSearchText(text)
-    }
+	const onChangeSearchText = (text: string): void => {
+		setSearchText(text);
+	};
 
 	return (
 		<HomeAndSearchMainContainer>
-			<Header onClickState={onClickState} onChangeSearchText={onChangeSearchText} searchText={searchText}/>
-            <WrapperComponent>
-                {searchClickStatus ? 
-					<SearchResults onClickState={onClickState} userSearchedPostsData={userSearchedPostsData} constraint={constraint} searchText={searchText}/> : 
-					<PostsHook><Home/></PostsHook>}
-            </WrapperComponent>
+			<Header
+				onClickState={onClickState}
+				onChangeSearchText={onChangeSearchText}
+				searchText={searchText}
+			/>
+			<WrapperComponent>
+				{searchClickStatus ? (
+					<SearchResults
+						onClickState={onClickState}
+						userSearchedPostsData={userSearchedPostsData}
+						constraint={constraint}
+						searchText={searchText}
+					/>
+				) : (
+					<PostsHook>
+						<Home />
+					</PostsHook>
+				)}
+			</WrapperComponent>
 		</HomeAndSearchMainContainer>
 	);
 };

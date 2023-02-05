@@ -26,6 +26,11 @@ export interface profileAndResponseStatusTypes{
     responseStatus: boolean
 }
 
+export interface UserProfileDetailsAndResponseStatusTypes{
+    user_details: profileDetailsFixturesTypes,
+    responseStatus: boolean
+}
+
 export interface profileDetailsResponseTypes{
     id: string,
     userId: string,
@@ -40,6 +45,11 @@ export interface profileDetailsResponseTypes{
 }
 
 export interface profileDetailsResponseStatusTypes{
-    profile: profileDetailsResponseTypes,
+    profileDetails: profileDetailsResponseTypes,
     responseStatus: boolean
 }
+
+export interface profileDetailsPropTypes{
+    profileDetails: profileDetailsResponseTypes,
+}
+

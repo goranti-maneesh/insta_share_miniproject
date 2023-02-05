@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import Profile from "../Profile"
 
-import {useUserProfileDetailsHook} from '../../Hooks/UserProfileDetails/useUserProfileDetailsHooks'
+import {useProfileDetailsHook} from '../../Hooks/ProfileDetails/useProfileDetailsHook'
 import {profileDetailsResponseStatusTypes} from '../../Stores/Types/types'
 
 import Header from "../../../Common/Header"
@@ -11,24 +11,21 @@ import Failure from "../../../Common/Failure"
 import Loader from "../../../Common/Loader"
 import WrapperComponent from "../../../Common/WrapperComponent"
 
-export const UserProfile = (props) => {
+export const MyProfile = () => {
 
-    const userProfileDetails = useUserProfileDetailsHook()
+    const profileDetails = useProfileDetailsHook()
 
     const [constraint, setConstraint] = useState(constraints.initial as string);
     const [data, setData] = useState({} as profileDetailsResponseStatusTypes)
 
-    const getUserProfileDetailsData = async () => {
-        const {match} = props
-        const {params} = match
-        const {userId} = params
+    const getProfileDetailsData = async () => {
 
         setConstraint(constraints.loading)
 
-        await userProfileDetails.fetchUserProfileDetails(userId)
+        await profileDetails.fetchProfileDetails()
 
-        if(userProfileDetails.userProfileDetailsResponse.responseStatus){
-            setData(userProfileDetails.userProfileDetailsResponse)
+        if(profileDetails.profileDetailsResponse.responseStatus){
+            setData(profileDetails.profileDetailsResponse)
             setConstraint(constraints.success)
         }
         else{
@@ -39,13 +36,13 @@ export const UserProfile = (props) => {
     }
 
     useEffect(() => {
-        getUserProfileDetailsData()
+        getProfileDetailsData()
     }, [])
 
     const overAllViews = (): JSX.Element => {
         switch(constraint){
             case "SUCCESS":
-                return renderUserProfileDetails()
+                return renderProfileDetails()
             case "LOADING":
                 return renderLoader()
             case "FAILURE":
@@ -58,10 +55,10 @@ export const UserProfile = (props) => {
     )
 
     const renderErrorView = (): JSX.Element => (
-        <Failure getPostsData={getUserProfileDetailsData} />
+        <Failure getPostsData={getProfileDetailsData} />
     )
 
-    const renderUserProfileDetails = (): JSX.Element => (
+    const renderProfileDetails = (): JSX.Element => (
         <Profile profileDetails={data.profileDetails}/>
     )
 

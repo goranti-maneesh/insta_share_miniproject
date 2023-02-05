@@ -27,7 +27,7 @@ class ProfileDetailsService implements UserProfileDetailsServiceTypes{
         } 
       }   
       
-      const url = `${config.INSTA_SHARE_BASE_URL}/users/{userId}`
+      const url = `${config.INSTA_SHARE_BASE_URL}/users/${userId}`
       const response = await fetch(url, options)
       const data = await response.json()
         return {

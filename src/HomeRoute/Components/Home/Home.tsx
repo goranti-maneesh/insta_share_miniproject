@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactNode } from "react";
 
-import { EachPostUl, PostsLoader } from "./styledComponents";
+import { EachPostUl } from "./styledComponents";
 
 import UserStories from "../UserStories/index";
 import EachPost from "../EachPost";
@@ -53,9 +53,7 @@ export const Home = (): JSX.Element => {
 	);
 
 	const renderLoadingView = (): JSX.Element => (
-		<PostsLoader>
-			<Loader width={53} height={53} />
-		</PostsLoader>
+		<Loader width={53} height={53} />
 	);
 
 	const renderOverAllViews = (): ReactNode => {

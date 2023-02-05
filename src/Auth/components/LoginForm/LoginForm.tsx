@@ -29,15 +29,12 @@ export const LoginForm = (props?: RouteComponentProps) => {
     
     const onSuccess = (): void => {
         const {history} = props
-        console.log(props, history, 'props')
         history.replace("/")
     }
 
     const onFailure = (failureResponse: AuthApiFailureResponseObjTypes): void => {
         setErrorMsg(failureResponse.error_msg)
     }
-
-    console.log(errorMsg, 'errorMsg')
 
     useEffect(() => {
         if(errorMsg !== ""){
