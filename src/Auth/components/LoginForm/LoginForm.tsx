@@ -1,18 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { RouteComponentProps, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import {LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
+import {LoginAndTranslateContainer, LoginPageContainer, InstaImageContainer, RenderInstaImage, LoginFormContainer, InstaLogoContainer,
 RenderInstaLogo, InstaShareTitle, LoginButton, ButtonErrorMsgContainer, ErrorMsg} from './StyledComponents'
 
 import useInputLabelContainer from "../LoginInputLabelContainer";
 
 import { AuthApiFailureResponseObjTypes, AuthApiResponseObjTypes, AuthRequestObjTypes, loginUserNameAndPasswordPropTypes } from "../../stores/types";
 import {userNameRegexValidation, passWordRegexValidation} from '../../Utils/CredsValidation'
+import {useAuthStoreHook} from '../../Hooks/useAuthStore'
 
 import { isLoggedIn } from '../../../Common/utils/AuthUtils/AuthUtils';
-
-import {useAuthStoreHook} from '../../Hooks/useAuthStore'
+import Translate from "../../../Common/Translate/index";
 
 
 export const LoginForm = (props?: RouteComponentProps) => {
@@ -34,13 +34,14 @@ export const LoginForm = (props?: RouteComponentProps) => {
 
     const onFailure = (failureResponse: AuthApiFailureResponseObjTypes): void => {
         setErrorMsg(failureResponse.error_msg)
+        console.log(failureResponse, 'error')
     }
 
-    useEffect(() => {
-        if(errorMsg !== ""){
-            setErrorMsg(buttonTextError)
-        }
-    }, [buttonTextError, errorMsg])
+    // useEffect(() => {
+    //     if(errorMsg !== ""){
+    //         setErrorMsg(buttonTextError)
+    //     }
+    // }, [buttonTextError])
     
     const loginAPI = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
@@ -55,7 +56,8 @@ export const LoginForm = (props?: RouteComponentProps) => {
                 onSuccess()
             }
             else{
-                onFailure(response as unknown as AuthApiFailureResponseObjTypes)
+                console.log(authStoreInstance.authApiResponse, response, 'login')
+                onFailure(authStoreInstance.authApiResponse as unknown as AuthApiFailureResponseObjTypes)
             }
         }
         else{
@@ -94,6 +96,8 @@ export const LoginForm = (props?: RouteComponentProps) => {
     }
 
     return(
+        <LoginAndTranslateContainer>
+            <Translate />
         <LoginPageContainer>
             {isLoggedIn()? <Redirect to="/"/> : null}
             <InstaImageContainer>
@@ -113,6 +117,7 @@ export const LoginForm = (props?: RouteComponentProps) => {
                 </ButtonErrorMsgContainer>
             </LoginFormContainer>
         </LoginPageContainer>
+        </LoginAndTranslateContainer>
     )
 }
 

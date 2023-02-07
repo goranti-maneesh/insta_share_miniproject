@@ -28,9 +28,10 @@ import {
 
 } from "./styledComponents";
 
-import { HeaderProps } from "../Stores/Types/HeaderTypes";
+import { HeaderProps } from "../Stores/types";
 import { instaHeaderLogo } from "../constants/LocalConstants";
 import { ObjContext } from "../context";
+
 import { headerConstraints } from "../utils/Constraints";
 
 import { accessRemoveCookie } from "../../Common/utils/StorageUtils";
@@ -76,11 +77,11 @@ const Header = (props: HeaderProps): JSX.Element => {
 	const renderRoutes = (): JSX.Element => (
 		<RoutesAndCancelContainer>
 			<RoutesContainer>
-				<HeaderLink to="/" appliedtext="home" appliedpath={path === "/"}>
+				<HeaderLink to="/" $appliedtext="home" $appliedpath={path === "/"}>
 					Home
 				</HeaderLink>
 				{path === "/" ? <MobileSearchBtn onClick={displaySearchButton}>Search</MobileSearchBtn> : null}
-				<HeaderLink to="/my-profile" appliedtext="profile" appliedpath={path === "/my-profile"}>
+				<HeaderLink to="/my-profile" $appliedtext="profile" $appliedpath={path === "/my-profile"}>
 					Profile
 				</HeaderLink>
 				<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
@@ -122,8 +123,8 @@ const Header = (props: HeaderProps): JSX.Element => {
 				</LogoContainer>
 				<RoutesContainer>
 					{path === "/" ? renderSearchInput() : null}
-					<HeaderLink to="/" appliedtext="home" appliedpath={path === "/"}>Home</HeaderLink>
-					<HeaderLink to="/my-profile" appliedtext="profile" appliedpath={path === "/my-profile"}>Profile</HeaderLink>
+					<HeaderLink to="/" $appliedtext="home" $appliedpath={path === "/"}>Home</HeaderLink>
+					<HeaderLink to="/my-profile" $appliedtext="profile" $appliedpath={path === "/my-profile"}>Profile</HeaderLink>
 					<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
 				</RoutesContainer>
 			</HeaderContainer>

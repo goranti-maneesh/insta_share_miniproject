@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactNode } from "react";
 
-import { EachPostUl } from "./styledComponents";
+import { HomeContainer, EachPostUl } from "./styledComponents";
 
 import UserStories from "../UserStories/index";
 import EachPost from "../EachPost";
@@ -38,13 +38,11 @@ export const Home = (): JSX.Element => {
 
 	const renderSuccessView = (): JSX.Element => {
 		return (
-			<div>
 				<EachPostUl>
 					{userPostsData.posts.map((eachPost) => (
 						<EachPost key={eachPost.postId} post={eachPost} />
 					))}
 				</EachPostUl>
-			</div>
 		);
 	};
 
@@ -68,11 +66,11 @@ export const Home = (): JSX.Element => {
 	};
 
 	return (
-		<div>
+		<HomeContainer>
 			<StoriesHook>
 				<UserStories />
 			</StoriesHook>
 			{renderOverAllViews()}
-		</div>
+		</HomeContainer>
 	);
 };

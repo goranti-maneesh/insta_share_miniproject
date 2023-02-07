@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import Profile from "../Profile"
+import Profile from "../ProfileDetails"
 
 import {useProfileDetailsHook} from '../../Hooks/ProfileDetails/useProfileDetailsHook'
 import {profileDetailsResponseStatusTypes} from '../../Stores/Types/types'

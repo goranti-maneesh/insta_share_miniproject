@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import LoginForm from "./Auth/components/LoginForm";
-import Translate from "./Common/Translate/index";
 import ProtectedRoute from "./Common/utils/ProtectedRoute";
 import HomeAndSearch from "./HomeRoute/Components/HomeAndSearch/index";
 import MyProfile from "./Profile/Components/MyProfile";
@@ -39,7 +38,6 @@ const App = (): JSX.Element => {
 	return (
 		<ObjContext.Provider value={contextValues}>
 			<BrowserRouter>
-				{/* <Translate /> */}
 				<AuthStoreHook>
 					<SearchedPostsHook>
 						<ProfileDetailsHook>

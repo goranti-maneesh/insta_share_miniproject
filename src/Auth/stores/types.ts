@@ -1,7 +1,3 @@
-import { Dispatch, SetStateAction } from "react"
-import AuthServiceApi from "../services/LoginService/index.api"
-import AuthStore from "./AuthStore"
-
 export interface AuthApiResponseObjTypes{
     jwt_token: string,
     responseStatus: boolean

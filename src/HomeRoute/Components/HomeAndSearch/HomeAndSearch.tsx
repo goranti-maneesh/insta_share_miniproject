@@ -2,10 +2,9 @@ import { useState } from "react";
 
 import {
 	HomeAndSearchMainContainer,
-	HomeAndSearchContainer,
 } from "./styledComponents";
 
-import { Home } from "../Home/Home";
+import { Home } from "../HomePage/HomePage";
 import { SearchResults } from "../SearchResults/SearchResults";
 
 import { PostsHook } from "../../Hooks/UserPosts/useUserPostsHook";

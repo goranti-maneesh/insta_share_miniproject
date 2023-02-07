@@ -1,6 +1,6 @@
 import {FailureContainer, FailureImage, FailureText, TryAgainButton,} from './styledComponents'
 
-import {FailureCompTypes} from '../Stores/Types/FailureCompTypes'
+import {FailureCompTypes} from '../Stores/types'
 
 export const Failure = (props: FailureCompTypes): JSX.Element => {
     const {getPostsData} = props

@@ -7,7 +7,7 @@ import AuthServiceType from '../../services/LoginService/index.api'
 import { AuthRequestObjTypes, AuthApiResponseObjTypes, AuthApiFailureResponseObjTypes } from '../types'
 import { setJwtToken } from '../../../Common/utils/StorageUtils';
 
-export class AuthStore{
+class AuthStore{
     @observable authApiService: AuthServiceType
     @observable authApiStatus = API_INITIAL;
     @observable authApiResponse
@@ -18,9 +18,13 @@ export class AuthStore{
 
     @action.bound setAuthCookies = (response: AuthApiResponseObjTypes| AuthApiFailureResponseObjTypes): void =>{
         const {jwt_token, responseStatus} = response
+        console.log(response, 'store') 
         if(responseStatus){
             this.authApiResponse = response
             setJwtToken(jwt_token)
+        }
+        else{
+            this.authApiResponse = response
         }
     }
     
@@ -38,3 +42,4 @@ export class AuthStore{
     }
 }
 
+export default AuthStore

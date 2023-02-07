@@ -6,7 +6,7 @@ import {FiSearch} from 'react-icons/fi'
 import {BiMenu} from 'react-icons/bi'
 import {MdCancel} from 'react-icons/md'
 
-import {HeaderLinkStylePropsType} from '../Stores/Types/HeaderTypes'
+import {HeaderLinkStylePropsType} from '../Stores/types'
 
 export const MainHeaderContainer = styled.div`
     ${tw`border-Alto border-solid border-0 border-b`}
@@ -67,10 +67,10 @@ export const SearchIcon = styled(FiSearch)`
 
 export const HeaderLink = styled(Link)<HeaderLinkStylePropsType>`
     ${tw`no-underline ml-2 mr-2 text-14px leading-18px text-mineShaft font-medium`}
-    ${(props) => props.appliedpath === true ? tw`text-picton-blue` : tw`text-mineShaft`}
+    ${(props) => props.$appliedpath === true ? tw`text-picton-blue` : tw`text-mineShaft`}
     
     @media (max-width: 768px){
-        ${(props) => props.appliedtext === 'home' ? tw`ml-0` : null}
+        ${(props) => props.$appliedtext === 'home' ? tw`ml-0` : null}
     }
 `
 

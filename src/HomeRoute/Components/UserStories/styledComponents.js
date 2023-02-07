@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 
+export const UserStoriesMainContainer = styled.div``
+
 export const USerStoriesContainer = styled.div`
 	${tw`pb-0 mt-12 mb-12`}
 	@media (max-width: 768px){
