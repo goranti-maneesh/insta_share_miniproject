@@ -1,3 +1,3 @@
-import {WrapperComponent} from './WrapperComponent'
+import { WrapperComponent } from "./WrapperComponent";
 
-export default WrapperComponent
+export default WrapperComponent;

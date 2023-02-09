@@ -1,4 +1,3 @@
-
 import {
 	SearchedResultsContainer,
 	SearchResultsTitle,
@@ -7,7 +6,7 @@ import {
 	NoSearchViewContainer,
 	NoSearchViewImage,
 	NoSearchViewHeading,
-	NoSearchViewText
+	NoSearchViewText,
 } from "./styledComponents";
 
 import EachPost from "../EachPost";
@@ -18,7 +17,6 @@ import Failure from "../../../Common/Failure";
 import Loader from "../../../Common/Loader";
 
 export const SearchResults = (props: searchResultsTypes): JSX.Element => {
-
 	const renderSuccessView = (): JSX.Element => {
 		const { userSearchedPostsData } = props;
 		return (
@@ -31,7 +29,7 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 	};
 
 	const renderFailureView = (): JSX.Element => {
-		const {onClickState} = props
+		const { onClickState } = props;
 		return <Failure getPostsData={onClickState} />;
 	};
 
@@ -43,11 +41,16 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 
 	const renderNoResultsView = (): JSX.Element => (
 		<NoSearchViewContainer>
-			<NoSearchViewImage src="https://res.cloudinary.com/degjdup40/image/upload/v1671980655/Group_s5njey.png" alt="no search view"/>
+			<NoSearchViewImage
+				src="https://res.cloudinary.com/degjdup40/image/upload/v1671980655/Group_s5njey.png"
+				alt="no search view"
+			/>
 			<NoSearchViewHeading>Search Not Found</NoSearchViewHeading>
-			<NoSearchViewText>Try different keyword or search again</NoSearchViewText>
+			<NoSearchViewText>
+				Try different keyword or search again
+			</NoSearchViewText>
 		</NoSearchViewContainer>
-	)
+	);
 
 	const renderOverAllViews = () => {
 		const { constraint } = props;

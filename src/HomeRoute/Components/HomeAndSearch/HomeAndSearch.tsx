@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import {
-	HomeAndSearchMainContainer,
-} from "./styledComponents";
+import { HomeAndSearchMainContainer } from "./styledComponents";
 
 import { Home } from "../HomePage/HomePage";
 import { SearchResults } from "../SearchResults/SearchResults";

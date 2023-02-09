@@ -7,7 +7,7 @@ import LoginForm from "./Auth/components/LoginForm";
 import ProtectedRoute from "./Common/utils/ProtectedRoute";
 import HomeAndSearch from "./HomeRoute/Components/HomeAndSearch/index";
 import MyProfile from "./Profile/Components/MyProfile";
-import UserProfile from './Profile/Components/UserProfile'
+import UserProfile from "./Profile/Components/UserProfile";
 
 import { ObjContext } from "./Common/context";
 
@@ -58,7 +58,11 @@ const App = (): JSX.Element => {
 										path="/my-profile"
 										component={MyProfile}
 									/>
-									<ProtectedRoute exact path="/users/:userId" component={UserProfile}/>
+									<ProtectedRoute
+										exact
+										path="/users/:userId"
+										component={UserProfile}
+									/>
 								</Switch>
 							</UserProfileDetailsHook>
 						</ProfileDetailsHook>

@@ -1,8 +1,8 @@
-import {userPostsResponseTypes} from './UserPostsTypes'
+import { userPostsResponseTypes } from "./UserPostsTypes";
 
-export interface searchResultsTypes{
-    onClickState: () => void,
-    userSearchedPostsData: userPostsResponseTypes
-    constraint: string
-    searchText: string
+export interface searchResultsTypes {
+	onClickState: () => void;
+	userSearchedPostsData: userPostsResponseTypes;
+	constraint: string;
+	searchText: string;
 }

@@ -1,3 +1,3 @@
 import { Failure } from "./Failure";
 
-export default Failure
+export default Failure;

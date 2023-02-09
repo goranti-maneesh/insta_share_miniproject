@@ -1,15 +1,15 @@
 {
-    "users_stories": [
-      {
-        "user_id": "Varun_Aadithya",
-        "user_name": "Varun Aadithya",
-        "story_url": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png"
-      },
-      {
-        "user_id": "Varun_Aadithya",
-        "user_name": "Varun Aadithya",
-        "story_url": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png"
-      }
-    ],
-    "responseStatus": true
-  }
+	"users_stories": [
+		{
+			"user_id": "Varun_Aadithya",
+			"user_name": "Varun Aadithya",
+			"story_url": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png"
+		},
+		{
+			"user_id": "Varun_Aadithya",
+			"user_name": "Varun Aadithya",
+			"story_url": "https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png"
+		}
+	],
+	"responseStatus": true
+}

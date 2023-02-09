@@ -1,3 +1,3 @@
-import {createContext} from 'react'
+import { createContext } from "react";
 
-export const ObjContext = createContext({isDesktopView: null })
+export const ObjContext = createContext({ isDesktopView: null });

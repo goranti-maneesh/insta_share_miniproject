@@ -1,3 +1,3 @@
-import {Translate} from './translate'
+import { Translate } from "./translate";
 
-export default Translate
+export default Translate;

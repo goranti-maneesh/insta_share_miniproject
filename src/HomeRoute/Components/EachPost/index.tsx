@@ -1,3 +1,3 @@
 import { EachPost } from "./EachPost";
 
-export default EachPost
+export default EachPost;

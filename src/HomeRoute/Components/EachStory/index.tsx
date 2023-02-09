@@ -1,3 +1,3 @@
 import { EachStory } from "./EachStory";
 
-export default EachStory
+export default EachStory;

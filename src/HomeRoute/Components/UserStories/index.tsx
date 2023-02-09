@@ -1,3 +1,3 @@
-import {UserStories} from './UserStories'
+import { UserStories } from "./UserStories";
 
-export default UserStories
+export default UserStories;

@@ -40,7 +40,7 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 		postId,
 		profilePic,
 		userName,
-		userId
+		userId,
 	} = post;
 
 	const [isLiked, setLikeStatus] = useState(false as boolean);
@@ -87,7 +87,8 @@ export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 				{comments.map((eachComment) => (
 					<CommentLi key={eachComment.userId}>
 						<CommentedUser>
-							<CommentedUserName to={`/users/${eachComment.userId}`}>
+							<CommentedUserName
+								to={`/users/${eachComment.userId}`}>
 								{`${eachComment.userName}`}
 							</CommentedUserName>
 							<Comment>{` ${eachComment.comment}`}</Comment>

@@ -1,8 +1,8 @@
-import {accessLoginCookie} from '../StorageUtils'
+import { accessLoginCookie } from "../StorageUtils";
 
-export const isLoggedIn = () =>{
-    if(accessLoginCookie()){
-        return true
-    }
-    return false
-}
+export const isLoggedIn = () => {
+	if (accessLoginCookie()) {
+		return true;
+	}
+	return false;
+};

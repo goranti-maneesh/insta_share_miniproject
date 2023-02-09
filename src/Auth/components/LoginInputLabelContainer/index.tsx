@@ -1,3 +1,3 @@
-import {useInputLabelContainer} from './inputLabelContainer'
+import { useInputLabelContainer } from "./inputLabelContainer";
 
-export default useInputLabelContainer
+export default useInputLabelContainer;

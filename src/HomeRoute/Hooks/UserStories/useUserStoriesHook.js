@@ -1,19 +1,23 @@
-import { useContext, createContext } from 'react'
+import { useContext, createContext } from "react";
 
-import UserStoriesStore from '../../Stores/HomeRouteStores/UserStoriesStore.ts'
+import UserStoriesStore from "../../Stores/HomeRouteStores/UserStoriesStore.ts";
 
-import {UserStoriesService} from '../../Services/UserStories/index.api'
+import { UserStoriesService } from "../../Services/UserStories/index.api";
 
-const userStoriesServiceInstance = new UserStoriesService()
+const userStoriesServiceInstance = new UserStoriesService();
 
-const userStoriesStoreInstance = new UserStoriesStore(userStoriesServiceInstance)
+const userStoriesStoreInstance = new UserStoriesStore(
+	userStoriesServiceInstance,
+);
 
-const StoriesContext = createContext(null)
+const StoriesContext = createContext(null);
 
-export const StoriesHook = ({children}) => {
-    return(
-        <StoriesContext.Provider value={userStoriesStoreInstance}>{children}</StoriesContext.Provider>
-    )
-}
+export const StoriesHook = ({ children }) => {
+	return (
+		<StoriesContext.Provider value={userStoriesStoreInstance}>
+			{children}
+		</StoriesContext.Provider>
+	);
+};
 
-export const useStoriesHook = () => useContext(StoriesContext)
+export const useStoriesHook = () => useContext(StoriesContext);

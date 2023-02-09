@@ -38,11 +38,11 @@ export const Home = (): JSX.Element => {
 
 	const renderSuccessView = (): JSX.Element => {
 		return (
-				<EachPostUl>
-					{userPostsData.posts.map((eachPost) => (
-						<EachPost key={eachPost.postId} post={eachPost} />
-					))}
-				</EachPostUl>
+			<EachPostUl>
+				{userPostsData.posts.map((eachPost) => (
+					<EachPost key={eachPost.postId} post={eachPost} />
+				))}
+			</EachPostUl>
 		);
 	};
 

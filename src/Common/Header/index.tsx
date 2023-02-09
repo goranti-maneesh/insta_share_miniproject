@@ -1,3 +1,3 @@
-import {HeaderWithRouter} from './Header'
+import { HeaderWithRouter } from "./Header";
 
-export default HeaderWithRouter
+export default HeaderWithRouter;

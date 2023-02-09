@@ -5,18 +5,20 @@ import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
 import UserPostModel from "../HomeRouteModels/UserPostsModel/UserPostsModel";
 import { userPostsResponseTypes } from "../Types/UserPostsTypes";
 
-export default class UserSearchedPostsStore{
-    @observable userSearchedPostApiService;
+export default class UserSearchedPostsStore {
+	@observable userSearchedPostApiService;
 	@observable userSearchedPostsStatus;
 	@observable userSearchedPostsResponse;
 
-    constructor(userSearchedPostServiceApiInstance) {
+	constructor(userSearchedPostServiceApiInstance) {
 		this.userSearchedPostApiService = userSearchedPostServiceApiInstance;
-		this.userSearchedPostsStatus = API_INITIAL
-		this.userSearchedPostsResponse = {} as userPostsResponseTypes
+		this.userSearchedPostsStatus = API_INITIAL;
+		this.userSearchedPostsResponse = {} as userPostsResponseTypes;
 	}
 
-	@action.bound getUserSearchedPostsResponse = (response: userPostsResponseTypes): void => {
+	@action.bound getUserSearchedPostsResponse = (
+		response: userPostsResponseTypes,
+	): void => {
 		const modelData = response.posts.map((eachPost) => {
 			return new UserPostModel(eachPost);
 		});
@@ -26,12 +28,15 @@ export default class UserSearchedPostsStore{
 		};
 	};
 
-	@action.bound getUserSearchedPostsStatus = (responseStatus: APIStatus): void => {
+	@action.bound getUserSearchedPostsStatus = (
+		responseStatus: APIStatus,
+	): void => {
 		this.userSearchedPostsStatus = responseStatus;
 	};
 
 	fetchUserSearchedPosts = (searchText): Promise<Object> => {
-		const searchedPostsResponse = this.userSearchedPostApiService.getSearchedPosts(searchText);
+		const searchedPostsResponse =
+			this.userSearchedPostApiService.getSearchedPosts(searchText);
 		return bindPromiseWithOnSuccess(searchedPostsResponse).to(
 			this.getUserSearchedPostsStatus,
 			(response: userPostsResponseTypes) => {

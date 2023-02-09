@@ -12,7 +12,7 @@ export const StoryLink = styled(Link)`
 
 export const StoryImage = styled.img`
 	${tw`w-70px h-70px rounded-35px m-auto`}
-	@media (max-width: 768px){
+	@media (max-width: 768px) {
 		${tw`w-50px h-50px`}
 	}
 `;

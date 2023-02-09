@@ -24,8 +24,7 @@ import {
 	RoutesAndCancelContainer,
 	MobileSearchBtn,
 	CancelButton,
-	CancelIcon
-
+	CancelIcon,
 } from "./styledComponents";
 
 import { HeaderProps } from "../Stores/types";
@@ -63,31 +62,41 @@ const Header = (props: HeaderProps): JSX.Element => {
 	};
 
 	const openMenu = () => {
-		setConstraint(headerConstraints.menu)
+		setConstraint(headerConstraints.menu);
 	};
 
 	const closeMenu = () => {
-		setConstraint(headerConstraints.initial)
+		setConstraint(headerConstraints.initial);
 	};
 
 	const displaySearchButton = () => {
-		setConstraint(headerConstraints.search)
-	}
+		setConstraint(headerConstraints.search);
+	};
 
 	const renderRoutes = (): JSX.Element => (
 		<RoutesAndCancelContainer>
 			<RoutesContainer>
-				<HeaderLink to="/" $appliedtext="home" $appliedpath={path === "/"}>
+				<HeaderLink
+					to="/"
+					$appliedtext="home"
+					$appliedpath={path === "/"}>
 					Home
 				</HeaderLink>
-				{path === "/" ? <MobileSearchBtn onClick={displaySearchButton}>Search</MobileSearchBtn> : null}
-				<HeaderLink to="/my-profile" $appliedtext="profile" $appliedpath={path === "/my-profile"}>
+				{path === "/" ? (
+					<MobileSearchBtn onClick={displaySearchButton}>
+						Search
+					</MobileSearchBtn>
+				) : null}
+				<HeaderLink
+					to="/my-profile"
+					$appliedtext="profile"
+					$appliedpath={path === "/my-profile"}>
 					Profile
 				</HeaderLink>
 				<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
 			</RoutesContainer>
 			<CancelButton onClick={closeMenu}>
-				<CancelIcon/>
+				<CancelIcon />
 			</CancelButton>
 		</RoutesAndCancelContainer>
 	);
@@ -123,8 +132,18 @@ const Header = (props: HeaderProps): JSX.Element => {
 				</LogoContainer>
 				<RoutesContainer>
 					{path === "/" ? renderSearchInput() : null}
-					<HeaderLink to="/" $appliedtext="home" $appliedpath={path === "/"}>Home</HeaderLink>
-					<HeaderLink to="/my-profile" $appliedtext="profile" $appliedpath={path === "/my-profile"}>Profile</HeaderLink>
+					<HeaderLink
+						to="/"
+						$appliedtext="home"
+						$appliedpath={path === "/"}>
+						Home
+					</HeaderLink>
+					<HeaderLink
+						to="/my-profile"
+						$appliedtext="profile"
+						$appliedpath={path === "/my-profile"}>
+						Profile
+					</HeaderLink>
 					<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
 				</RoutesContainer>
 			</HeaderContainer>

@@ -1,3 +1,3 @@
 import { MyProfile } from "./MyProfile";
 
-export default MyProfile
+export default MyProfile;

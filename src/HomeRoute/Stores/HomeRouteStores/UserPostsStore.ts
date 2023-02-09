@@ -12,10 +12,12 @@ class UserPostsStores {
 	constructor(userPostServiceApiInstance) {
 		this.userPostApiService = userPostServiceApiInstance;
 		this.userPostsStatus = API_INITIAL;
-		this.userPostsResponse = {} as userPostsResponseTypes
+		this.userPostsResponse = {} as userPostsResponseTypes;
 	}
 
-	@action.bound getUserPostsResponse = (response: userPostsResponseTypes): void => {
+	@action.bound getUserPostsResponse = (
+		response: userPostsResponseTypes,
+	): void => {
 		const modelData = response.posts.map((eachPost) => {
 			return new UserPostModel(eachPost);
 		});

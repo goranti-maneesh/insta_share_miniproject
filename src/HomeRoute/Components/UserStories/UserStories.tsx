@@ -36,27 +36,27 @@ export const UserStories = (): JSX.Element => {
 			{
 				breakpoint: 992,
 				settings: {
-				  slidesToShow: 6,
-				  slidesToScroll: 1,
-				  infinite: false
-				}
-			  },
-			{
-			  breakpoint: 768,
-			  settings: {
-				slidesToShow: 5,
-				slidesToScroll: 1,
-				infinite: false
-			  }
+					slidesToShow: 6,
+					slidesToScroll: 1,
+					infinite: false,
+				},
 			},
 			{
-			  breakpoint: 567,
-			  settings: {
-				slidesToShow: 4,
-				slidesToScroll: 1,
-			  }
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 5,
+					slidesToScroll: 1,
+					infinite: false,
+				},
 			},
-		  ]
+			{
+				breakpoint: 567,
+				settings: {
+					slidesToShow: 4,
+					slidesToScroll: 1,
+				},
+			},
+		],
 	};
 
 	useEffect(() => {
@@ -97,7 +97,9 @@ export const UserStories = (): JSX.Element => {
 		</StoryLoader>
 	);
 
-	const renderFailureView = (): JSX.Element => <Failure getPostsData={getStoriesData} />;
+	const renderFailureView = (): JSX.Element => (
+		<Failure getPostsData={getStoriesData} />
+	);
 
 	const renderOverAllViews = (): JSX.Element => {
 		switch (constraint) {
@@ -110,5 +112,9 @@ export const UserStories = (): JSX.Element => {
 		}
 	};
 
-	return <UserStoriesMainContainer>{renderOverAllViews()}</UserStoriesMainContainer>;
+	return (
+		<UserStoriesMainContainer>
+			{renderOverAllViews()}
+		</UserStoriesMainContainer>
+	);
 };

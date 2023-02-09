@@ -4,15 +4,15 @@ export interface eachPostCommentTypes {
 	userName: string;
 }
 
-export interface PostLikeRequestObjTypes{
-    likeStatusObj:{
-        like_status: boolean
-    },
-    postId: string
+export interface PostLikeRequestObjTypes {
+	likeStatusObj: {
+		like_status: boolean;
+	};
+	postId: string;
 }
 
 export interface eachUserPostTypes {
-    fetchPostLikeStatus(PostLikeRequestObjTypes: PostLikeRequestObjTypes): void;
+	fetchPostLikeStatus(PostLikeRequestObjTypes: PostLikeRequestObjTypes): void;
 	comments: Array<eachPostCommentTypes>;
 	createdAt: string;
 	likesCount: number;
@@ -24,12 +24,12 @@ export interface eachUserPostTypes {
 	profilePic: string;
 	userId: string;
 	userName: string;
-	// fetchPostLikeStatus: 
+	// fetchPostLikeStatus:
 }
 
 export interface userPostsResponseTypes {
 	posts: Array<eachUserPostTypes>;
-	responseStatus: boolean
+	responseStatus: boolean;
 }
 
 export interface eachFixturePostCommentTypes {
@@ -54,9 +54,9 @@ export interface eachFixtureUserPostTypes {
 
 export interface userFixturePostsResponseTypes {
 	posts: Array<eachFixtureUserPostTypes>;
-	responseStatus: boolean
+	responseStatus: boolean;
 }
 
-export interface eachUserPostPropTypes{
-	post: eachUserPostTypes
+export interface eachUserPostPropTypes {
+	post: eachUserPostTypes;
 }

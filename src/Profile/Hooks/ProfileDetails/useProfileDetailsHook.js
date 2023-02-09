@@ -1,19 +1,21 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext } from "react";
 
-import {ProfileDetailsService} from '../../Services/userProfile/index.api'
+import { ProfileDetailsService } from "../../Services/userProfile/index.api";
 
-import {ProfileDetailsStores} from '../../Stores/ProfileDetailsStores/ProfileDetailsStores'
+import { ProfileDetailsStores } from "../../Stores/ProfileDetailsStores/ProfileDetailsStores";
 
-const ProfileDetailsServiceInstance = new ProfileDetailsService()
+const ProfileDetailsServiceInstance = new ProfileDetailsService();
 
-const profileDetailsStoresInstance = new ProfileDetailsStores(ProfileDetailsServiceInstance)
+const profileDetailsStoresInstance = new ProfileDetailsStores(
+	ProfileDetailsServiceInstance,
+);
 
-const profileDetailsContext = createContext(null)
+const profileDetailsContext = createContext(null);
 
-export const ProfileDetailsHook = ({children}) => (
-    <profileDetailsContext.Provider value={profileDetailsStoresInstance}>
-        {children}
-    </profileDetailsContext.Provider>
-)
+export const ProfileDetailsHook = ({ children }) => (
+	<profileDetailsContext.Provider value={profileDetailsStoresInstance}>
+		{children}
+	</profileDetailsContext.Provider>
+);
 
-export const useProfileDetailsHook = () => useContext(profileDetailsContext)
+export const useProfileDetailsHook = () => useContext(profileDetailsContext);

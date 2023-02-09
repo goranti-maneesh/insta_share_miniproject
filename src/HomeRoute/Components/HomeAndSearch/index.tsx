@@ -1,3 +1,3 @@
 import { HomeAndSearch } from "./HomeAndSearch";
 
-export default HomeAndSearch
+export default HomeAndSearch;
