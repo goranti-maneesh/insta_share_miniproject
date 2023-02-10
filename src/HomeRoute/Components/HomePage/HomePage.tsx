@@ -2,11 +2,9 @@ import { useState, useEffect, ReactNode } from "react";
 
 import { HomeContainer, EachPostUl } from "./styledComponents";
 
-import UserStories from "../UserStories/index";
 import EachPost from "../EachPost";
 
 import { usePostsHook } from "../../Hooks/UserPosts/useUserPostsHook";
-import { StoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
 import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes";
 
 import { constraints } from "../../../Common/utils/Constraints";
@@ -67,9 +65,7 @@ export const Home = (): JSX.Element => {
 
 	return (
 		<HomeContainer>
-			<StoriesHook>
-				<UserStories />
-			</StoriesHook>
+			
 			{renderOverAllViews()}
 		</HomeContainer>
 	);

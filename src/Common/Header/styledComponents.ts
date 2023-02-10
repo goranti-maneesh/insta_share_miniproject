@@ -16,7 +16,7 @@ export const MainHeaderContainer = styled.div`
 `;
 
 export const HeaderDesktopContainer = styled.div`
-	${tw`h-16 ml-24px mr-24px flex flex-col justify-center `}
+	${tw`h-16 pl-10 pr-10 flex flex-col justify-center `}
 `;
 
 export const HeaderContainer = styled.div`

@@ -1,8 +1,9 @@
 import { userPostsResponseTypes } from "./UserPostsTypes";
 
 export interface searchResultsTypes {
-	onClickState: () => void;
+	getPostsData: () => void;
 	userSearchedPostsData: userPostsResponseTypes;
 	constraint: string;
 	searchText: string;
+	searchClickStatus: boolean
 }

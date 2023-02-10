@@ -4,7 +4,8 @@ module.exports = {
 		minHeight: {
 			'194px': '194px',
 			'98px': '98px',
-			full: '100%'
+			full: '100%',
+			screen: '100vh'
 		},
 		maxWidth: {
 			'1040px': '1040px',
@@ -67,6 +68,9 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+			},
+			padding: {
+				'10': '10%'
 			},
 			spacing: {
 				'1px': '1px',
@@ -132,7 +136,9 @@ module.exports = {
 				'1000px': '1000px',
 				'1040px': '1040px',
 				'80vh': '80vh',
-				'31': '31.5%'
+				'70vh': '70vh',
+				'31': '31.5%',
+				'50': '50%'
 			},
 			colors: {
 				Alto: '#DBDBDB',

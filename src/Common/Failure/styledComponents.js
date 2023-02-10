@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const FailureContainer = styled.div`
-	${tw`h-866px flex items-center justify-center flex-col`}
+	${tw`h-70vh flex items-center justify-center flex-col`}
 `;
 
 export const FailureImage = styled.img`

@@ -53,6 +53,13 @@ const Header = (props: HeaderProps): JSX.Element => {
 		onChangeSearchText(event.target.value);
 	};
 
+	const onSearchEnterKey = (event) => {
+		console.log(event)
+		if(event.key === 'Enter'){
+			onClickState();
+		}
+	}
+
 	const onClickLogout = () => {
 		accessRemoveCookie(props);
 	};
@@ -113,6 +120,7 @@ const Header = (props: HeaderProps): JSX.Element => {
 				type="text"
 				placeholder="Search Caption"
 				onChange={onChangeSearchInput}
+				onKeyDown={onSearchEnterKey}
 				value={searchText}
 			/>
 			<SearchIconContainer>

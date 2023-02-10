@@ -43,7 +43,7 @@ export const PostImageConstainer = styled.div`
 `;
 
 export const PostImage = styled.img`
-	${tw`w-full h-614px`}
+	${tw`w-full h-614px object-fill`}
 	@media (max-width: 768px) {
 		${tw`h-375px`}
 	}

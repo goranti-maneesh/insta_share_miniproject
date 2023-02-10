@@ -10,17 +10,22 @@ import {
 } from "./styledComponents";
 
 import EachPost from "../EachPost";
+import UserStories from "../UserStories/index";
 
+import { StoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
 import { searchResultsTypes } from "../../Stores/Types/UserSearchedPostsTypes";
 
 import Failure from "../../../Common/Failure";
 import Loader from "../../../Common/Loader";
 
 export const SearchResults = (props: searchResultsTypes): JSX.Element => {
+	const { searchClickStatus } = props;
+
 	const renderSuccessView = (): JSX.Element => {
-		const { userSearchedPostsData } = props;
+		const { userSearchedPostsData, searchClickStatus } = props;
+		console.log(userSearchedPostsData);
 		return (
-			<EachPostUl>
+			<EachPostUl searchClickStatus={searchClickStatus}>
 				{userSearchedPostsData.posts.map((eachPost) => (
 					<EachPost key={eachPost.postId} post={eachPost} />
 				))}
@@ -29,8 +34,8 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 	};
 
 	const renderFailureView = (): JSX.Element => {
-		const { onClickState } = props;
-		return <Failure getPostsData={onClickState} />;
+		const { getPostsData } = props;
+		return <Failure getPostsData={getPostsData} />;
 	};
 
 	const renderLoadingView = (): JSX.Element => (
@@ -54,6 +59,7 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 
 	const renderOverAllViews = () => {
 		const { constraint } = props;
+		console.log(constraint);
 		switch (constraint) {
 			case "SUCCESS":
 				return renderSuccessView();
@@ -68,7 +74,13 @@ export const SearchResults = (props: searchResultsTypes): JSX.Element => {
 
 	return (
 		<SearchedResultsContainer>
-			<SearchResultsTitle>Search Results</SearchResultsTitle>
+			{searchClickStatus ? (
+				<SearchResultsTitle>Search Results</SearchResultsTitle>
+			) : (
+				<StoriesHook>
+					<UserStories />
+				</StoriesHook>
+			)}
 			{renderOverAllViews()}
 		</SearchedResultsContainer>
 	);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HomeAndSearchMainContainer } from "./styledComponents";
 
@@ -25,17 +25,14 @@ export const HomeAndSearch = (): JSX.Element => {
 
 	const useSearchedPostsHook = useSearchedPostsContext();
 
-	const onClickState = async (): Promise<void> => {
-		setSearchClickStatus(true);
+	const getPostsData = async (): Promise<void> => {
 		setConstraint(constraints.loading);
 
 		await useSearchedPostsHook.fetchUserSearchedPosts(searchText);
 
 		if (useSearchedPostsHook.userSearchedPostsResponse.responseStatus) {
 			if (
-				useSearchedPostsHook.userSearchedPostsResponse.posts.length >
-					0 &&
-				searchText !== ""
+				useSearchedPostsHook.userSearchedPostsResponse.posts.length > 0
 			) {
 				setUserSearchedPostsData(
 					useSearchedPostsHook.userSearchedPostsResponse,
@@ -47,11 +44,22 @@ export const HomeAndSearch = (): JSX.Element => {
 		} else {
 			setConstraint(constraints.failure);
 		}
+	}
+
+	const onClickState = (): void => {
+		setSearchClickStatus(true);
+		getPostsData()
 	};
 
 	const onChangeSearchText = (text: string): void => {
 		setSearchText(text);
 	};
+
+	useEffect(() => {
+		getPostsData()
+	}, [])
+
+	console.log(userSearchedPostsData, 'userSearchedPostsData')
 
 	return (
 		<HomeAndSearchMainContainer>
@@ -61,18 +69,19 @@ export const HomeAndSearch = (): JSX.Element => {
 				searchText={searchText}
 			/>
 			<WrapperComponent>
-				{searchClickStatus ? (
-					<SearchResults
-						onClickState={onClickState}
-						userSearchedPostsData={userSearchedPostsData}
-						constraint={constraint}
-						searchText={searchText}
-					/>
+				<SearchResults
+					getPostsData={getPostsData}
+					searchClickStatus={searchClickStatus}
+					userSearchedPostsData={userSearchedPostsData}
+					constraint={constraint}
+					searchText={searchText}
+				/>
+				{/* {searchClickStatus ? (
 				) : (
 					<PostsHook>
 						<Home />
 					</PostsHook>
-				)}
+				)} */}
 			</WrapperComponent>
 		</HomeAndSearchMainContainer>
 	);

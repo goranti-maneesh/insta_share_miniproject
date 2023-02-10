@@ -30,7 +30,7 @@ export const UserName = styled.h1`
 export const UserStats = styled.div`
 	${tw`flex`}
 	@media (max-width: 768px) {
-		${tw`justify-center items-center`}
+		${tw`items-center`}
 	}
 `;
 
