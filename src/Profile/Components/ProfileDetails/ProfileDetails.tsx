@@ -45,26 +45,30 @@ export const Profile = (props: profileDetailsPropTypes) => {
 		stories,
 	} = profileDetails;
 
+	const renderUserStats = () => (
+		<UserStats>
+			<MobileProfileImage src={profilePic} alt={userName} />
+			<StatContainer>
+				<StatCount>{posts.length}</StatCount>
+				<StatName> posts</StatName>
+			</StatContainer>
+			<StatContainer>
+				<StatCount>{followersCount}</StatCount>
+				<StatName> followers</StatName>
+			</StatContainer>
+			<StatContainer>
+				<StatCount>{followingCount}</StatCount>
+				<StatName> following</StatName>
+			</StatContainer>
+		</UserStats>
+	)
+
 	const renderProfileImageAndDetails = () => (
 		<ProfileImageDetailsContainer>
 			<ProfileImage src={profilePic} alt={userName} />
 			<ProfileDetailsContainer>
 				<UserName>{userName}</UserName>
-				<UserStats>
-					<MobileProfileImage src={profilePic} alt={userName} />
-					<StatContainer>
-						<StatCount>{posts.length}</StatCount>
-						<StatName> posts</StatName>
-					</StatContainer>
-					<StatContainer>
-						<StatCount>{followersCount}</StatCount>
-						<StatName> followers</StatName>
-					</StatContainer>
-					<StatContainer>
-						<StatCount>{followingCount}</StatCount>
-						<StatName> following</StatName>
-					</StatContainer>
-				</UserStats>
+				{renderUserStats()}
 				<UserDescriptionContainer>
 					<UserId>{userId}</UserId>
 					<Description>{userBio}</Description>

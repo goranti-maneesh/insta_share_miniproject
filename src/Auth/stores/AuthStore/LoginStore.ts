@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
-import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
+import { APIStatus, API_INITIAL } from "@ib/api-constants";
 
 import AuthServiceType from "../../services/LoginService/index.api";
 
@@ -21,7 +21,7 @@ class AuthStore {
 	}
 
 	@action.bound
-    setAuthCookies = (
+	setAuthCookies = (
 		response: AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes,
 	): void => {
 		const { jwt_token, responseStatus } = response;
@@ -35,7 +35,7 @@ class AuthStore {
 	};
 
 	@action.bound
-    setAuthApiStatus = (apiResponse: APIStatus): void => {
+	setAuthApiStatus = (apiResponse: APIStatus): void => {
 		this.authApiStatus = apiResponse;
 	};
 

@@ -5,7 +5,7 @@ import {
 	TryAgainButton,
 } from "./styledComponents";
 
-import { FailureCompTypes } from "../Stores/types";
+import { FailureCompTypes } from "../../stores/types";
 
 export const Failure = (props: FailureCompTypes): JSX.Element => {
 	const { getPostsData } = props;

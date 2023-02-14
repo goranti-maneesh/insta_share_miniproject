@@ -27,13 +27,13 @@ import {
 	CancelIcon,
 } from "./styledComponents";
 
-import { HeaderProps } from "../Stores/types";
-import { instaHeaderLogo } from "../constants/LocalConstants";
-import { ObjContext } from "../context";
+import { HeaderProps } from "../../stores/types";
+import { instaHeaderLogo } from "../../constants/LocalConstants";
+import { ObjContext } from "../../context";
 
-import { headerConstraints } from "../utils/Constraints";
+import { headerConstraints } from "../../utils/Constraints";
 
-import { accessRemoveCookie } from "../../Common/utils/StorageUtils";
+import { accessRemoveCookie } from "../../utils/StorageUtils";
 
 const Header = (props: HeaderProps): JSX.Element => {
 	const objUseContext = useContext(ObjContext);

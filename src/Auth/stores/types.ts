@@ -24,7 +24,7 @@ export interface ServiceStoreTypes {
 	AuthServiceApiInstance: ApiNetworkCallType;
 	AuthStoreInstance: {
 		loginApiService: ApiNetworkCallType;
-		onAuthLogIn: Function;
+		onAuthLogIn: () => void;
 		setCookies: Function;
 	};
 }

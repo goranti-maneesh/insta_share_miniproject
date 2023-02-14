@@ -5,11 +5,11 @@ import Profile from "../ProfileDetails";
 import { useUserProfileDetailsHook } from "../../Hooks/UserProfileDetails/useUserProfileDetailsHooks";
 import { profileDetailsResponseStatusTypes } from "../../Stores/Types/types";
 
-import Header from "../../../Common/Header";
+import Header from "../../../Common/components/Header";
 import { constraints } from "../../../Common/utils/Constraints";
-import Failure from "../../../Common/Failure";
-import Loader from "../../../Common/Loader";
-import WrapperComponent from "../../../Common/WrapperComponent";
+import Failure from "../../../Common/components/Failure";
+import Loader from "../../../Common/components/Loader";
+import WrapperComponent from "../../../Common/components/WrapperComponent";
 
 export const UserProfile = (props) => {
 	const userProfileDetails = useUserProfileDetailsHook();
@@ -40,11 +40,11 @@ export const UserProfile = (props) => {
 
 	const overAllViews = (): JSX.Element => {
 		switch (constraint) {
-			case "SUCCESS":
+			case constraints.success:
 				return renderUserProfileDetails();
-			case "LOADING":
+			case constraints.loading:
 				return renderLoader();
-			case "FAILURE":
+			case constraints.failure:
 				return renderErrorView();
 		}
 	};

@@ -1,42 +1,32 @@
-import { useState, useEffect, ReactNode } from "react";
-
-import { HomeContainer, EachPostUl } from "./styledComponents";
+import {
+	HomePageContainer,
+	SearchResultsTitle,
+	EachPostUl,
+	PostsLoader,
+	NoSearchViewContainer,
+	NoSearchViewImage,
+	NoSearchViewHeading,
+	NoSearchViewText,
+} from "./styledComponents";
 
 import EachPost from "../EachPost";
+import UserStories from "../UserStories/index";
 
-import { usePostsHook } from "../../Hooks/UserPosts/useUserPostsHook";
-import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes";
+import { StoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
+import { homePagePropsTypes } from "../../Stores/Types/UserPostsTypes";
 
-import { constraints } from "../../../Common/utils/Constraints";
-import Loader from "../../../Common/Loader/index";
-import Failure from "../../../Common/Failure/index";
+import Failure from "../../../Common/components/Failure";
+import Loader from "../../../Common/components/Loader";
+import {constraints} from "../../../Common/utils/Constraints"
 
-export const Home = (): JSX.Element => {
-	const [userPostsData, setUserPostsData] = useState(
-		{} as userPostsResponseTypes,
-	);
-	const [constraint, setConstraint] = useState(constraints.initial as string);
-
-	const UserPosts = usePostsHook();
-
-	useEffect(() => {
-		getPostsData();
-	}, []);
-
-	const getPostsData = async (): Promise<void> => {
-		setConstraint(constraints.loading);
-		await UserPosts.fetchUserPosts();
-		if (UserPosts.userPostsResponse.responseStatus) {
-			setUserPostsData(UserPosts.userPostsResponse);
-			setConstraint(constraints.success);
-		} else {
-			setConstraint(constraints.failure);
-		}
-	};
+export const HomePage = (props: homePagePropsTypes): JSX.Element => {
+	const { searchStatus } = props;
 
 	const renderSuccessView = (): JSX.Element => {
+		const { userPostsData, searchStatus } = props;
+		console.log(userPostsData);
 		return (
-			<EachPostUl>
+			<EachPostUl searchStatus={searchStatus}>
 				{userPostsData.posts.map((eachPost) => (
 					<EachPost key={eachPost.postId} post={eachPost} />
 				))}
@@ -44,29 +34,55 @@ export const Home = (): JSX.Element => {
 		);
 	};
 
-	const renderFailureView = (): JSX.Element => (
-		<Failure getPostsData={getPostsData} />
-	);
+	const renderFailureView = (): JSX.Element => {
+		const { getPostsData } = props;
+		return <Failure getPostsData={getPostsData} />;
+	};
 
 	const renderLoadingView = (): JSX.Element => (
-		<Loader width={53} height={53} />
+		<PostsLoader>
+			<Loader width={53} height={53} />
+		</PostsLoader>
 	);
 
-	const renderOverAllViews = (): ReactNode => {
+	const renderNoResultsView = (): JSX.Element => (
+		<NoSearchViewContainer>
+			<NoSearchViewImage
+				src="https://res.cloudinary.com/degjdup40/image/upload/v1671980655/Group_s5njey.png"
+				alt="no search view"
+			/>
+			<NoSearchViewHeading>Search Not Found</NoSearchViewHeading>
+			<NoSearchViewText>
+				Try different keyword or search again
+			</NoSearchViewText>
+		</NoSearchViewContainer>
+	);
+
+	const renderOverAllViews = () => {
+		const { constraint } = props;
+		console.log(constraint);
 		switch (constraint) {
-			case "SUCCESS":
+			case constraints.success:
 				return renderSuccessView();
-			case "LOADING":
+			case constraints.loading:
 				return renderLoadingView();
-			case "FAILURE":
+			case constraints.failure:
 				return renderFailureView();
+			case constraints.noResults:
+				return renderNoResultsView();
 		}
 	};
 
 	return (
-		<HomeContainer>
-			
+		<HomePageContainer>
+			{searchStatus ? (
+				<SearchResultsTitle>Search Results</SearchResultsTitle>
+			) : (
+				<StoriesHook>
+					<UserStories />
+				</StoriesHook>
+			)}
 			{renderOverAllViews()}
-		</HomeContainer>
+		</HomePageContainer>
 	);
 };

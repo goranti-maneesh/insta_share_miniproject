@@ -15,8 +15,8 @@ import { useStoriesHook } from "../../Hooks/UserStories/useUserStoriesHook";
 import { userStoriesResponseTypes } from "../../Stores/Types/UserStoriesTypes";
 
 import { constraints } from "../../../Common/utils/Constraints";
-import Loader from "../../../Common/Loader/index";
-import Failure from "../../../Common/Failure/index";
+import Loader from "../../../Common/components/Loader/index";
+import Failure from "../../../Common/components/Failure/index";
 
 export const UserStories = (): JSX.Element => {
 	const [userStoriesData, setUserStoriesData] = useState(
@@ -103,11 +103,11 @@ export const UserStories = (): JSX.Element => {
 
 	const renderOverAllViews = (): JSX.Element => {
 		switch (constraint) {
-			case "SUCCESS":
+			case constraints.success:
 				return renderSuccessView();
-			case "LOADING":
+			case constraints.loading:
 				return renderLoadingView();
-			case "FAILURE":
+			case constraints.failure:
 				return renderFailureView();
 		}
 	};

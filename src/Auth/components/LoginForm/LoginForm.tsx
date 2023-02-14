@@ -14,7 +14,7 @@ import {
 	LoginButton,
 	ButtonErrorMsgContainer,
 	ErrorMsg,
-} from "./StyledComponents";
+} from './styledComponents.js';
 
 import useInputLabelContainer from "../LoginInputLabelContainer";
 
@@ -27,11 +27,11 @@ import {
 import {
 	userNameRegexValidation,
 	passWordRegexValidation,
-} from "../../Utils/CredsValidation";
-import { useAuthStoreHook } from "../../Hooks/useAuthStore";
+} from "../../utils/CredsValidation";
+import { useAuthStoreHook } from "../../hooks/useAuthStore";
 
 import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
-import Translate from "../../../Common/Translate/index";
+import Translate from "../../../Common/components/Translate/index";
 
 export const LoginForm = (props?: RouteComponentProps) => {
 	const { t } = useTranslation();
@@ -71,7 +71,7 @@ export const LoginForm = (props?: RouteComponentProps) => {
 
 			await authStoreInstance.onAuthLogIn(userDetails);
 			setResponse(authStoreInstance.authApiResponse);
-
+			
 			if (authStoreInstance.authApiResponse.responseStatus) {
 				onSuccess();
 			} else {

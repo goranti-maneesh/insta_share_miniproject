@@ -1,41 +1,39 @@
 import { useEffect, useState } from "react";
 
-import { HomeAndSearchMainContainer } from "./styledComponents";
+import { HomeMainContainer } from "./styledComponents";
 
-import { Home } from "../HomePage/HomePage";
-import { SearchResults } from "../SearchResults/SearchResults";
+import HomePage from "../HomePage/index";
 
-import { PostsHook } from "../../Hooks/UserPosts/useUserPostsHook";
 import { userPostsResponseTypes } from "../../Stores/Types/UserPostsTypes";
-import { useSearchedPostsContext } from "../../Hooks/UserSearchedPosts/useUserSearchedPostsHook";
+import { usePostsContext } from "../../Hooks/UserPosts/useUserPostsHook";
 
-import Header from "../../../Common/Header";
-import WrapperComponent from "../../../Common/WrapperComponent";
+import Header from "../../../Common/components/Header";
+import WrapperComponent from "../../../Common/components/WrapperComponent";
 import { constraints } from "../../../Common/utils/Constraints";
 
 export const HomeAndSearch = (): JSX.Element => {
 	const [searchText, setSearchText] = useState("" as string);
-	const [searchClickStatus, setSearchClickStatus] = useState(
+	const [searchStatus, setsearchStatus] = useState(
 		false as boolean,
 	);
-	const [userSearchedPostsData, setUserSearchedPostsData] = useState(
+	const [userPostsData, setuserPostsData] = useState(
 		{} as userPostsResponseTypes,
 	);
 	const [constraint, setConstraint] = useState(constraints.initial as string);
 
-	const useSearchedPostsHook = useSearchedPostsContext();
+	const usePostsHook = usePostsContext();
 
 	const getPostsData = async (): Promise<void> => {
 		setConstraint(constraints.loading);
 
-		await useSearchedPostsHook.fetchUserSearchedPosts(searchText);
+		await usePostsHook.fetchUserPosts(searchText);
 
-		if (useSearchedPostsHook.userSearchedPostsResponse.responseStatus) {
+		if (usePostsHook.userPostsResponse.responseStatus) {
 			if (
-				useSearchedPostsHook.userSearchedPostsResponse.posts.length > 0
+				usePostsHook.userPostsResponse.posts.length > 0
 			) {
-				setUserSearchedPostsData(
-					useSearchedPostsHook.userSearchedPostsResponse,
+				setuserPostsData(
+					usePostsHook.userPostsResponse,
 				);
 				setConstraint(constraints.success);
 			} else {
@@ -47,7 +45,7 @@ export const HomeAndSearch = (): JSX.Element => {
 	}
 
 	const onClickState = (): void => {
-		setSearchClickStatus(true);
+		setsearchStatus(true);
 		getPostsData()
 	};
 
@@ -59,30 +57,24 @@ export const HomeAndSearch = (): JSX.Element => {
 		getPostsData()
 	}, [])
 
-	console.log(userSearchedPostsData, 'userSearchedPostsData')
+	console.log(userPostsData, 'userPostsData')
 
 	return (
-		<HomeAndSearchMainContainer>
+		<HomeMainContainer>
 			<Header
 				onClickState={onClickState}
 				onChangeSearchText={onChangeSearchText}
 				searchText={searchText}
 			/>
 			<WrapperComponent>
-				<SearchResults
+				<HomePage
 					getPostsData={getPostsData}
-					searchClickStatus={searchClickStatus}
-					userSearchedPostsData={userSearchedPostsData}
+					searchStatus={searchStatus}
+					userPostsData={userPostsData}
 					constraint={constraint}
 					searchText={searchText}
 				/>
-				{/* {searchClickStatus ? (
-				) : (
-					<PostsHook>
-						<Home />
-					</PostsHook>
-				)} */}
 			</WrapperComponent>
-		</HomeAndSearchMainContainer>
+		</HomeMainContainer>
 	);
 };

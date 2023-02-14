@@ -60,3 +60,11 @@ export interface userFixturePostsResponseTypes {
 export interface eachUserPostPropTypes {
 	post: eachUserPostTypes;
 }
+
+export interface homePagePropsTypes {
+	getPostsData: () => void;
+	userPostsData: userPostsResponseTypes;
+	constraint: string;
+	searchText: string;
+	searchStatus: boolean;
+}

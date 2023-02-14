@@ -13,8 +13,8 @@ import { ObjContext } from "./Common/context";
 
 import { contextValueTypes } from "./Auth/stores/types";
 
-import { AuthStoreHook } from "./Auth/Hooks/useAuthStore";
-import { SearchedPostsHook } from "./HomeRoute/Hooks/UserSearchedPosts/useUserSearchedPostsHook";
+import { AuthStoreHook } from "./Auth/hooks/useAuthStore";
+import { SearchedPostsHook } from "./HomeRoute/Hooks/UserPosts/useUserPostsHook";
 import { ProfileDetailsHook } from "./Profile/Hooks/ProfileDetails/useProfileDetailsHook";
 import { UserProfileDetailsHook } from "./Profile/Hooks/UserProfileDetails/useUserProfileDetailsHooks";
 

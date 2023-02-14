@@ -1,10 +1,11 @@
 import { observable, action } from "mobx";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
 import { APIStatus, API_INITIAL } from "@ib/api-constants/lib/index";
+
 import UserPostModel from "../HomeRouteModels/UserPostsModel/UserPostsModel";
 import { userPostsResponseTypes } from "../Types/UserPostsTypes";
 
-class UserPostsStores {
+export default class UserPostsStore {
 	@observable userPostApiService;
 	@observable userPostsStatus;
 	@observable userPostsResponse;
@@ -15,7 +16,7 @@ class UserPostsStores {
 		this.userPostsResponse = {} as userPostsResponseTypes;
 	}
 
-	@action.bound getUserPostsResponse = (
+	@action.bound getuserPostsResponse = (
 		response: userPostsResponseTypes,
 	): void => {
 		const modelData = response.posts.map((eachPost) => {
@@ -27,19 +28,18 @@ class UserPostsStores {
 		};
 	};
 
-	@action.bound getUserPostsStatus = (responseStatus: APIStatus): void => {
+	@action.bound getuserPostsStatus = (responseStatus: APIStatus): void => {
 		this.userPostsStatus = responseStatus;
 	};
 
-	fetchUserPosts = (): Promise<Object> => {
-		const postsResponse = this.userPostApiService.getUserPosts();
-		return bindPromiseWithOnSuccess(postsResponse).to(
-			this.getUserPostsStatus,
+	fetchUserPosts = (searchText): Promise<Object> => {
+		const searchedPostsResponse =
+			this.userPostApiService.getUserPosts(searchText);
+		return bindPromiseWithOnSuccess(searchedPostsResponse).to(
+			this.getuserPostsStatus,
 			(response: userPostsResponseTypes) => {
-				return this.getUserPostsResponse(response);
+				return this.getuserPostsResponse(response);
 			},
 		);
 	};
 }
-
-export default UserPostsStores;

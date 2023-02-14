@@ -1,20 +1,20 @@
-import React, { createContext, useContext } from "react";
-
+import { createContext, useContext } from "react";
 import { UserPostsService } from "../../Services/UserPosts/index.api";
-import UserPostsStores from "../../Stores/HomeRouteStores/UserPostsStore.ts";
+
+import UserPostsStore from "../../Stores/HomeRouteStores/UserPostsStore.ts";
 
 const UserPostsServiceInstance = new UserPostsService();
 
-const UserPostsStoresInstance = new UserPostsStores(UserPostsServiceInstance);
+const UserPostsStoreInstance = new UserPostsStore(UserPostsServiceInstance);
 
 const PostsContext = createContext(null);
 
-export const PostsHook = ({ children }) => {
+export const SearchedPostsHook = ({ children }) => {
 	return (
-		<PostsContext.Provider value={UserPostsStoresInstance}>
+		<PostsContext.Provider value={UserPostsStoreInstance}>
 			{children}
 		</PostsContext.Provider>
 	);
 };
 
-export const usePostsHook = () => useContext(PostsContext);
+export const usePostsContext = () => useContext(PostsContext);

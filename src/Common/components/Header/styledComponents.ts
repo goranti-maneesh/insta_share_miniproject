@@ -6,7 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { BiMenu } from "react-icons/bi";
 import { MdCancel } from "react-icons/md";
 
-import { HeaderLinkStylePropsType } from "../Stores/types";
+import { HeaderLinkStylePropsType } from "../../stores/types";
 
 export const MainHeaderContainer = styled.div`
 	${tw`border-Alto border-solid border-0 border-b`}
