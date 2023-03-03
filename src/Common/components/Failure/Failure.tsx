@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import {
 	FailureContainer,
 	FailureImage,
@@ -5,19 +7,28 @@ import {
 	TryAgainButton,
 } from "./styledComponents";
 
+import {
+	imageBaseUrl,
+	failureImageAltText,
+} from "../../constants/LocalConstants";
 import { FailureCompTypes } from "../../stores/types";
 
 export const Failure = (props: FailureCompTypes): JSX.Element => {
 	const { getPostsData } = props;
+
+	const { t } = useTranslation();
+
 	return (
 		<FailureContainer>
 			<FailureImage
-				src="https://res.cloudinary.com/degjdup40/image/upload/v1671592495/alert-triangle_uu5ysl.png"
-				alt="failure image"
+				src={`${imageBaseUrl}/v1671592495/alert-triangle_uu5ysl.png`}
+				alt={failureImageAltText}
 			/>
-			<FailureText>Something went wrong. Please try again</FailureText>
+			<FailureText>
+				{t<string>("failure.somethingWentWrongText")}
+			</FailureText>
 			<TryAgainButton type="button" onClick={getPostsData}>
-				Try Again
+				{t<string>("failure.tryAgainText")}
 			</TryAgainButton>
 		</FailureContainer>
 	);

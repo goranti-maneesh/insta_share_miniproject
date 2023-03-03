@@ -1,4 +1,5 @@
 {
 	"jwt_token": "abcd",
-	"responseStatus": true
+	"responseStatus": true,
+	"error_msg": "never"
 }

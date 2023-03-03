@@ -1,6 +1,29 @@
-import React, { useState } from "react";
-import { RouteComponentProps, Redirect } from "react-router-dom";
+import { observer } from "mobx-react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+
+
+import Translate from "../../../Common/components/Translate/index";
+import {
+	imageBaseUrl,
+	instaLogoAltText,
+	instaLoginPageImageAltText,
+	userNameInputEleId,
+	passwordInputEleId,
+	loginPageInstaShareText
+} from "../../../Common/constants/LocalConstants";
+
+import {
+	loginUserNameAndPasswordPropTypes,
+	loginPageProps
+} from "../../stores/types";
+import {
+	userNameRegexExpression,
+	passWordRegexExpression,
+} from "../../utils/regexExpressions";
+import { useAuthStoreHook } from "../../hooks/useAuthStore";
+
+import useInputLabelContainer from "../LoginInputLabelContainer";
 
 import {
 	LoginAndTranslateContainer,
@@ -14,147 +37,95 @@ import {
 	LoginButton,
 	ButtonErrorMsgContainer,
 	ErrorMsg,
-} from './styledComponents.js';
+} from "./styledComponents.js";
 
-import useInputLabelContainer from "../LoginInputLabelContainer";
-
-import {
-	AuthApiFailureResponseObjTypes,
-	AuthApiResponseObjTypes,
-	AuthRequestObjTypes,
-	loginUserNameAndPasswordPropTypes,
-} from "../../stores/types";
-import {
-	userNameRegexValidation,
-	passWordRegexValidation,
-} from "../../utils/CredsValidation";
-import { useAuthStoreHook } from "../../hooks/useAuthStore";
-
-import { isLoggedIn } from "../../../Common/utils/AuthUtils/AuthUtils";
-import Translate from "../../../Common/components/Translate/index";
-
-export const LoginForm = (props?: RouteComponentProps) => {
+export const LoginForm = observer((props: loginPageProps) => {
 	const { t } = useTranslation();
 
-	const authStoreInstance = useAuthStoreHook();
+	const authStore = useAuthStoreHook();
 
-	const buttonTextError = t("loginErrors.loginButtonError");
+	const {loginAPI} = props
 
-	const [userDetails, setUserDetails] = useState({
-		username: "",
-		password: "",
-	} as AuthRequestObjTypes);
-	const [errorMsg, setErrorMsg] = useState("" as string);
-	const [response, setResponse] = useState(
-		{} as AuthApiFailureResponseObjTypes | AuthApiResponseObjTypes,
-	);
 
-	const onSuccess = (): void => {
-		const { history } = props;
-		history.replace("/");
-	};
-
-	const onFailure = (
-		failureResponse: AuthApiFailureResponseObjTypes,
-	): void => {
-		setErrorMsg(failureResponse.error_msg);
-		console.log(failureResponse, "error");
-	};
-
-	const loginAPI = async (
+	const onSubmitForm = (
 		event: React.FormEvent<HTMLFormElement>,
-	): Promise<void> => {
+	): void => {
 		event.preventDefault();
-
-		if (userDetails.username !== "" && userDetails.password !== "") {
-			setErrorMsg("");
-
-			await authStoreInstance.onAuthLogIn(userDetails);
-			setResponse(authStoreInstance.authApiResponse);
-			
-			if (authStoreInstance.authApiResponse.responseStatus) {
-				onSuccess();
-			} else {
-				console.log(
-					authStoreInstance.authApiResponse,
-					response,
-					"login",
-				);
-				onFailure(
-					authStoreInstance.authApiResponse as unknown as AuthApiFailureResponseObjTypes,
-				);
-			}
-		} else {
-			setErrorMsg(buttonTextError);
-		}
+		loginAPI()
 	};
 
 	const onChangeUsername = (
 		event: React.FormEvent<HTMLInputElement>,
 	): void => {
-		setUserDetails({
-			username: event.currentTarget.value,
-			password: userDetails.password,
-		});
+		authStore.setUsername(event.currentTarget.value)
 	};
 
 	const onChangePassword = (
 		event: React.FormEvent<HTMLInputElement>,
 	): void => {
-		setUserDetails({
-			username: userDetails.username,
-			password: event.currentTarget.value,
-		});
+		authStore.setPassword(event.currentTarget.value)
 	};
 
 	const loginUserNameProps: loginUserNameAndPasswordPropTypes = {
 		type: "text",
-		labelText: "USERNAME",
-		id: "username",
-		value: userDetails.username,
-		onchangeMethod: onChangeUsername,
-		placeholder: "Username",
+
+		labelText: t("loginPageText.usernameLabelText"),
+		placeholder: t("loginPageText.usernamePhaceholderText"),
 		errMsg: t("loginErrors.loginUsernameError"),
-		regexValue: userNameRegexValidation,
+
+		id: userNameInputEleId,
+		value: authStore.username,
+		onchangeMethod: onChangeUsername,
+		regexValue: userNameRegexExpression,
 	};
 
 	const loginPasswordProps: loginUserNameAndPasswordPropTypes = {
 		type: "password",
-		labelText: "PASSWORD",
-		id: "password",
-		value: userDetails.password,
-		onchangeMethod: onChangePassword,
-		placeholder: "Password",
+
+		labelText: t("loginPageText.passwordLabelText"),
+		placeholder: t("loginPageText.passwordPhaceholderText"),
 		errMsg: t("loginErrors.loginPasswordError"),
-		regexValue: passWordRegexValidation,
+
+		id: passwordInputEleId,
+		value: authStore.password,
+		onchangeMethod: onChangePassword,
+		regexValue: passWordRegexExpression,
 	};
+	console.log(authStore.authApiErrorResponse)
 
 	return (
 		<LoginAndTranslateContainer>
 			<Translate />
 			<LoginPageContainer>
-				{isLoggedIn() ? <Redirect to="/" /> : null}
 				<InstaImageContainer>
-					<RenderInstaImage src="https://res.cloudinary.com/degjdup40/image/upload/v1654572231/Layer_2_sz97wf.png" />
+					<RenderInstaImage
+						src={`${imageBaseUrl}/v1654572231/Layer_2_sz97wf.png`}
+						alt={instaLoginPageImageAltText}
+					/>
 				</InstaImageContainer>
 
-				<LoginFormContainer onSubmit={loginAPI}>
+				<LoginFormContainer onSubmit={onSubmitForm}>
 					<InstaLogoContainer>
-						<RenderInstaLogo src="https://res.cloudinary.com/degjdup40/image/upload/v1654572262/Standard_Collection_8_m8rwqb.png" />
-						<InstaShareTitle>Insta Share</InstaShareTitle>
+						<RenderInstaLogo
+							src={`${imageBaseUrl}/v1654572262/Standard_Collection_8_m8rwqb.png`}
+							alt={instaLogoAltText}
+						/>
+						<InstaShareTitle>
+							{loginPageInstaShareText}
+						</InstaShareTitle>
 					</InstaLogoContainer>
 					{useInputLabelContainer(loginUserNameProps)}
 					{useInputLabelContainer(loginPasswordProps)}
 					<ButtonErrorMsgContainer>
 						<LoginButton type="submit">
-							{authStoreInstance.authApiStatus === 100
-								? "Loading"
+							{authStore.authApiStatus === 100
+								? t<string>("loginPageText.loadingText")
 								: t<string>("loginPageText.loginText")}
 						</LoginButton>
-						<ErrorMsg>{errorMsg === "" ? null : errorMsg}</ErrorMsg>
+						{authStore.authApiErrorResponse ? <ErrorMsg>{authStore.authApiErrorResponse}</ErrorMsg> : null}
 					</ButtonErrorMsgContainer>
 				</LoginFormContainer>
 			</LoginPageContainer>
 		</LoginAndTranslateContainer>
 	);
-};
+});

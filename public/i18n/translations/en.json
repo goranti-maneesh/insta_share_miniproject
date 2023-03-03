@@ -5,6 +5,26 @@
         "loginButtonError": "Enter valid Username and Password"
     },
     "loginPageText": {
-        "loginText": "Login"
+        "loginText": "Login",
+        "usernameLabelText": "USERNAME",
+        "usernamePhaceholderText": "Username",
+        "passwordLabelText": "PASSWORD",
+        "passwordPhaceholderText": "Password",
+        "loadingText": "Loading"
+    },
+    "header": {
+        "homeText": "Home",
+        "profileText": "Profile",
+        "searchText": "Search",
+        "logoutText": "Logout"
+    },
+    "failure": {
+        "somethingWentWrongText": "Something went wrong. Please try again",
+        "tryAgainText": "Try Again"
+    },
+    "searchResults": {
+        "searchNotFoundText": "Search Not Found",
+        "tryDifferentKeywordText": "Try different keyword or search again",
+        "searchResultsText": "Search Results"
     }
 }

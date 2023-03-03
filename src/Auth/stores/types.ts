@@ -1,6 +1,9 @@
+import { RouteComponentProps } from "react-router-dom";
+
 export interface AuthApiResponseObjTypes {
 	jwt_token: string;
 	responseStatus: boolean;
+	error_msg?: string
 }
 
 export interface AuthApiFailureResponseObjTypes {
@@ -13,20 +16,6 @@ export interface AuthApiFailureResponseObjTypes {
 export interface AuthRequestObjTypes {
 	username: string;
 	password: string;
-}
-
-interface ApiNetworkCallType {
-	api: Object;
-	networkCallWithApisauce: Function;
-}
-
-export interface ServiceStoreTypes {
-	AuthServiceApiInstance: ApiNetworkCallType;
-	AuthStoreInstance: {
-		loginApiService: ApiNetworkCallType;
-		onAuthLogIn: () => void;
-		setCookies: Function;
-	};
 }
 
 export interface loginUserNameAndPasswordPropTypes {
@@ -42,4 +31,8 @@ export interface loginUserNameAndPasswordPropTypes {
 
 export interface contextValueTypes {
 	isDesktopView: boolean;
+}
+
+export interface loginPageProps{
+	loginAPI: () => void
 }

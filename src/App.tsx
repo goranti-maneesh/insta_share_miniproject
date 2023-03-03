@@ -3,20 +3,20 @@ import { useState, useEffect } from "react";
 
 import "./App.css";
 
-import LoginForm from "./Auth/components/LoginForm";
+import LoginForm from "./Auth/components/LoginForm/Route";
 import ProtectedRoute from "./Common/utils/ProtectedRoute";
-import HomeAndSearch from "./HomeRoute/Components/HomeAndSearch/index";
-import MyProfile from "./Profile/Components/MyProfile";
-import UserProfile from "./Profile/Components/UserProfile";
+import HomeAndSearch from "./HomeRoute/components/HomeAndSearch/index";
+import MyProfile from "./Profile/components/MyProfile";
+import UserProfile from "./Profile/components/UserProfile";
 
 import { ObjContext } from "./Common/context";
 
 import { contextValueTypes } from "./Auth/stores/types";
 
 import { AuthStoreHook } from "./Auth/hooks/useAuthStore";
-import { SearchedPostsHook } from "./HomeRoute/Hooks/UserPosts/useUserPostsHook";
-import { ProfileDetailsHook } from "./Profile/Hooks/ProfileDetails/useProfileDetailsHook";
-import { UserProfileDetailsHook } from "./Profile/Hooks/UserProfileDetails/useUserProfileDetailsHooks";
+import { SearchedPostsHook } from "./HomeRoute/hooks/UserPosts/useUserPostsHook";
+import { ProfileDetailsHook } from "./Profile/hooks/ProfileDetails/useProfileDetailsHook";
+import { UserProfileDetailsHook } from "./Profile/hooks/UserProfileDetails/useUserProfileDetailsHooks";
 
 const mediaQuery = window.matchMedia("(min-width: 768px)");
 

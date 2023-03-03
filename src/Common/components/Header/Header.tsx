@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
 	HeaderDesktopContainer,
@@ -28,7 +29,7 @@ import {
 } from "./styledComponents";
 
 import { HeaderProps } from "../../stores/types";
-import { instaHeaderLogo } from "../../constants/LocalConstants";
+import { imageBaseUrl, instaLogoAltText, loginPageInstaShareText } from "../../constants/LocalConstants";
 import { ObjContext } from "../../context";
 
 import { headerConstraints } from "../../utils/Constraints";
@@ -37,6 +38,8 @@ import { accessRemoveCookie } from "../../utils/StorageUtils";
 
 const Header = (props: HeaderProps): JSX.Element => {
 	const objUseContext = useContext(ObjContext);
+
+	const { t } = useTranslation();
 
 	const { onClickState, onChangeSearchText, searchText } = props;
 
@@ -54,7 +57,6 @@ const Header = (props: HeaderProps): JSX.Element => {
 	};
 
 	const onSearchEnterKey = (event) => {
-		console.log(event)
 		if(event.key === 'Enter'){
 			onClickState();
 		}
@@ -87,20 +89,20 @@ const Header = (props: HeaderProps): JSX.Element => {
 					to="/"
 					$appliedtext="home"
 					$appliedpath={path === "/"}>
-					Home
+					{t<string>("header.homeText")}
 				</HeaderLink>
 				{path === "/" ? (
 					<MobileSearchBtn onClick={displaySearchButton}>
-						Search
+						{t<string>("header.searchText")}
 					</MobileSearchBtn>
 				) : null}
 				<HeaderLink
 					to="/my-profile"
 					$appliedtext="profile"
 					$appliedpath={path === "/my-profile"}>
-					Profile
+					{t<string>("header.profileText")}
 				</HeaderLink>
-				<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
+				<LogoutButton onClick={onClickLogout}>{t<string>("header.logoutText")}</LogoutButton>
 			</RoutesContainer>
 			<CancelButton onClick={closeMenu}>
 				<CancelIcon />
@@ -110,7 +112,7 @@ const Header = (props: HeaderProps): JSX.Element => {
 
 	const renderRoutesOrSearch = () => (
 		<RoutesAndSearchContainer>
-			{constraint === "MENU" ? renderRoutes() : renderSearchInput()}
+			{constraint === headerConstraints.menu ? renderRoutes() : renderSearchInput()}
 		</RoutesAndSearchContainer>
 	);
 
@@ -135,8 +137,8 @@ const Header = (props: HeaderProps): JSX.Element => {
 		<HeaderDesktopContainer>
 			<HeaderContainer>
 				<LogoContainer>
-					<InstaLogo src={instaHeaderLogo} alt="insta-logo" />
-					<InstaShareTitle>Insta Share</InstaShareTitle>
+					<InstaLogo src={`${imageBaseUrl}/v1654572262/Standard_Collection_8_m8rwqb.png`} alt="insta-logo" />
+					<InstaShareTitle>{loginPageInstaShareText}</InstaShareTitle>
 				</LogoContainer>
 				<RoutesContainer>
 					{path === "/" ? renderSearchInput() : null}
@@ -144,15 +146,15 @@ const Header = (props: HeaderProps): JSX.Element => {
 						to="/"
 						$appliedtext="home"
 						$appliedpath={path === "/"}>
-						Home
+						{t<string>("header.homeText")}
 					</HeaderLink>
 					<HeaderLink
 						to="/my-profile"
 						$appliedtext="profile"
 						$appliedpath={path === "/my-profile"}>
-						Profile
+						{t<string>("header.profileText")}
 					</HeaderLink>
-					<LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
+					<LogoutButton onClick={onClickLogout}>{t<string>("header.logoutText")}</LogoutButton>
 				</RoutesContainer>
 			</HeaderContainer>
 		</HeaderDesktopContainer>
@@ -162,14 +164,14 @@ const Header = (props: HeaderProps): JSX.Element => {
 		<HeaderMobileContainer>
 			<LogoAndMenuContainer>
 				<LogoContainer>
-					<InstaLogo src={instaHeaderLogo} alt="insta-logo" />
-					<InstaShareTitle>Insta Share</InstaShareTitle>
+					<InstaLogo src={`${imageBaseUrl}/v1654572262/Standard_Collection_8_m8rwqb.png`} alt={instaLogoAltText} />
+					<InstaShareTitle>{loginPageInstaShareText}</InstaShareTitle>
 				</LogoContainer>
 				<MenuButton onClick={openMenu}>
 					<MenuIcon />
 				</MenuButton>
 			</LogoAndMenuContainer>
-			{constraint === "INITIAL" ? null : renderRoutesOrSearch()}
+			{constraint === headerConstraints.initial ? null : renderRoutesOrSearch()}
 		</HeaderMobileContainer>
 	);
 

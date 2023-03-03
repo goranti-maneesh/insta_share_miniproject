@@ -5,6 +5,26 @@
         "loginButtonError": "చెల్లుబాటు అయ్యే వినియోగదారు పేరు మరియు పాస్‌వర్డ్‌ను నమోదు చేయండి"
     },
     "loginPageText": {
-        "loginText": "లాగిన్"
+        "loginText": "లాగిన్",
+        "usernameLabelText": "వినియోగదారు పేరు",
+        "usernamePhaceholderText": "వినియోగదారు పేరు",
+        "passwordLabelText": "పాస్వర్డ్",
+        "passwordPhaceholderText": "పాస్వర్డ్",
+        "loadingText": "లోడింగ"
+    },
+    "header": {
+        "homeText": "Home",
+        "profileText": "Profile",
+        "searchText": "Search",
+        "logoutText": "Logout"
+    },
+    "failure": {
+        "somethingWentWrongText": "Something went wrong. Please try again",
+        "tryAgainText": "Try Again"
+    },
+    "searchResults": {
+        "searchNotFoundText": "Search Not Found",
+        "tryDifferentKeywordText": "Try different keyword or search again",
+        "searchResultsText": "Search Results"
     }
 }

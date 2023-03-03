@@ -1,46 +1,74 @@
-import { observable, action } from "mobx";
+import { observable, action, makeAutoObservable } from "mobx";
 import { bindPromiseWithOnSuccess } from "@ib/mobx-promise";
 import { APIStatus, API_INITIAL } from "@ib/api-constants";
 
-import AuthServiceType from "../../services/LoginService/index.api";
+import { setJwtToken } from "../../../Common/utils/StorageUtils";
+
+import AuthServiceType from "../../services/LoginService/index";
 
 import {
 	AuthRequestObjTypes,
 	AuthApiResponseObjTypes,
 	AuthApiFailureResponseObjTypes,
 } from "../types";
-import { setJwtToken } from "../../../Common/utils/StorageUtils";
 
 class AuthStore {
-	@observable authApiService: AuthServiceType;
-	@observable authApiStatus = API_INITIAL;
-	@observable authApiResponse;
+	authApiService: AuthServiceType;
+	authApiStatus = API_INITIAL as number;
+	authApiResponse = {} as AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes;
+	authApiResponseStatus = false as boolean;
+	authApiErrorResponse = "" as string;
+	username = "" as string;
+	password = "" as string;
 
-	constructor(AuthServiceApiInstance: AuthServiceType) {
-		this.authApiService = AuthServiceApiInstance;
+	constructor(AuthServiceApi: AuthServiceType) {
+		makeAutoObservable(this)
+		this.authApiService = AuthServiceApi;
 	}
 
-	@action.bound
 	setAuthCookies = (
 		response: AuthApiResponseObjTypes | AuthApiFailureResponseObjTypes,
 	): void => {
-		const { jwt_token, responseStatus } = response;
-		console.log(response, "store");
+		const { responseStatus } = response;
+		console.log(response)
+
 		if (responseStatus) {
+			const {jwt_token} = response
+
 			this.authApiResponse = response;
+			this.authApiResponseStatus = responseStatus
+
 			setJwtToken(jwt_token);
 		} else {
-			this.authApiResponse = response;
+			const {error_msg} = response
+			console.log(error_msg, 'error_msg')
+			this.authApiErrorResponse = error_msg;
 		}
 	};
+
+	setUsername = (username: any) => {
+		// console.log(username, 'username')
+		this.username = username
+	}
+
+	@action.bound
+	setPassword = (password: any) => {
+		// console.log(password, 'password')
+		this.password = password
+	}
 
 	@action.bound
 	setAuthApiStatus = (apiResponse: APIStatus): void => {
 		this.authApiStatus = apiResponse;
 	};
 
-	onAuthLogIn = (userDetais: AuthRequestObjTypes): Promise<Object> => {
-		const authLoginApi = this.authApiService.onAuthLogin(userDetais);
+	@action.bound
+	setEmptyDetailsErrorMsg = (errorText: string): void => {
+		this.authApiErrorResponse = errorText
+	}
+
+	onAuthLogIn = (): Promise<Object> => {
+		const authLoginApi = this.authApiService.onAuthLogin({username: this.username, password: this.password});
 		return bindPromiseWithOnSuccess(authLoginApi).to(
 			this.setAuthApiStatus,
 			(
