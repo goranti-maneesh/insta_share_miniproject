@@ -2,7 +2,7 @@ import { useContext, createContext } from "react";
 
 import UserStoriesStore from "../../stores/HomeRouteStores/UserStoriesStore.ts";
 
-import { UserStoriesService } from "../../services/UserStories/index.api";
+import { UserStoriesService } from "../../../Common/stores/index";
 
 const userStoriesServiceInstance = new UserStoriesService();
 

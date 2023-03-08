@@ -21,6 +21,7 @@ class UserProfileDetailsStores {
 	@action.bound getUserProfileDetailsResponse = (
 		response: UserProfileDetailsAndResponseStatusTypes,
 	): void => {
+		console.log(response, 'response')
 		const modelData = new profileDetailsModel(response.user_details);
 		this.userProfileDetailsResponse = {
 			profileDetails: modelData,

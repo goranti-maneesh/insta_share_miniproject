@@ -1,6 +1,6 @@
 import { useContext, createContext } from "react";
 
-import AuthServiceApi from "../services/LoginService/index.api";
+import {AuthServiceApi} from "../../Common/stores/index";
 import AuthStore from "../stores/AuthStore/LoginStore";
 
 const authServiceApiInstance = new AuthServiceApi();

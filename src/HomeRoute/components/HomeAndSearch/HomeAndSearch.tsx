@@ -5,7 +5,6 @@ import { HomeMainContainer } from "./styledComponents";
 
 import HomePage from "../HomePage/index";
 
-import { userPostsResponseTypes } from "../../stores/Types/UserPostsTypes";
 import { usePostsContext } from "../../hooks/UserPosts/useUserPostsHook";
 
 import Header from "../../../Common/components/Header";
@@ -13,9 +12,6 @@ import WrapperComponent from "../../../Common/components/WrapperComponent";
 import { constraints } from "../../../Common/utils/Constraints";
 
 export const HomeAndSearch = observer((): JSX.Element => {
-	const [userPostsData, setuserPostsData] = useState(
-		{} as userPostsResponseTypes,
-	);
 	const [constraint, setConstraint] = useState(constraints.initial as string);
 
 	const postsHook = usePostsContext();

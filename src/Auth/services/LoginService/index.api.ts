@@ -28,4 +28,4 @@ class AuthServiceApi implements AuthServiceType {
 	};
 }
 
-export default AuthServiceApi;
+export {AuthServiceApi};

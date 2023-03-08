@@ -19,6 +19,7 @@ class ProfileDetailsStores {
 	@action.bound getProfileDetailsResponse = (
 		response: profileAndResponseStatusTypes,
 	): void => {
+		console.log(response, 'response')
 		const modelData = new profileDetailsModel(response.profile);
 		this.profileDetailsResponse = {
 			profileDetails: modelData,

@@ -16,6 +16,7 @@ class profileDetailsModel implements profileDetailsResponseTypes {
 	stories: Array<profilePostsDetails>;
 
 	constructor(data) {
+		console.log(data)
 		this.id = data.id;
 		this.userId = data.user_id;
 		this.userName = data.user_name;

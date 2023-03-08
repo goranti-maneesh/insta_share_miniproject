@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { UserPostsService } from "../../services/UserPosts/index.api";
+import { UserPostsService } from "../../../Common/stores/index";
 
 import UserPostsStore from "../../stores/HomeRouteStores/UserPostsStore.ts";
 

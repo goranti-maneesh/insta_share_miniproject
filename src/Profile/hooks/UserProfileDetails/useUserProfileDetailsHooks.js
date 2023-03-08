@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { ProfileDetailsService } from "../../services/userProfile/index.api";
+import { ProfileDetailsService } from "../../../Common/stores/index";
 
 import { UserProfileDetailsStores } from "../../stores/ProfileDetailsStores/UserProfileDetailsStores";
 
