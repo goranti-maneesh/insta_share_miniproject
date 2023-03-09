@@ -1,13 +1,13 @@
+import { storyImageAltText } from "../../../Common/constants/LocalConstants";
+
+import { eachStoryPropType } from "../../stores/Types/UserStoriesTypes";
+
 import {
 	EachStoryLi,
 	StoryLink,
 	StoryImage,
 	StoryUserName,
 } from "./styledComponents";
-
-import { eachStoryPropType } from "../../stores/Types/UserStoriesTypes";
-
-import { storyImageAltText } from "../../../Common/constants/LocalConstants";
 
 export const EachStory = (props: eachStoryPropType): JSX.Element => {
 	const { story } = props;

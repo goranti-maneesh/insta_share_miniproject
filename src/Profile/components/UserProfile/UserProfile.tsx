@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 
-import Profile from "../ProfileDetails";
-
-import { useUserProfileDetailsHook } from "../../hooks/UserProfileDetails/useUserProfileDetailsHooks";
-import { profileDetailsResponseStatusTypes } from "../../stores/Types/types";
-
 import Header from "../../../Common/components/Header";
 import { constraints } from "../../../Common/utils/Constraints";
 import Failure from "../../../Common/components/Failure";
 import Loader from "../../../Common/components/Loader";
 import WrapperComponent from "../../../Common/components/WrapperComponent";
 
+import { useUserProfileDetailsHook } from "../../hooks/UserProfileDetails/useUserProfileDetailsHooks";
+
+import Profile from "../ProfileDetails";
+
 export const UserProfile = (props) => {
 	const userProfileDetails = useUserProfileDetailsHook();
 
 	const [constraint, setConstraint] = useState(constraints.initial as string);
-	const [data, setData] = useState({} as profileDetailsResponseStatusTypes);
 
 	const getUserProfileDetailsData = async () => {
 		const { match } = props;
@@ -27,7 +25,6 @@ export const UserProfile = (props) => {
 		await userProfileDetails.fetchUserProfileDetails(userId);
 
 		if (userProfileDetails.userProfileDetailsResponse.responseStatus) {
-			setData(userProfileDetails.userProfileDetailsResponse);
 			setConstraint(constraints.success);
 		} else {
 			setConstraint(constraints.failure);
@@ -56,7 +53,7 @@ export const UserProfile = (props) => {
 	);
 
 	const renderUserProfileDetails = (): JSX.Element => (
-		<Profile profileDetails={data.profileDetails} />
+		<Profile profileDetails={userProfileDetails.userProfileDetailsResponse.profileDetails} />
 	);
 
 	return (

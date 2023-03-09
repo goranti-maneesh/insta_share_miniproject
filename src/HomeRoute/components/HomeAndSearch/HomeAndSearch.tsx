@@ -16,10 +16,16 @@ export const HomeAndSearch = observer((): JSX.Element => {
 
 	const postsHook = usePostsContext();
 
+	const {searchText, fetchUserPosts, setSearchStatus, setSearchText, searchStatus} = postsHook
+
 	const getPostsData = async (): Promise<void> => {
 		setConstraint(constraints.loading);
 
-		await postsHook.fetchUserPosts(postsHook.searchText);
+		const {userPostsResponse} = postsHook
+
+		await fetchUserPosts(postsHook.searchText);
+
+		console.log(userPostsResponse, postsHook, 'userPostsResponse')
 
 		if (postsHook.userPostsResponse.responseStatus) {
 			if (

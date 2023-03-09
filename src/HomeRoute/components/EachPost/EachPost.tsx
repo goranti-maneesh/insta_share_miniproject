@@ -1,4 +1,14 @@
 import { useState } from "react";
+
+import {
+	postImageAltText,
+	profilePicAltText,
+	likesText
+} from "../../../Common/constants/LocalConstants";
+
+import { eachUserPostPropTypes } from "../../stores/Types/UserPostsTypes";
+import { PostLikeRequestObjTypes } from "../../stores/Types/PostLikeStatusTypes";
+
 import {
 	EachPostli,
 	UserDetails,
@@ -25,15 +35,6 @@ import {
 	Comment,
 	CreatedAt,
 } from "./styledComponents";
-
-import { eachUserPostPropTypes } from "../../stores/Types/UserPostsTypes";
-import { PostLikeRequestObjTypes } from "../../stores/Types/PostLikeStatusTypes";
-
-import {
-	postImageAltText,
-	profilePicAltText,
-	likesText
-} from "../../../Common/constants/LocalConstants";
 
 export const EachPost = (props: eachUserPostPropTypes): JSX.Element => {
 	const { post } = props;

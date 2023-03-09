@@ -2,7 +2,6 @@ import { observer } from "mobx-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-
 import Translate from "../../../Common/components/Translate/index";
 import {
 	imageBaseUrl,
@@ -10,12 +9,12 @@ import {
 	instaLoginPageImageAltText,
 	userNameInputEleId,
 	passwordInputEleId,
-	loginPageInstaShareText
+	loginPageInstaShareText,
 } from "../../../Common/constants/LocalConstants";
 
 import {
 	loginUserNameAndPasswordPropTypes,
-	loginPageProps
+	loginPageProps,
 } from "../../stores/types";
 import {
 	userNameRegexExpression,
@@ -44,26 +43,32 @@ export const LoginForm = observer((props: loginPageProps) => {
 
 	const authStore = useAuthStoreHook();
 
-	const {loginAPI} = props
+	const {
+		setUsername,
+		setPassword,
+		username,
+		password,
+		authApiErrorResponse,
+		authApiStatus,
+	} = authStore;
 
+	const { loginAPI } = props;
 
-	const onSubmitForm = (
-		event: React.FormEvent<HTMLFormElement>,
-	): void => {
+	const onSubmitForm = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
-		loginAPI()
+		loginAPI();
 	};
 
 	const onChangeUsername = (
 		event: React.FormEvent<HTMLInputElement>,
 	): void => {
-		authStore.setUsername(event.currentTarget.value)
+		setUsername(event.currentTarget.value);
 	};
 
 	const onChangePassword = (
 		event: React.FormEvent<HTMLInputElement>,
 	): void => {
-		authStore.setPassword(event.currentTarget.value)
+		setPassword(event.currentTarget.value);
 	};
 
 	const loginUserNameProps: loginUserNameAndPasswordPropTypes = {
@@ -74,7 +79,7 @@ export const LoginForm = observer((props: loginPageProps) => {
 		errMsg: t("loginErrors.loginUsernameError"),
 
 		id: userNameInputEleId,
-		value: authStore.username,
+		value: username,
 		onchangeMethod: onChangeUsername,
 		regexValue: userNameRegexExpression,
 	};
@@ -87,11 +92,11 @@ export const LoginForm = observer((props: loginPageProps) => {
 		errMsg: t("loginErrors.loginPasswordError"),
 
 		id: passwordInputEleId,
-		value: authStore.password,
+		value: password,
 		onchangeMethod: onChangePassword,
 		regexValue: passWordRegexExpression,
 	};
-	console.log(authStore.authApiErrorResponse)
+	console.log(authApiErrorResponse);
 
 	return (
 		<LoginAndTranslateContainer>
@@ -118,11 +123,13 @@ export const LoginForm = observer((props: loginPageProps) => {
 					{useInputLabelContainer(loginPasswordProps)}
 					<ButtonErrorMsgContainer>
 						<LoginButton type="submit">
-							{authStore.authApiStatus === 100
+							{authApiStatus === 100
 								? t<string>("loginPageText.loadingText")
 								: t<string>("loginPageText.loginText")}
 						</LoginButton>
-						{authStore.authApiErrorResponse ? <ErrorMsg>{authStore.authApiErrorResponse}</ErrorMsg> : null}
+						{authApiErrorResponse ? (
+							<ErrorMsg>{authApiErrorResponse}</ErrorMsg>
+						) : null}
 					</ButtonErrorMsgContainer>
 				</LoginFormContainer>
 			</LoginPageContainer>

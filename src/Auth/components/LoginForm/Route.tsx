@@ -12,9 +12,17 @@ import LoginForm from "./index";
 const Route = observer((props: RouteComponentProps) => {
 	const authStore = useAuthStoreHook();
 
+	const {
+		username,
+		password,
+		onAuthLogIn,
+		authApiResponse,
+		setEmptyDetailsErrorMsg,
+	} = authStore;
+
 	const { t } = useTranslation();
 
-    const { history } = props;
+	const { history } = props;
 
 	const buttonTextError = t("loginErrors.loginButtonError");
 
@@ -23,29 +31,24 @@ const Route = observer((props: RouteComponentProps) => {
 	};
 
 	const loginAPI = async (): Promise<void> => {
-		if (authStore.username !== "" && authStore.password !== "") {
+		if (username !== "" && password !== "") {
+			await onAuthLogIn();
 
-			await authStore.onAuthLogIn();
-
-			if (authStore.authApiResponse.responseStatus) {
+			if (authApiResponse.responseStatus) {
 				onSuccess();
-			} 
+			}
 		} else {
-			authStore.setEmptyDetailsErrorMsg(buttonTextError)
+			setEmptyDetailsErrorMsg(buttonTextError);
 		}
 	};
 
-    useEffect((): void => {
-        if (isLoggedIn()) {
+	useEffect((): void => {
+		if (isLoggedIn()) {
 			history.replace("/");
 		}
-    }, [])
+	}, []);
 
-	return (
-		<LoginForm
-			loginAPI={loginAPI}
-		/>
-	);
+	return <LoginForm loginAPI={loginAPI} />;
 });
 
 export default Route;
