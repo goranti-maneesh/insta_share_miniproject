@@ -5,6 +5,8 @@ interface UlElementPropTypes {
 	searchStatus: Boolean;
 }
 
+export const HomeMainContainer = styled.div``;
+
 export const HomePageContainer = styled.div``;
 
 export const SearchResultsTitle = styled.h1`
